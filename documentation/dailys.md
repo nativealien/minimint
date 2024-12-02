@@ -14,6 +14,10 @@ This week was dedicated to planning and designing the layout for the repository 
 
 > Monday
 
+First day of development. As noted in the project plan, I spent the day setting up a Hardhat environment. I also added an ERC721 template to begin work on tomorrow. Additionally, I reflected on the project plan, as I have a meeting scheduled with the examiner tomorrow to discuss the possibility of adding complexity to the project.
+
+Tomorrow, I will begin developing the main ERC721 contract that will allow all users to mint tokens. As a suggestion for added functionality, I plan to propose the inclusion of a Contract Factory to allow users to create their own collections, as well as an Auction contract to enable users to create auctions for their NFTs.
+
 > Tuesday
 
 > Wednesday
