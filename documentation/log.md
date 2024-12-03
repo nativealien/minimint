@@ -20,6 +20,10 @@ Tomorrow, I will begin developing the main ERC721 contract that will allow all u
 
 > Tuesday
 
+Had the meeting with the examiner, and after his guidance decided to add a factory contract to the project plan. I think i will be able to fit this into the sprint im in now, as I feel I understand the logic behind it enough to implement it fairly easy. This will also add some more frontend work, that shouldnt be a problem. Today I have also added an ERC721 main contract, for general minting, aswell as made tests for it. I also updated the project plan, and sent it to the examinators.
+
+Tomorrow I will write the factory contract, with belonging tests.
+
 > Wednesday
 
 > Thursday
