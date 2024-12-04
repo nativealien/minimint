@@ -30,6 +30,14 @@ Tomorrow, my focus will be on writing the factory contract and creating the corr
 
 I decided to update the ERC721, so that any wallet (besides the owner) that wants to mint will need to be white listed by the owner. This will need some verification handeling on the frontend, but I have a solution in mind for this. Also updated tests, and used the coverage package. The contract doesnt cover all branches, but i will explore this further when all contracts are deployed and tested at the end of this week.
 
+I have now added a factory contract, along with tests. There are some functions I am considering adding, but I will reflect on these until the end of this week, when I will have time to fine-tune all the contracts. The functions I am considering are:
+
+- Retrieving collections by owner.
+- Removing a collection.
+- Pausing deployment.
+
+Tomorrow, I will begin writing a Marketplace contract.
+
 > Thursday
 
 > Friday
