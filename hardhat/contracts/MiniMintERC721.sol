@@ -80,7 +80,6 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
             _allMintedTokens[i] = _allMintedTokens[i + 1];
         }
 
-        // Reduce the array size
         _allMintedTokens.pop();
 
         emit NFTBurned(msg.sender, tokenId);

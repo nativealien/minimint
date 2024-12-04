@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { MiniMintERC721__factory } from "./MiniMintERC721__factory";
+export { MiniMintFactory__factory } from "./MiniMintFactory__factory";
