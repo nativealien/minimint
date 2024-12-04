@@ -20,13 +20,15 @@ Tomorrow, I will begin developing the main ERC721 contract that will allow all u
 
 > Tuesday
 
-I had a productive meeting with the examiner, and based on their guidance, I decided to include a factory contract in the project plan. I feel confident that I can fit this into my current sprint, as I understand the logic behind it well enough to implement it without much difficulty. This addition will also require some extra frontend work, but I don't anticipate that being an issue.
+I had a productive meeting with the examiner and, based on their guidance, I decided to include a factory contract in the project plan. I feel confident that I can fit this into my current sprint, as I understand the logic behind it well enough to implement it without much difficulty. I will not, however, include auctions as I cant estimate if this will stress the development to much. The addition of the factory will also require some extra frontend work, but I don't anticipate that being an issue.
 
 Today, I successfully added an ERC721 main contract for general minting and wrote comprehensive tests for it. Additionally, I updated the project plan to reflect these changes and sent the revised version to the examiners.
 
 Tomorrow, my focus will be on writing the factory contract and creating the corresponding tests.
 
 > Wednesday
+
+I decided to update the ERC721, so that any wallet (besides the owner) that wants to mint will need to be white listed by the owner. This will need some verification handeling on the frontend, but I have a solution in mind for this. Also updated tests, and used the coverage package. The contract doesnt cover all branches, but i will explore this further when all contracts are deployed and tested at the end of this week.
 
 > Thursday
 
