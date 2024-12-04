@@ -11,7 +11,6 @@ describe("MiniMintERC721", function () {
         [owner, addr1, addr2] = await ethers.getSigners();
         const MiniMintERC721 = await ethers.getContractFactory("MiniMintERC721");
         miniMint = await MiniMintERC721.deploy(CONTRACT_METADATA_URI);
-        console.log('Minimint deployed')
     });
 
     describe("Deployment", function () {
@@ -41,22 +40,75 @@ describe("MiniMintERC721", function () {
         });
     });
 
-    describe("safeMint", function () {
-        it("Should mint a new token and emit NFTMinted event", async function () {
-            const tokenURI = "ipfs://token-metadata-1";
-            await expect(miniMint.safeMint(addr1.address, tokenURI))
-                .to.emit(miniMint, "NFTMinted")
-                .withArgs(addr1.address, 1, tokenURI);
-
-            expect(await miniMint.ownerOf(1)).to.equal(addr1.address);
-            expect(await miniMint.tokenURI(1)).to.equal(tokenURI);
+    describe("Whitelist Management", function () {
+        it("Should allow the owner to whitelist an address", async function () {
+            await miniMint.whitelistAddress(addr1.address, true);
+            expect(await miniMint.isWhitelisted(addr1.address)).to.be.true;
         });
 
-        it("Should update the next token ID after minting", async function () {
-            const tokenURI = "ipfs://token-metadata-1";
-            await miniMint.safeMint(addr1.address, tokenURI);
+        it("Should allow the owner to remove an address from the whitelist", async function () {
+            await miniMint.whitelistAddress(addr1.address, true);
+            expect(await miniMint.isWhitelisted(addr1.address)).to.be.true;
 
-            expect(await miniMint.getNextTokenId()).to.equal(2);
+            await miniMint.whitelistAddress(addr1.address, false);
+            expect(await miniMint.isWhitelisted(addr1.address)).to.be.false;
+        });
+
+        it("Should emit an event when an address is whitelisted", async function () {
+            await expect(miniMint.whitelistAddress(addr1.address, true))
+                .to.emit(miniMint, "AddressWhitelisted")
+                .withArgs(addr1.address, true);
+
+            await expect(miniMint.whitelistAddress(addr1.address, false))
+                .to.emit(miniMint, "AddressWhitelisted")
+                .withArgs(addr1.address, false);
+        });
+
+        it("Should revert if a non-owner tries to whitelist an address", async function () {
+            await expect(
+                miniMint.connect(addr1).whitelistAddress(addr2.address, true)
+            ).to.be.reverted;
+        });
+    });
+
+
+    describe("Minting with Whitelist", function () {
+        const TOKEN_URI = "ipfs://token-metadata";
+
+        it("Should allow the owner to mint", async function () {
+            await miniMint.safeMint(addr1.address, TOKEN_URI);
+            expect(await miniMint.ownerOf(1)).to.equal(addr1.address);
+            expect(await miniMint.tokenURI(1)).to.equal(TOKEN_URI);
+        });
+
+        it("Should allow whitelisted addresses to mint", async function () {
+            await miniMint.whitelistAddress(addr1.address, true);
+            await miniMint.connect(addr1).safeMint(addr2.address, TOKEN_URI);
+
+            expect(await miniMint.ownerOf(1)).to.equal(addr2.address);
+            expect(await miniMint.tokenURI(1)).to.equal(TOKEN_URI);
+        });
+
+        it("Should revert if a non-whitelisted address tries to mint", async function () {
+            await expect(
+                miniMint.connect(addr1).safeMint(addr2.address, TOKEN_URI)
+            ).to.be.revertedWithCustomError(miniMint, "NotAuthorized").withArgs(addr1.address);
+        });
+
+        it("Should allow the owner to mint even if not explicitly whitelisted", async function () {
+            expect(await miniMint.isWhitelisted(owner.address)).to.be.false;
+
+            await miniMint.safeMint(addr1.address, TOKEN_URI);
+            expect(await miniMint.ownerOf(1)).to.equal(addr1.address);
+        });
+
+        it("Should not allow a removed address to mint", async function () {
+            await miniMint.whitelistAddress(addr1.address, true);
+            await miniMint.whitelistAddress(addr1.address, false);
+
+            await expect(
+                miniMint.connect(addr1).safeMint(addr2.address, TOKEN_URI)
+            ).to.be.revertedWithCustomError(miniMint, "NotAuthorized").withArgs(addr1.address);
         });
     });
 
@@ -84,6 +136,47 @@ describe("MiniMintERC721", function () {
             await expect(
                 miniMint.burn(99)
             ).to.be.reverted;
+        });
+
+        it("Should remove the burned token from the _allMintedTokens array", async function () {
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-2");
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-3");
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-4");
+        
+            await miniMint.connect(addr1).burn(1);
+        
+            const allTokens = await miniMint.getAllMintedTokens();
+        
+            const tokenIds = allTokens.map((t: bigint) => Number(t));
+            expect(tokenIds).to.deep.equal([2, 3, 4]); 
+        });
+    });
+
+    describe("getNextTokenId", function () {
+        it("Should return the next token ID to be minted", async function () {
+            // Initially, the next token ID should be 1
+            expect(await miniMint.getNextTokenId()).to.equal(1);
+    
+            // Mint one token, the next token ID should now be 2
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-1");
+            expect(await miniMint.getNextTokenId()).to.equal(2);
+    
+            // Mint another token, the next token ID should now be 3
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-2");
+            expect(await miniMint.getNextTokenId()).to.equal(3);
+        });
+    
+        it("Should not change the next token ID after burning a token", async function () {
+            // Mint two tokens
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-1");
+            await miniMint.safeMint(addr1.address, "ipfs://token-metadata-2");
+    
+            // The next token ID should be 3
+            expect(await miniMint.getNextTokenId()).to.equal(3);
+    
+            // Burn a token and check the next token ID remains unchanged
+            await miniMint.connect(addr1).burn(1);
+            expect(await miniMint.getNextTokenId()).to.equal(3);
         });
     });
 
@@ -114,5 +207,21 @@ describe("MiniMintERC721", function () {
             expect(tokenIds).to.deep.equal([1, 2]);
         });
     });
+
+    describe("supportsInterface", function () {
+        it("Should return true for ERC721 and ERC721URIStorage interfaces", async function () {
+            // ERC721 interface ID: 0x80ac58cd
+            expect(await miniMint.supportsInterface("0x80ac58cd")).to.be.true;
+    
+            // ERC721Metadata (via URIStorage) interface ID: 0x5b5e139f
+            expect(await miniMint.supportsInterface("0x5b5e139f")).to.be.true;
+        });
+    
+        it("Should return false for unsupported interfaces", async function () {
+            // Random unsupported interface ID
+            expect(await miniMint.supportsInterface("0xffffffff")).to.be.false;
+        });
+    });
 });
+
 
