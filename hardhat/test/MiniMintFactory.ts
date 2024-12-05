@@ -80,11 +80,11 @@ describe("MiniMintFactory", function () {
     const symbol = parsedLog.args.symbol;
     const metadataURI = parsedLog.args.contractMetadataURI;
   
-    expect(owner).to.equal(addr1.address); // Check owner
-    expect(collectionAddress).to.not.equal(ethers.ZeroAddress); // Check valid collection address
-    expect(name).to.equal("TestNFT"); // Check name
-    expect(symbol).to.equal("TNFT"); // Check symbol
-    expect(metadataURI).to.equal("ipfs://testMetadataURI"); // Check metadata URI
+    expect(owner).to.equal(addr1.address); 
+    expect(collectionAddress).to.not.equal(ethers.ZeroAddress); 
+    expect(name).to.equal("TestNFT"); 
+    expect(symbol).to.equal("TNFT"); 
+    expect(metadataURI).to.equal("ipfs://testMetadataURI"); 
   });
   
 

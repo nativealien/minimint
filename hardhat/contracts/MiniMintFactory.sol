@@ -4,8 +4,13 @@ pragma solidity ^0.8.27;
 import "./MiniMintERC721.sol";
 
 contract MiniMintFactory {
-
-    event CollectionDeployed(address indexed owner, address collectionAddress, string name, string symbol, string contractMetadataURI);
+    event CollectionDeployed(
+        address indexed owner,
+        address collectionAddress,
+        string name,
+        string symbol,
+        string contractMetadataURI
+    );
     event UserWhitelisted(address indexed user, bool isWhitelisted);
 
     address[] public collections;
@@ -37,14 +42,23 @@ contract MiniMintFactory {
 
         collections.push(address(collection));
 
-        emit CollectionDeployed(msg.sender, address(collection), name, symbol, contractMetadataURI);
+        emit CollectionDeployed(
+            msg.sender,
+            address(collection),
+            name,
+            symbol,
+            contractMetadataURI
+        );
     }
 
     function getCollections() external view returns (address[] memory) {
         return collections;
     }
 
-    function whitelistUser(address user, bool isWhitelisted) external onlyOwner {
+    function whitelistUser(
+        address user,
+        bool isWhitelisted
+    ) external onlyOwner {
         whitelisted[user] = isWhitelisted;
         emit UserWhitelisted(user, isWhitelisted);
     }
@@ -54,4 +68,3 @@ contract MiniMintFactory {
         owner = newOwner;
     }
 }
-

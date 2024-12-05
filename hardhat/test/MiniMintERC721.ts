@@ -142,39 +142,33 @@ describe("MiniMintERC721", function () {
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-2");
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-3");
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-4");
-        
+
             await miniMint.connect(addr1).burn(1);
-        
+
             const allTokens = await miniMint.getAllMintedTokens();
-        
+
             const tokenIds = allTokens.map((t: bigint) => Number(t));
-            expect(tokenIds).to.deep.equal([2, 3, 4]); 
+            expect(tokenIds).to.deep.equal([2, 3, 4]);
         });
     });
 
     describe("getNextTokenId", function () {
         it("Should return the next token ID to be minted", async function () {
-            // Initially, the next token ID should be 1
             expect(await miniMint.getNextTokenId()).to.equal(1);
-    
-            // Mint one token, the next token ID should now be 2
+
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-1");
             expect(await miniMint.getNextTokenId()).to.equal(2);
-    
-            // Mint another token, the next token ID should now be 3
+
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-2");
             expect(await miniMint.getNextTokenId()).to.equal(3);
         });
-    
+
         it("Should not change the next token ID after burning a token", async function () {
-            // Mint two tokens
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-1");
             await miniMint.safeMint(addr1.address, "ipfs://token-metadata-2");
-    
-            // The next token ID should be 3
+
             expect(await miniMint.getNextTokenId()).to.equal(3);
-    
-            // Burn a token and check the next token ID remains unchanged
+
             await miniMint.connect(addr1).burn(1);
             expect(await miniMint.getNextTokenId()).to.equal(3);
         });
@@ -201,7 +195,6 @@ describe("MiniMintERC721", function () {
 
             const mintedTokens = await miniMint.getAllMintedTokens();
             // console.log(mintedTokens)
-            // expect(mintedTokens.map((t: any) => t.toNumber())).to.deep.equal([1, 2]);
 
             const tokenIds = mintedTokens.map((t: bigint) => Number(t));
             expect(tokenIds).to.deep.equal([1, 2]);
@@ -212,11 +205,11 @@ describe("MiniMintERC721", function () {
         it("Should return true for ERC721 and ERC721URIStorage interfaces", async function () {
             // ERC721 interface ID: 0x80ac58cd
             expect(await miniMint.supportsInterface("0x80ac58cd")).to.be.true;
-    
+
             // ERC721Metadata (via URIStorage) interface ID: 0x5b5e139f
             expect(await miniMint.supportsInterface("0x5b5e139f")).to.be.true;
         });
-    
+
         it("Should return false for unsupported interfaces", async function () {
             // Random unsupported interface ID
             expect(await miniMint.supportsInterface("0xffffffff")).to.be.false;

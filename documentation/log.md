@@ -40,6 +40,8 @@ Tomorrow, I will begin writing a Marketplace contract.
 
 > Thursday
 
+Wrote the marketplace contract, with testing. Think I managed to put in all functions needed, but will review all contracts tomorrow.
+
 > Friday
 
 ### Retrospect:
