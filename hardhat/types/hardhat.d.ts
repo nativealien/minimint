@@ -77,6 +77,10 @@ declare module "hardhat/types/runtime" {
       name: "MiniMintFactory",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MiniMintFactory__factory>;
+    getContractFactory(
+      name: "MiniMintMarketplace",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.MiniMintMarketplace__factory>;
 
     getContractAt(
       name: "Ownable",
@@ -158,6 +162,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.MiniMintFactory>;
+    getContractAt(
+      name: "MiniMintMarketplace",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.MiniMintMarketplace>;
 
     deployContract(
       name: "Ownable",
@@ -223,6 +232,10 @@ declare module "hardhat/types/runtime" {
       name: "MiniMintFactory",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MiniMintFactory>;
+    deployContract(
+      name: "MiniMintMarketplace",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MiniMintMarketplace>;
 
     deployContract(
       name: "Ownable",
@@ -304,6 +317,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.MiniMintFactory>;
+    deployContract(
+      name: "MiniMintMarketplace",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.MiniMintMarketplace>;
 
     // default types
     getContractFactory(

@@ -38,3 +38,5 @@ export type { MiniMintERC721 } from "./contracts/MiniMintERC721";
 export { MiniMintERC721__factory } from "./factories/contracts/MiniMintERC721__factory";
 export type { MiniMintFactory } from "./contracts/MiniMintFactory";
 export { MiniMintFactory__factory } from "./factories/contracts/MiniMintFactory__factory";
+export type { MiniMintMarketplace } from "./contracts/MiniMintMarketplace";
+export { MiniMintMarketplace__factory } from "./factories/contracts/MiniMintMarketplace__factory";

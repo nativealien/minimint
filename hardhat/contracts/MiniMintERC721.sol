@@ -6,8 +6,8 @@ import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
-    string private _contractURI; 
-    uint256 private _nextTokenId; 
+    string private _contractURI;
+    uint256 private _nextTokenId;
     uint256[] private _allMintedTokens;
     mapping(address => bool) private _whitelisted;
 
@@ -19,9 +19,11 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     event NFTBurned(address indexed owner, uint256 indexed tokenId);
     event AddressWhitelisted(address indexed account, bool isWhitelisted);
 
-    constructor(string memory contractMetadataURI) ERC721("MiniMint", "MTK") Ownable(msg.sender) {
+    constructor(
+        string memory contractMetadataURI
+    ) ERC721("MiniMint", "MTK") Ownable(msg.sender) {
         _contractURI = contractMetadataURI;
-        _nextTokenId = 1; 
+        _nextTokenId = 1;
     }
 
     modifier onlyAuthorized() {
@@ -31,7 +33,9 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         _;
     }
 
-    function setContractURI(string memory contractMetadataURI) public onlyOwner {
+    function setContractURI(
+        string memory contractMetadataURI
+    ) public onlyOwner {
         emit MetadataUpdated(_contractURI, contractMetadataURI);
         _contractURI = contractMetadataURI;
     }
@@ -49,10 +53,10 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return _whitelisted[account];
     }
 
-    function safeMint(address to, string memory uri) public onlyAuthorized { 
+    function safeMint(address to, string memory uri) public onlyAuthorized {
         uint256 tokenId = _nextTokenId;
         _nextTokenId++;
-        _allMintedTokens.push(tokenId); 
+        _allMintedTokens.push(tokenId);
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
 
@@ -61,7 +65,7 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
 
     function burn(uint256 tokenId) public {
         if (ownerOf(tokenId) != msg.sender) {
-            revert NotOwner(msg.sender, tokenId); 
+            revert NotOwner(msg.sender, tokenId);
         }
         _burn(tokenId);
 
@@ -93,22 +97,16 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return _allMintedTokens;
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         ownerOf(tokenId);
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (bool)
-    {
+    function supportsInterface(
+        bytes4 interfaceId
+    ) public view override(ERC721, ERC721URIStorage) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 }
