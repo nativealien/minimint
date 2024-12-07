@@ -1,4 +1,4 @@
-# Documentation
+# Sprint Log
 
 The project is divided into five sprints spanning the period from November 25th to December 27th. Each sprint lasts for one week (Monday through Friday) and has a specific objective (e.g., Sprint 1 focuses on project planning and repository setup). A daily log will be maintained in this file to track progress.
 
@@ -42,13 +42,19 @@ Tomorrow, I will begin writing a Marketplace contract.
 
 Wrote the marketplace contract, with testing. Think I managed to put in all functions needed, but will review all contracts tomorrow.
 
-> Friday
+> Friday (Saturday)
+
+This day didn't progress as planned. Parental responsibilities got in the way, but I think the functions and tests in the contracts are adequate for the assignment anyway. I also believe there will be time for fine-tuning along the way. Another thing to keep in mind is that I have been lazy with comments, so I will make sure to add them along the way.
+
+As of writing this on Saturday, I am planning for the next sprint as well as reflecting on the week that has passed. 
 
 ### Retrospect:
 
+I think this sprint has served its purpose! The plan was to write and test the contracts I need, and this has been achieved, even though none of them have been deployed to the testnet or verified yet. I will fit this into the start of the next sprint, as it shouldn’t be a problem!
+
 --------------------------------------------------------------------------
 
-## Sprint 3: Frontend Development - Integration with Blockchain
+## Sprint 3: Frontend Setup and Integration with Blockchain
 
 > Monday
 
@@ -64,7 +70,7 @@ Wrote the marketplace contract, with testing. Think I managed to put in all func
 
 --------------------------------------------------------------------------
 
-## Sprint 4: Refinements and Testing
+## Sprint 4: User experience and Design
 
 > Monday
 
@@ -80,7 +86,7 @@ Wrote the marketplace contract, with testing. Think I managed to put in all func
 
 --------------------------------------------------------------------------
 
-## Sprint 5: Finalizing and Documentation
+## Sprint 5: Finalizing, Documentation and Deployment
 
 > Monday
 
