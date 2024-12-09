@@ -1,1 +1,3 @@
-# React Frontend
+# MiniMint Frontend
+
+React

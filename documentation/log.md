@@ -58,6 +58,19 @@ I think this sprint has served its purpose! The plan was to write and test the c
 
 > Monday
 
+I have now set up a frontend using yarn create vite with TypeScript. I also added a basic structure with React Router DOM, including simple navigation and two pages: "Home" and "About" (both currently empty). Additionally, I created scripts in the root directory to simplify starting the Hardhat node, deploying contracts, and running the client simultaneously. Also added a simple function using ethers, to check if the local chain is running.
+
+```js
+"scripts": {
+    "node": "cd hardhat && npx hardhat node",
+    "client": "cd client && yarn dev",
+    "node-client": "npm-run-all --parallel node client",
+    "deploy": "cd hardhat && npx hardhat run scripts/deploy.js --network localhost",
+    "deploy-client": "npm-run-all deploy client",
+    "start-all": "npm-run-all --parallel node deploy-and-client"
+}
+```
+
 > Tuesday
 
 > Wednesday
