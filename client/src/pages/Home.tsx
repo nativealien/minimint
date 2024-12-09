@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom"
 
 const Home = () => {
-    const { local } = useOutletContext()
+    const { local }: any = useOutletContext()
 
     return <div className="home">
         <h2>Home</h2>
