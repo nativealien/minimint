@@ -71,6 +71,8 @@ I have now set up a frontend using yarn create vite with TypeScript. I also adde
 }
 ```
 
+For some reason I thought I could make a function check for verification possibilities without accually deploying them on test net. Maybe you can but I got to the point where I just put it on hold. Ill fucus on the frontend more, and start testing the contracts on local chain before deploying to testnet. Added deployment script.
+
 > Tuesday
 
 > Wednesday

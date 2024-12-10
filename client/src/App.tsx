@@ -7,7 +7,9 @@ import { checkLocalChain } from "./service/ethers-provider";
 import './app.css'
 
 function App() {
+  const [wallet, setWallet] = useState<any>(null)
   const [local, setLocal] = useState<boolean>(false)
+  const [status, setStatus] = useState<string>('')
   useEffect(() => {
     const checkLocal = async () => {
       const check = await checkLocalChain()
@@ -16,10 +18,12 @@ function App() {
     checkLocal()
   })
 
+
+
   return <div className="app">
     <Header />
     <Navbar />
-    <main><Outlet context={{local}} /></main>
+    <main><Outlet context={{local, wallet, setWallet, status, setStatus}} /></main>
     <Footer />
   </div>
 }
