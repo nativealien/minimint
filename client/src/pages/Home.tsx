@@ -7,7 +7,7 @@ const Home = () => {
     return <div className="home">
         <h2>Home</h2>
         {/* {local && <>Local chain running</>} */}
-        <ConnectWeb3 />
+        {window.ethereum ? <ConnectWeb3 /> : <>You need metamask...</>}
     </div>
 }
 

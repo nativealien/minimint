@@ -75,6 +75,8 @@ For some reason I thought I could make a function check for verification possibi
 
 > Tuesday
 
+Added wallet connection and listeners to the Ethereum window object.
+
 > Wednesday
 
 > Thursday
