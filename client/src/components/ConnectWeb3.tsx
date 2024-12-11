@@ -24,7 +24,8 @@ const ConnectWeb3 = () => {
     }
 
     return <div>
-        {!wallet ? <div>
+
+        {window.ethereum.isMetaMask && !wallet ? <div>
                     <button onClick={() => handleConnect()}>CONNECT</button>
                 </div> : <div>
                     <button onClick={() => setWallet(null)}>DISCONNECT</button>
