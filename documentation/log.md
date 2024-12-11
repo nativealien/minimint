@@ -79,6 +79,16 @@ Added wallet connection and listeners to the Ethereum window object.
 
 > Wednesday
 
+Today i broke up the the task of integrating contracts into 3 sepearate tasks.
+
+Functions for:
+
+- Main ERC721 Contract
+- ERC721 Factory Contract
+- Marketplace contract
+
+Completed task to add functionoallity for the front end to call my main ERC721 conract. Next task will be to get IPFS up and running, so that i can do frontend testing with real metadata.
+
 > Thursday
 
 > Friday

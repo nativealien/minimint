@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom"
-import { connectProvider, addListener } from "../service/ethers-provider"
+import { connectProvider, addListener } from "../service/provider"
 import { useEffect, useState } from "react"
 
 const ConnectWeb3 = () => {

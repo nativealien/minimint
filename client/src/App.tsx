@@ -3,7 +3,8 @@ import { Outlet } from "react-router-dom";
 import Header from "./pages/parts/Header";
 import Footer from "./pages/parts/Footer";
 import Navbar from "./pages/parts/Navbar";
-import { checkLocalChain } from "./service/ethers-provider";
+import { checkLocalChain } from "./service/provider";
+import erc721 from './service/blockchain/ERC721'
 import './app.css'
 
 function App() {
@@ -11,6 +12,12 @@ function App() {
   const [local, setLocal] = useState<boolean>(false)
   const [status, setStatus] = useState<string>('')
   useEffect(() => {
+    if(wallet){
+      const uri = erc721.getContractMetadataURI(wallet.provider)
+      const tokenId = erc721.getNextTokenId(wallet.signer)
+      console.log(uri)
+      console.log(tokenId)
+    }
     const checkLocal = async () => {
       const check = await checkLocalChain()
       setLocal(check)
