@@ -5,6 +5,7 @@ import Footer from "./pages/parts/Footer";
 import Navbar from "./pages/parts/Navbar";
 import { checkLocalChain } from "./service/provider";
 import erc721 from './service/blockchain/ERC721'
+import ipfs from './service/ipfs'
 import './app.css'
 
 function App() {
