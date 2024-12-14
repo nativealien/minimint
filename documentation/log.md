@@ -99,6 +99,8 @@ I also added in a .env file to secure keys as I communicate with the pinata API.
 
 Put in functions for the factory contract, made some simple calls from app component.
 
+Added marketplace connections and realized that I need to modify the contract to automatically mint NFTs upon deployment. This will ensure the exam project has content to display. I've also added a new task to address this.
+
 ### Retrospect:
 
 --------------------------------------------------------------------------
