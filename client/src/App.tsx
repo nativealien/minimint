@@ -6,7 +6,8 @@ import Navbar from "./pages/parts/Navbar";
 import { checkLocalChain } from "./service/provider";
 import erc721 from './service/blockchain/ERC721'
 import factory from './service/blockchain/factory'
-import ipfs from './service/ipfs'
+import market from './service/blockchain/marketplace'
+// import ipfs from './service/ipfs'
 import './app.css'
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         console.log(colls)
         const isWhitelist = await factory.isUserWhitelisted(wallet.provider, address)
         console.log(isWhitelist)
+
       } else {
         console.log('No connection to metamask...')
       }
