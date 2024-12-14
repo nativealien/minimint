@@ -68,13 +68,11 @@ const fetchIPFS = async (cid: string, timeout = 3000) => {
     try {
         const source = axios.CancelToken.source();
     
-        // Set timeout for the fetch request
         const timer = setTimeout(() => {
           source.cancel(`Request timed out after ${timeout} ms`);
         }, timeout);
 
         const response = await axios.get(gatewayURL, { cancelToken: source.token });
-        // console.log('File fetched:', response.data);
         clearTimeout(timer);
         return response.data;
     } catch (error) {

@@ -5,6 +5,7 @@ import Footer from "./pages/parts/Footer";
 import Navbar from "./pages/parts/Navbar";
 import { checkLocalChain } from "./service/provider";
 import erc721 from './service/blockchain/ERC721'
+import factory from './service/blockchain/factory'
 import ipfs from './service/ipfs'
 import './app.css'
 
@@ -13,18 +14,32 @@ function App() {
   const [local, setLocal] = useState<boolean>(false)
   const [status, setStatus] = useState<string>('')
   useEffect(() => {
-    if(wallet){
-      const uri = erc721.getContractMetadataURI(wallet.provider)
-      const tokenId = erc721.getNextTokenId(wallet.signer)
-      console.log(uri)
-      console.log(tokenId)
+
+    const checkContracts = async () => {
+      if(wallet){
+        const address = await wallet.signer.getAddress()
+        const uri = await erc721.getContractMetadataURI(wallet.provider)
+        const tokenId = await erc721.getNextTokenId(wallet.signer)
+        console.log(uri, address)
+        console.log(tokenId)
+  
+        const colls = await factory.getAllCollections(wallet.provider)
+        console.log(colls)
+        const isWhitelist = await factory.isUserWhitelisted(wallet.provider, address)
+        console.log(isWhitelist)
+      } else {
+        console.log('No connection to metamask...')
+      }
     }
+    checkContracts()
+
+  
     const checkLocal = async () => {
       const check = await checkLocalChain()
       setLocal(check)
     }
     checkLocal()
-  })
+  }, [wallet])
 
 
 

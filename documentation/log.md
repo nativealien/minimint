@@ -93,9 +93,11 @@ Completed task to add functionoallity for the front end to call my main ERC721 c
 
 I have now added IPFS comunication through pinata, for pinning, unpinning and fetching data through ipfs. To test the the chain of events i have also added a 'MintNFT' component in witch you set name, description and image file that gets proccessed into CIDs. This component will come of use in the collection creation feature aswell, and might be renamed and/or refactored.
 
-I also added in a .env file to secure keys as I communicate with the pinata API. Next up is getting the functions 
+I also added in a .env file to secure keys as I communicate with the pinata API. Next up is getting the functions working for the factory contract.
 
 > Friday
+
+Put in functions for the factory contract, made some simple calls from app component.
 
 ### Retrospect:
 

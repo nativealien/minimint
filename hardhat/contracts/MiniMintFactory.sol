@@ -23,6 +23,7 @@ contract MiniMintFactory {
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
+        whitelisted[msg.sender] = true;
         _;
     }
 
