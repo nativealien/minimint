@@ -31,13 +31,9 @@ export interface MiniMintFactoryInterface extends Interface {
       | "getCollections"
       | "owner"
       | "transferOwnership"
-      | "whitelistUser"
-      | "whitelisted"
   ): FunctionFragment;
 
-  getEvent(
-    nameOrSignatureOrTopic: "CollectionDeployed" | "UserWhitelisted"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "CollectionDeployed"): EventFragment;
 
   encodeFunctionData(
     functionFragment: "collections",
@@ -45,7 +41,7 @@ export interface MiniMintFactoryInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "deployCollection",
-    values: [string, string, string]
+    values: [string, string, string, string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "getCollections",
@@ -54,14 +50,6 @@ export interface MiniMintFactoryInterface extends Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
-    values: [AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "whitelistUser",
-    values: [AddressLike, boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "whitelisted",
     values: [AddressLike]
   ): string;
 
@@ -80,14 +68,6 @@ export interface MiniMintFactoryInterface extends Interface {
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "whitelistUser",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "whitelisted",
     data: BytesLike
   ): Result;
 }
@@ -113,19 +93,6 @@ export namespace CollectionDeployedEvent {
     name: string;
     symbol: string;
     contractMetadataURI: string;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
-}
-
-export namespace UserWhitelistedEvent {
-  export type InputTuple = [user: AddressLike, isWhitelisted: boolean];
-  export type OutputTuple = [user: string, isWhitelisted: boolean];
-  export interface OutputObject {
-    user: string;
-    isWhitelisted: boolean;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -179,7 +146,7 @@ export interface MiniMintFactory extends BaseContract {
   collections: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
   deployCollection: TypedContractMethod<
-    [name: string, symbol: string, contractMetadataURI: string],
+    [name: string, symbol: string, contractMetadataURI: string, uris: string[]],
     [void],
     "nonpayable"
   >;
@@ -194,14 +161,6 @@ export interface MiniMintFactory extends BaseContract {
     "nonpayable"
   >;
 
-  whitelistUser: TypedContractMethod<
-    [user: AddressLike, isWhitelisted: boolean],
-    [void],
-    "nonpayable"
-  >;
-
-  whitelisted: TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
-
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -212,7 +171,7 @@ export interface MiniMintFactory extends BaseContract {
   getFunction(
     nameOrSignature: "deployCollection"
   ): TypedContractMethod<
-    [name: string, symbol: string, contractMetadataURI: string],
+    [name: string, symbol: string, contractMetadataURI: string, uris: string[]],
     [void],
     "nonpayable"
   >;
@@ -225,16 +184,6 @@ export interface MiniMintFactory extends BaseContract {
   getFunction(
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "whitelistUser"
-  ): TypedContractMethod<
-    [user: AddressLike, isWhitelisted: boolean],
-    [void],
-    "nonpayable"
-  >;
-  getFunction(
-    nameOrSignature: "whitelisted"
-  ): TypedContractMethod<[arg0: AddressLike], [boolean], "view">;
 
   getEvent(
     key: "CollectionDeployed"
@@ -242,13 +191,6 @@ export interface MiniMintFactory extends BaseContract {
     CollectionDeployedEvent.InputTuple,
     CollectionDeployedEvent.OutputTuple,
     CollectionDeployedEvent.OutputObject
-  >;
-  getEvent(
-    key: "UserWhitelisted"
-  ): TypedContractEvent<
-    UserWhitelistedEvent.InputTuple,
-    UserWhitelistedEvent.OutputTuple,
-    UserWhitelistedEvent.OutputObject
   >;
 
   filters: {
@@ -261,17 +203,6 @@ export interface MiniMintFactory extends BaseContract {
       CollectionDeployedEvent.InputTuple,
       CollectionDeployedEvent.OutputTuple,
       CollectionDeployedEvent.OutputObject
-    >;
-
-    "UserWhitelisted(address,bool)": TypedContractEvent<
-      UserWhitelistedEvent.InputTuple,
-      UserWhitelistedEvent.OutputTuple,
-      UserWhitelistedEvent.OutputObject
-    >;
-    UserWhitelisted: TypedContractEvent<
-      UserWhitelistedEvent.InputTuple,
-      UserWhitelistedEvent.OutputTuple,
-      UserWhitelistedEvent.OutputObject
     >;
   };
 }

@@ -1,7 +1,9 @@
 import { ethers } from "ethers"
-import MiniMintABI from "./abi/MiniMintERC721.json"
+// import MiniMintABI from "./abi/MiniMintERC721.json"
+import MiniMintABI from "../../../../hardhat/artifacts/contracts/MiniMintERC721.sol/MiniMintERC721.json"
 
-const address = '0x5fbdb2315678afecb367f032d93f642f64180aa3'
+// const address = '0x5fbdb2315678afecb367f032d93f642f64180aa3'
+const address = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
 export const minimintContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
     return new ethers.Contract(address, MiniMintABI.abi, signerOrProvider);

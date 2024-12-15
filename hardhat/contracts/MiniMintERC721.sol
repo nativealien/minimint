@@ -9,28 +9,27 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     string private _contractURI;
     uint256 private _nextTokenId;
     uint256[] private _allMintedTokens;
-    mapping(address => bool) private _whitelisted;
 
     error NotOwner(address caller, uint256 tokenId);
-    error NotAuthorized(address caller);
 
     event NFTMinted(address indexed to, uint256 indexed tokenId, string uri);
     event MetadataUpdated(string oldURI, string newURI);
     event NFTBurned(address indexed owner, uint256 indexed tokenId);
-    event AddressWhitelisted(address indexed account, bool isWhitelisted);
 
     constructor(
-        string memory contractMetadataURI
-    ) ERC721("MiniMint", "MTK") Ownable(msg.sender) {
+        string memory name,
+        string memory symbol,
+        string memory contractMetadataURI,
+        string[] memory uris,
+        address recipient
+    ) ERC721(name, symbol) Ownable(msg.sender) {
+        require(uris.length == 4, "Must provide exactly 4 URIs");
         _contractURI = contractMetadataURI;
         _nextTokenId = 1;
-    }
 
-    modifier onlyAuthorized() {
-        if (msg.sender != owner() && !_whitelisted[msg.sender]) {
-            revert NotAuthorized(msg.sender);
+        for (uint256 i = 0; i < 4; i++) {
+            _mintNFT(recipient, uris[i]);
         }
-        _;
     }
 
     function setContractURI(
@@ -44,20 +43,15 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return _contractURI;
     }
 
-    function whitelistAddress(address account, bool islisted) public onlyOwner {
-        _whitelisted[account] = islisted;
-        emit AddressWhitelisted(account, islisted);
+    function safeMint(address to, string memory uri) public onlyOwner {
+        _mintNFT(to, uri);
     }
 
-    function isWhitelisted(address account) public view returns (bool) {
-        return _whitelisted[account];
-    }
-
-    function safeMint(address to, string memory uri) public onlyAuthorized {
+    function _mintNFT(address to, string memory uri) internal {
         uint256 tokenId = _nextTokenId;
         _nextTokenId++;
         _allMintedTokens.push(tokenId);
-        _safeMint(to, tokenId);
+        _mint(to, tokenId); // Use _mint instead of _safeMint
         _setTokenURI(tokenId, uri);
 
         emit NFTMinted(to, tokenId, uri);
