@@ -11,10 +11,8 @@ contract MiniMintFactory {
         string symbol,
         string contractMetadataURI
     );
-    event UserWhitelisted(address indexed user, bool isWhitelisted);
 
     address[] public collections;
-    mapping(address => bool) public whitelisted;
     address public owner;
 
     constructor() {
@@ -23,21 +21,17 @@ contract MiniMintFactory {
 
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function");
-        whitelisted[msg.sender] = true;
-        _;
-    }
-
-    modifier onlyWhitelisted() {
-        require(whitelisted[msg.sender], "Not whitelisted");
         _;
     }
 
     function deployCollection(
         string memory name,
         string memory symbol,
-        string memory contractMetadataURI
-    ) external onlyWhitelisted {
-        MiniMintERC721 collection = new MiniMintERC721(contractMetadataURI);
+        string memory contractMetadataURI,
+        string[] memory uris
+    ) external { 
+        require(uris.length == 4, "Must provide exactly 4 URIs");
+        MiniMintERC721 collection = new MiniMintERC721(name, symbol, contractMetadataURI, uris, msg.sender);
 
         collection.transferOwnership(msg.sender);
 
@@ -54,14 +48,6 @@ contract MiniMintFactory {
 
     function getCollections() external view returns (address[] memory) {
         return collections;
-    }
-
-    function whitelistUser(
-        address user,
-        bool isWhitelisted
-    ) external onlyOwner {
-        whitelisted[user] = isWhitelisted;
-        emit UserWhitelisted(user, isWhitelisted);
     }
 
     function transferOwnership(address newOwner) external onlyOwner {

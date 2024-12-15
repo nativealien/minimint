@@ -39,8 +39,7 @@ contract MiniMintMarketplace {
 
     modifier onlySupportedCollection(address collection) {
         require(
-            collection == mainCollection ||
-                isFactoryDeployedCollection(collection),
+            collection == mainCollection || isFactoryDeployedCollection(collection),
             "Marketplace: Unsupported collection"
         );
         _;

@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
-import MiniMintFactoryABI from "./abi/MiniMintFactory.json"
+// import MiniMintFactoryABI from "./abi/MiniMintFactory.json"
+import MiniMintFactoryABI from "../../../../hardhat/artifacts/contracts/MiniMintFactory.sol/MiniMintFactory.json"
 
 const contractAddress = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
 
@@ -22,7 +23,11 @@ const deployCollection = async (signer: ethers.Signer, name: string, symbol: str
 }
 
 const whitelistUser = async (signer: ethers.Signer, userAddress: string, isWhitelisted: boolean) => {
+    console.log('Signer', signer)
+    console.log('Address', userAddress)
+    console.log('isWhitelist', isWhitelisted)
     const contract = factoryContract(signer);
+    console.log('contract', contract)
     const tx = await contract.whitelistUser(userAddress, isWhitelisted);
     const test = await tx.wait();
     console.log(`User ${userAddress} whitelisted: ${isWhitelisted}`);

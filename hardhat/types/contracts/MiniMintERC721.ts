@@ -34,7 +34,6 @@ export interface MiniMintERC721Interface extends Interface {
       | "getApproved"
       | "getNextTokenId"
       | "isApprovedForAll"
-      | "isWhitelisted"
       | "name"
       | "owner"
       | "ownerOf"
@@ -49,12 +48,10 @@ export interface MiniMintERC721Interface extends Interface {
       | "tokenURI"
       | "transferFrom"
       | "transferOwnership"
-      | "whitelistAddress"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
-      | "AddressWhitelisted"
       | "Approval"
       | "ApprovalForAll"
       | "BatchMetadataUpdate"
@@ -94,10 +91,6 @@ export interface MiniMintERC721Interface extends Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [AddressLike, AddressLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "isWhitelisted",
-    values: [AddressLike]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -146,10 +139,6 @@ export interface MiniMintERC721Interface extends Interface {
     functionFragment: "transferOwnership",
     values: [AddressLike]
   ): string;
-  encodeFunctionData(
-    functionFragment: "whitelistAddress",
-    values: [AddressLike, boolean]
-  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -172,10 +161,6 @@ export interface MiniMintERC721Interface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "isWhitelisted",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -216,23 +201,6 @@ export interface MiniMintERC721Interface extends Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "whitelistAddress",
-    data: BytesLike
-  ): Result;
-}
-
-export namespace AddressWhitelistedEvent {
-  export type InputTuple = [account: AddressLike, isWhitelisted: boolean];
-  export type OutputTuple = [account: string, isWhitelisted: boolean];
-  export interface OutputObject {
-    account: string;
-    isWhitelisted: boolean;
-  }
-  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
-  export type Filter = TypedDeferredTopicFilter<Event>;
-  export type Log = TypedEventLog<Event>;
-  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace ApprovalEvent {
@@ -445,8 +413,6 @@ export interface MiniMintERC721 extends BaseContract {
     "view"
   >;
 
-  isWhitelisted: TypedContractMethod<[account: AddressLike], [boolean], "view">;
-
   name: TypedContractMethod<[], [string], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
@@ -512,12 +478,6 @@ export interface MiniMintERC721 extends BaseContract {
     "nonpayable"
   >;
 
-  whitelistAddress: TypedContractMethod<
-    [account: AddressLike, islisted: boolean],
-    [void],
-    "nonpayable"
-  >;
-
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
@@ -554,9 +514,6 @@ export interface MiniMintERC721 extends BaseContract {
     [boolean],
     "view"
   >;
-  getFunction(
-    nameOrSignature: "isWhitelisted"
-  ): TypedContractMethod<[account: AddressLike], [boolean], "view">;
   getFunction(
     nameOrSignature: "name"
   ): TypedContractMethod<[], [string], "view">;
@@ -620,21 +577,7 @@ export interface MiniMintERC721 extends BaseContract {
   getFunction(
     nameOrSignature: "transferOwnership"
   ): TypedContractMethod<[newOwner: AddressLike], [void], "nonpayable">;
-  getFunction(
-    nameOrSignature: "whitelistAddress"
-  ): TypedContractMethod<
-    [account: AddressLike, islisted: boolean],
-    [void],
-    "nonpayable"
-  >;
 
-  getEvent(
-    key: "AddressWhitelisted"
-  ): TypedContractEvent<
-    AddressWhitelistedEvent.InputTuple,
-    AddressWhitelistedEvent.OutputTuple,
-    AddressWhitelistedEvent.OutputObject
-  >;
   getEvent(
     key: "Approval"
   ): TypedContractEvent<
@@ -700,17 +643,6 @@ export interface MiniMintERC721 extends BaseContract {
   >;
 
   filters: {
-    "AddressWhitelisted(address,bool)": TypedContractEvent<
-      AddressWhitelistedEvent.InputTuple,
-      AddressWhitelistedEvent.OutputTuple,
-      AddressWhitelistedEvent.OutputObject
-    >;
-    AddressWhitelisted: TypedContractEvent<
-      AddressWhitelistedEvent.InputTuple,
-      AddressWhitelistedEvent.OutputTuple,
-      AddressWhitelistedEvent.OutputObject
-    >;
-
     "Approval(address,address,uint256)": TypedContractEvent<
       ApprovalEvent.InputTuple,
       ApprovalEvent.OutputTuple,
