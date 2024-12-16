@@ -31,7 +31,7 @@ contract MiniMintFactory {
         string[] memory uris
     ) external { 
         require(uris.length == 4, "Must provide exactly 4 URIs");
-        MiniMintERC721 collection = new MiniMintERC721(name, symbol, contractMetadataURI, uris, msg.sender);
+        MiniMintERC721 collection = new MiniMintERC721(name, symbol, contractMetadataURI, uris);
 
         collection.transferOwnership(msg.sender);
 

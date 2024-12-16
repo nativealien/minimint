@@ -17,10 +17,8 @@ describe("MiniMintERC721", function () {
   ];
 
   beforeEach(async function () {
-    // Get signers
     [owner, addr1, addr2] = await ethers.getSigners();
 
-    // Deploy the contract
     const MiniMintERC721Factory = await ethers.getContractFactory("MiniMintERC721");
     miniMint = (await MiniMintERC721Factory.deploy(
       name,
