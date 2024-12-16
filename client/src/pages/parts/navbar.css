@@ -1,0 +1,33 @@
+
+
+nav {
+    background-color: rgb(141, 141, 205);
+
+    & > ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        background-color: rgb(204, 164, 164);
+
+        & > li {
+
+            & > a {
+                font-size: 1.5em;
+                color: rgb(27, 61, 102);
+
+                & :visited {
+                    color: grey;
+                }
+
+                & :active {
+
+                    color: grey;
+                }
+                & > :hover {
+                    background-color: aquamarine;
+                }
+            }
+        }
+    }
+}

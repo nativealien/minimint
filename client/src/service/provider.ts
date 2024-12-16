@@ -1,5 +1,7 @@
 import { ethers } from "ethers";
 
+const infura = import.meta.env.VITE_INFURA_ENDPOINT
+
 // export const checkLocalChain = async (): Promise<boolean> => {
 //     try {
 //         const provider = new ethers.JsonRpcProvider('http://127.0.0.1:8545');
@@ -12,13 +14,18 @@ import { ethers } from "ethers";
 //     }
 // }
 
-export const connectProvider = async () => {
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
-    const sign = await signer.signMessage('Connect?')
-    if (sign) {
-        return { provider, signer }
-    } else { return 'Signature failed...' }
+export const connectProvider = async (metamask: boolean) => {
+    if(window.ethereum && metamask){
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const sign = await signer.signMessage('Connect?')
+        if (sign) {
+            return { provider, signer }
+        } else { return 'Signature failed...' }
+    } else {
+        const provider = new ethers.JsonRpcProvider(infura);
+        return { provider }
+    }
 }
 
 export const addListener = (

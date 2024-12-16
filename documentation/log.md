@@ -111,6 +111,12 @@ This week has been a challenge. I worked a lot over the weekend, and I managed t
 
 > Monday
 
+I didn't have much time to produce a sprint plan last week, so I started off by doing this. I will not be focusing too much on design initially and will keep things very basic in order to focus more on producing an application with zero bugs. If time allows, I might add tasks to improve the design later on in this sprint, as well as in the last one.
+
+I have added tasks for the week and created a wireframe today. I will not add this to the project yet and will keep the task open as I progress.
+
+The basic structure has been set up, with most pages added. For easier development, all page components have been included in the main navbar. This allows for better navigation through the app while developing the functional components. I have also integrated an Infura connection for users who don’t have MetaMask or simply don’t want to connect.
+
 > Tuesday
 
 > Wednesday

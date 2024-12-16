@@ -3,35 +3,24 @@ import { connectProvider, addListener } from "../service/provider"
 import { useEffect, useState } from "react"
 
 const ConnectWeb3 = () => {
-    const { wallet, setWallet, setStatus }: any = useOutletContext()
-    const [account, setAccount] = useState<string>('')
-    const [chainId, setChain] = useState<string | null>(null)
-    const [connected, setConnected] = useState<boolean>(false)
+    const { web3, setWeb3, setStatus }: any = useOutletContext()
     useEffect(() => {
-        console.log(account, chainId, connected)
-    }, [account, chainId, connected])
+        console.log(web3)
+    }, [web3])
 
     const handleConnect = async () => {
-        const res = await connectProvider()
+        const res = await connectProvider(true)
         if(typeof res !== 'string'){
-            setWallet(res)
-            setAccount(await res.signer.getAddress())
-            const network = await res.provider.getNetwork()
-            setChain(network.chainId.toString())
-            setConnected(true)
-            addListener(setAccount, setChain, setConnected)
+            setWeb3(res)
         } else setStatus(res)
     }
 
     return <div>
-
-        {window.ethereum.isMetaMask && !wallet ? <div>
-                    <button onClick={() => handleConnect()}>CONNECT</button>
-                </div> : <div>
-                    <button onClick={() => setWallet(null)}>DISCONNECT</button>
-                    <p>{account}</p>
-                    <p>{chainId}</p>
-                </div>}
+        {!web3 ? <div>
+            <button onClick={() => handleConnect()}>{window.ethereum ? 'METAMASK' : 'INFURA'}</button>
+        </div> : <div>
+            <button onClick={() => setWeb3(null)}>disconnect</button>
+        </div>}
     </div>
 }
 

@@ -3,6 +3,9 @@ import App from "../App";
 import NotFound from "../pages/NotFound";
 import Home from "../pages/Home";
 import About from "../pages/About";
+import Gallery from "../pages/Gallery";
+import Collection from "../pages/Collection";
+import NFT from "../pages/NFT";
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +20,22 @@ export const router = createBrowserRouter([
             {
                 path: 'about',
                 element: <About />
+            },
+            {
+                path: 'gallery',
+                element: <Gallery />
+            },
+            {
+                path: 'collection',
+                element: <Collection />
+            },
+            {
+                path: 'nft',
+                element: <NFT />
+            },
+            {
+                path: 'notfound',
+                element: <NotFound />
             }
         ]
     }

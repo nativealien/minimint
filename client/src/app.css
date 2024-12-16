@@ -1,11 +1,29 @@
 @import url('./styles/reset.css');
 
 #root {
-  max-width: 1280px;
+  width: 100vw;
+  height: 100vh;
   margin: 0 auto;
   text-align: center;
 
   & > .app{
+    height: 100%;
     border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+
+    & > header {
+      height: 100px;
+      background-color: rgb(134, 134, 192);
+    }
+    & > main {
+      max-width: 1280px;
+      height: 100%;
+      margin: auto;
+    }
+    & > footer {
+      height: 100px;
+      background-color: rgb(220, 192, 138);
+    }
   }
 }
