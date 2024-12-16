@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 // import MiniMintFactoryABI from "./abi/MiniMintFactory.json"
 import MiniMintFactoryABI from "../../../../hardhat/artifacts/contracts/MiniMintFactory.sol/MiniMintFactory.json"
 
-const contractAddress = "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512";
+const contractAddress = import.meta.env.VITE_MINIMINT_FACTORY_CONTRACT
 
 export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
     return new ethers.Contract(contractAddress, MiniMintFactoryABI.abi, signerOrProvider);
@@ -10,6 +10,7 @@ export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provide
 
 const getAllCollections = async (provider: ethers.Provider) => {
     const contract = factoryContract(provider);
+    console.log(contract)
     const collections = await contract.getCollections();
     return collections;
 }
