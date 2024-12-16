@@ -1,20 +1,21 @@
 // import { useOutletContext } from "react-router-dom"
 import ConnectWeb3 from "../components/ConnectWeb3"
 import { connectProvider } from "../service/provider"
-import { useOutletContext } from "react-router-dom"
+import { useOutletContext, useNavigate } from "react-router-dom"
 import './home.css'
 import { useEffect } from "react"
 
 const Home = () => {
     const { web3 }: any = useOutletContext()
+    const navigate = useNavigate()
     useEffect(() => {
         console.log(web3)
     }, [web3])
 
-    const handleContinue = async () => {
-        const res = await connectProvider(false)
-        console.log(res)
-    }
+    // const handleContinue = async () => {
+    //     const res = await connectProvider(false)
+    //     console.log(res)
+    // }
 
     return <div className="home">
         <h2>Home</h2>
@@ -23,7 +24,7 @@ const Home = () => {
         </section>
         {/* {local && <>Local chain running</>} */}
         {window.ethereum ? <ConnectWeb3 /> : <>You need metamask...</>}
-        <p onClick={() => handleContinue()}>continue without connecting</p>
+        <p onClick={() => navigate('gallery')}>{"continue without connecting ->"}</p>
 
 
     </div>
