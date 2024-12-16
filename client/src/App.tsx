@@ -4,33 +4,55 @@ import Header from "./pages/parts/Header";
 import Footer from "./pages/parts/Footer";
 import Navbar from "./pages/parts/Navbar";
 // import { checkLocalChain } from "./service/provider";
-import erc721 from './service/blockchain/ERC721'
-import factory from './service/blockchain/factory'
-import market from './service/blockchain/marketplace'
+// import erc721 from './service/blockchain/ERC721'
+// import factory from './service/blockchain/factory'
+// import market from './service/blockchain/marketplace'
 // import ipfs from './service/ipfs'
 import './app.css'
 
 function App() {
-  const [wallet, setWallet] = useState<any>(null)
-  // const [local, setLocal] = useState<boolean>(false)
-  const [status, setStatus] = useState<string>('')
+  const [web3, setWeb3] = useState<any>(null)
+  const [collection, setCollection] = useState<any>(null)
+  const [nft, setNft] = useState<any>(null)
+  const [status, setStatus] = useState<any>(null)
+  const [context, setContext] = useState<object>({
+    web3,
+    setWeb3,
+    collection,
+    setCollection,
+    nft,
+    setNft,
+    status,
+    setStatus
+  })
   useEffect(() => {
 
-    const checkContracts = async () => {
-      if(wallet){
-        const address = await wallet.signer.getAddress()
-        const uri = await erc721.getContractMetadataURI(wallet.provider)
-        const tokenId = await erc721.getNextTokenId(wallet.signer)
-        console.log(uri, address)
-        console.log(tokenId)
+    setContext({
+      web3,
+      setWeb3,
+      collection,
+      setCollection,
+      nft,
+      setNft,
+      status,
+      setStatus
+    })
+
+    // const checkContracts = async () => {
+      // if(wallet){
+      //   const address = await wallet.signer.getAddress()
+      //   const uri = await erc721.getContractMetadataURI(wallet.provider)
+      //   const tokenId = await erc721.getNextTokenId(wallet.signer)
+      //   console.log(uri, address)
+      //   console.log(tokenId)
 
 
 
-      } else {
-        console.log('No connection to metamask...')
-      }
-    }
-    checkContracts()
+      // } else {
+      //   console.log('No connection to metamask...')
+      // }
+    // }
+    // checkContracts()
 
   
     // const checkLocal = async () => {
@@ -38,14 +60,15 @@ function App() {
     //   setLocal(check)
     // }
     // checkLocal()
-  }, [wallet])
+    console.log('APP', web3)
+  }, [web3, collection, nft, status])
 
 
 
   return <div className="app">
     <Header />
     <Navbar />
-    <main><Outlet context={{wallet, setWallet, status, setStatus}} /></main>
+    <main><Outlet context={context} /></main>
     <Footer />
   </div>
 }

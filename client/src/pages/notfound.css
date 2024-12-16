@@ -1,0 +1,15 @@
+/* Styling for the Notfound page... */
+
+.notfound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    & > h2 {
+        background-color: bisque;
+    }
+    & > section {
+        width: 500px;
+    }
+}
