@@ -1,10 +1,10 @@
-import { useOutletContext } from 'react-router-dom'
+import { useAppContext } from '../context/context'
 import './nft.css'
 
 const NFT = () => {
-    const { nft }: any = useOutletContext()
+    const { nfts }: any = useAppContext()
 
-    console.log(nft)
+    console.log(nfts)
 
     return <div className="nft">
         <h2>NFT</h2>

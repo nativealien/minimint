@@ -1,10 +1,10 @@
-import { useOutletContext } from 'react-router-dom'
+import { useAppContext } from '../context/context'
 import './collection.css'
 
 const Collection = () => {
-    const { collection }: any = useOutletContext()
+    const { collections }: any = useAppContext()
 
-    console.log(collection)
+    console.log(collections)
 
     return <div className="collection">
         <h2>Collection</h2>
