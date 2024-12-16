@@ -24,13 +24,7 @@ function App() {
         console.log(uri, address)
         console.log(tokenId)
 
-        const list = await factory.whitelistUser(wallet.signer, address, true)
-        console.log(list)
-  
-        // const colls = await factory.getAllCollections(wallet.provider)
-        // console.log(colls)
-        // const isWhitelist = await factory.isUserWhitelisted(wallet.provider, address)
-        // console.log(isWhitelist)
+
 
       } else {
         console.log('No connection to metamask...')

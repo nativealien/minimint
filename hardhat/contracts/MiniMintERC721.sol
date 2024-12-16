@@ -20,15 +20,15 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         string memory name,
         string memory symbol,
         string memory contractMetadataURI,
-        string[] memory uris,
-        address recipient
+        string[] memory uris
+        // address recipient
     ) ERC721(name, symbol) Ownable(msg.sender) {
         require(uris.length == 4, "Must provide exactly 4 URIs");
         _contractURI = contractMetadataURI;
         _nextTokenId = 1;
 
         for (uint256 i = 0; i < 4; i++) {
-            _mintNFT(recipient, uris[i]);
+            _mintNFT(msg.sender, uris[i]);
         }
     }
 

@@ -95,13 +95,15 @@ I have now added IPFS comunication through pinata, for pinning, unpinning and fe
 
 I also added in a .env file to secure keys as I communicate with the pinata API. Next up is getting the functions working for the factory contract.
 
-> Friday
+> Friday (weekend)
 
-Put in functions for the factory contract, made some simple calls from app component.
+I added functions for the factory contract and made some simple calls from the app component. I also connected the marketplace and realized that I need to modify the contract to automatically mint NFTs upon deployment. This will ensure the exam project has content to display. I've added a new task to address this.
 
-Added marketplace connections and realized that I need to modify the contract to automatically mint NFTs upon deployment. This will ensure the exam project has content to display. I've also added a new task to address this.
+I made some changes to the contracts and decided to remove the whitelist functions for simplicity, ensuring I have enough time to complete the frontend 100%. This means anyone can now mint on the contracts. I deployed the contracts to Sepolia and will transition from the test environment as I begin developing the frontend next week.
 
 ### Retrospect:
+
+This week has been a challenge. I worked a lot over the weekend, and I managed to get everything done according to plan!
 
 --------------------------------------------------------------------------
 
