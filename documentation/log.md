@@ -117,6 +117,8 @@ I have added tasks for the week and created a wireframe today. I will not add th
 
 The basic structure has been set up, with most pages added. For easier development, all page components have been included in the main navbar. This allows for better navigation through the app while developing the functional components. I have also integrated an Infura connection for users who don’t have MetaMask or simply don’t want to connect.
 
+Made the front 'Home' page, will add content later (welcome text) and have decided to utilize React Markdown to store content in .md files. I also added my wireframe, this might be updated abit as I go but the basic idea and structure is there.
+
 > Tuesday
 
 > Wednesday

@@ -1,6 +1,6 @@
 import { useOutletContext } from "react-router-dom"
-import { connectProvider, addListener } from "../service/provider"
-import { useEffect, useState } from "react"
+import { connectProvider } from "../service/provider"
+import { useEffect } from "react"
 
 const ConnectWeb3 = () => {
     const { web3, setWeb3, setStatus }: any = useOutletContext()
@@ -16,10 +16,10 @@ const ConnectWeb3 = () => {
     }
 
     return <div>
-        {!web3 ? <div>
-            <button onClick={() => handleConnect()}>{window.ethereum ? 'METAMASK' : 'INFURA'}</button>
+        {!web3.signer ? <div>
+            <button onClick={() => handleConnect()}>Connect</button>
         </div> : <div>
-            <button onClick={() => setWeb3(null)}>disconnect</button>
+            <button onClick={() => setWeb3(null)}>Disconnect</button>
         </div>}
     </div>
 }
