@@ -1,21 +1,16 @@
 // import { useOutletContext } from "react-router-dom"
-import ConnectWeb3 from "../components/ConnectWeb3"
-import { connectProvider } from "../service/provider"
-import { useOutletContext, useNavigate } from "react-router-dom"
-import './home.css'
+import { useNavigate } from "react-router-dom"
+import { useAppContext } from "../context/context"
 import { useEffect } from "react"
+import ConnectWeb3 from "../components/ConnectWeb3"
+import './home.css'
 
 const Home = () => {
-    const { web3 }: any = useOutletContext()
+    const { web3 }: any = useAppContext()
     const navigate = useNavigate()
     useEffect(() => {
         console.log(web3)
     }, [web3])
-
-    // const handleContinue = async () => {
-    //     const res = await connectProvider(false)
-    //     console.log(res)
-    // }
 
     return <div className="home">
         <h2>Home</h2>

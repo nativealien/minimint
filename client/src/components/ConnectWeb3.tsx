@@ -1,9 +1,9 @@
-import { useOutletContext } from "react-router-dom"
-import { connectProvider } from "../service/provider"
 import { useEffect } from "react"
+import { useAppContext } from "../context/context"
+import { connectProvider } from "../service/provider"
 
 const ConnectWeb3 = () => {
-    const { web3, setWeb3, setStatus }: any = useOutletContext()
+    const { web3, setWeb3, setStatus }: any = useAppContext()
     useEffect(() => {
         console.log(web3)
     }, [web3])
@@ -16,7 +16,7 @@ const ConnectWeb3 = () => {
     }
 
     return <div>
-        {!web3.signer ? <div>
+        {!web3?.signer ? <div>
             <button onClick={() => handleConnect()}>Connect</button>
         </div> : <div>
             <button onClick={() => setWeb3(null)}>Disconnect</button>
