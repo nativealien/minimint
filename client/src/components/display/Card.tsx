@@ -1,6 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom"
+import { useAppContext } from "../../context/context"
 
 const Card = ({meta}: {meta: IMeta}) => {
+    const { web3 } = useAppContext()
     const location = useLocation()
     const navigate = useNavigate()
     let path = ''
@@ -13,17 +15,20 @@ const Card = ({meta}: {meta: IMeta}) => {
             path = location.pathname + '/' + meta.type
         }
     }
-    console.log(location)
+    console.log(web3)
 
     const handleClick = () => {
         navigate(path, { state: { meta } });
     }
 
-    return <div onClick={handleClick} className={`${meta.type}-card grid-item`}>
-        <img src={meta.image} alt="" />
-        <h3>{meta.name}</h3>
-        <p>{meta.description}</p>
-        <p>{meta.type}</p>
+    return <div style={{backgroundImage: `url(${meta.image})`}} onClick={handleClick} className={`${meta.type}-card grid-item`}>
+        {/* <img src={meta.image} alt="" /> */}
+        <div className="item-info">
+            <h3>{meta.name}</h3>
+            {web3.address === meta.owner && <>OWN</>}
+        </div>
+        {/* <p>{meta.description}</p>
+        <p>{meta.type}</p> */}
     </div>
 }
 

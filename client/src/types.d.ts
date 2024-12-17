@@ -8,8 +8,9 @@ interface Window{
 }
 
 interface IMeta {
-    type: string,
-    name: string,
-    description: string,
-    image: string
+    type: string;
+    name: string;
+    description: string;
+    image: string;
+    owner: string;
 }

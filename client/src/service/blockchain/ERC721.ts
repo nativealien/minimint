@@ -5,6 +5,8 @@ import MiniMintABI from "../../../../hardhat/artifacts/contracts/MiniMintERC721.
 // const address = '0x5fbdb2315678afecb367f032d93f642f64180aa3'
 const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
+const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
+
 export const minimintContract = (signerOrProvider: ethers.Signer | ethers.Provider, address: string = mainAddress) => {
     return new ethers.Contract(address, MiniMintABI.abi, signerOrProvider);
 }
@@ -23,7 +25,7 @@ const getContractMetadataURI = async (signer: any, address?: string) => {
     const contract = minimintContract(signer, address)
     const owner = await contract.owner()
     const uri = await contract.contractURI();
-    console.log("Contract Metadata URI:", uri);
+    // console.log("Contract Metadata URI:", uri);
     const res = { uri, owner}
     return res;
 };
@@ -48,7 +50,8 @@ const getNextTokenId = async (signer: any, address?: string) => {
 const getAllMintedTokens = async (signer: any, address?: string) => {
     const contract = minimintContract(signer, address)
     const tokenIds: number[] = await contract.getAllMintedTokens();
-    console.log("All Minted Tokens:", tokenIds.map(id => id.toString()));
+    await delay(1000)
+    // console.log("All Minted Tokens:", tokenIds.map(id => id.toString()));
     return tokenIds.map(id => id.toString());
 };
 
@@ -57,8 +60,9 @@ const getTokenURI = async (tokenId: number, signer: any, address?: string) => {
     const contract = minimintContract(signer, address)
     const uri = await contract.tokenURI(tokenId);
     const owner = await contract.ownerOf(tokenId)
-    console.log(`Metadata URI for Token ID ${tokenId}:`, uri);
-    console.log(`Owner for Token ID ${tokenId}:`, owner);
+    await delay(500)
+    // console.log(`Metadata URI for Token ID ${tokenId}:`, uri);
+    // console.log(`Owner for Token ID ${tokenId}:`, owner);
     return {uri: uri, owner: owner};
 };
 

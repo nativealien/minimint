@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-// import { useAppContext } from '../context/context'
 import './collection.css'
 import Grid from '../components/display/Grid';
 
