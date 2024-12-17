@@ -1,9 +1,11 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './collection.css'
 
 const NFT = () => {
+    const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
+    if(!meta) navigate(-1)
 
     console.log(meta)
 

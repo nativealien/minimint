@@ -1,16 +1,23 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 // import { useAppContext } from '../context/context'
 import './collection.css'
+import Grid from '../components/display/Grid';
 
 const Collection = () => {
-    // const { collections }: any = useAppContext()
+    const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
+    if(!meta) navigate(-1)
 
     console.log(meta)
 
     return <div className="collection">
-        <h2>Collection</h2>
+        <section>
+            <h2>{meta.name}</h2>
+            <p>{meta.owner}</p>
+            <img src={meta.image} alt="" />
+        </section>
+        <Grid items={meta.nfts} />
     </div>
     
 }

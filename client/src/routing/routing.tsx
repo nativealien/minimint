@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
                 element: <Collection />
             },
             {
-                path: 'gallery/nft',
+                path: 'gallery/collection/nft',
                 element: <NFT />
             },
             {

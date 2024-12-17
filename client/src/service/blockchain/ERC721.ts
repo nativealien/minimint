@@ -59,7 +59,7 @@ const getTokenURI = async (tokenId: number, signer: any, address?: string) => {
     const owner = await contract.ownerOf(tokenId)
     console.log(`Metadata URI for Token ID ${tokenId}:`, uri);
     console.log(`Owner for Token ID ${tokenId}:`, owner);
-    return uri;
+    return {uri: uri, owner: owner};
 };
 
 export default {

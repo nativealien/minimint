@@ -17,13 +17,16 @@ const initMarketplace = async (web3: any) => {
     nftArr = await Promise.all(
     tokenIds.map(async (tokenId: any) => {
         const nft = await ERC721.getTokenURI(tokenId, web3.provider);
-        const nftMeta = await ipfs.fetchIPFSJSON(nft)
+        const nftMeta = await ipfs.fetchIPFSJSON(nft.uri)
         const newImg = ipfs.makeImgURL(nftMeta.image)
+        nftMeta.collection = mainMeta
+        nftMeta.owner = nft.owner
         nftMeta.image = newImg
         nftMeta.type = 'nft'
         return nftMeta; 
     })
     );
+    mainMeta.nfts = nftArr
 
     const collMeta = {
         collection: mainMeta,
