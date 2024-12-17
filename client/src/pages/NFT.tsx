@@ -1,12 +1,13 @@
-import { useAppContext } from '../context/context'
-import './nft.css'
+import { useLocation } from 'react-router-dom'
+import './collection.css'
 
 const NFT = () => {
-    const { nfts }: any = useAppContext()
+    const location = useLocation()
+    const { meta } = location.state || {};
 
-    console.log(nfts)
+    console.log(meta)
 
-    return <div className="nft">
+    return <div className="collection">
         <h2>NFT</h2>
     </div>
     

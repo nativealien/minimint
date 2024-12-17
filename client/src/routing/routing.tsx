@@ -26,11 +26,11 @@ export const router = createBrowserRouter([
                 element: <Gallery />
             },
             {
-                path: 'collection',
+                path: 'gallery/collection',
                 element: <Collection />
             },
             {
-                path: 'nft',
+                path: 'gallery/nft',
                 element: <NFT />
             },
             {
