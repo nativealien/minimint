@@ -20,7 +20,8 @@ export const connectProvider = async (metamask: boolean) => {
         const signer = await provider.getSigner();
         const sign = await signer.signMessage('Connect?')
         if (sign) {
-            return { provider, signer }
+            const address = await signer.getAddress()
+            return { provider, signer, address }
         } else { return 'Signature failed...' }
     } else {
         const provider = new ethers.JsonRpcProvider(infura);

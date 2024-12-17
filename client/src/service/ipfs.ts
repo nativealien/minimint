@@ -64,12 +64,11 @@ const fetchIPFSJSON = async (cid: string, timeout = 3000) => {
     const pureCid1 = cid.replace("ipfs://", "");
     const pureCid = pureCid1.replace("/", "");
     const gateways = [
-      `https://cloudflare-ipfs.com/ipfs/${pureCid}`,
       `https://ipfs.io/ipfs/${pureCid}`,
-      `https://gateway.pinata.cloud/ipfs/${pureCid}`,
+      `https://gateway.pinata.cloud/ipfs/${pureCid}`
     ];
   
-    console.log("Trying gateways:", gateways);
+    // console.log("Trying gateways:", gateways);
   
     for (const gatewayURL of gateways) {
       try {
@@ -78,18 +77,17 @@ const fetchIPFSJSON = async (cid: string, timeout = 3000) => {
           source.cancel(`Request timed out after ${timeout} ms`);
         }, timeout);
   
-        console.log(`Fetching: ${gatewayURL}`);
+        // console.log(`Fetching: ${gatewayURL}`);
         const response = await axios.get(gatewayURL, {
           cancelToken: source.token,
           headers: { Accept: "application/json" },
         });
-  
         clearTimeout(timer);
         if (response.status === 200) {
           return response.data; 
         }
       } catch (error: any) {
-        console.error(`Error fetching from ${gatewayURL}:`, error.message);
+        // console.error(`Error fetching from ${gatewayURL}:`, error.message);
       }
     }
   

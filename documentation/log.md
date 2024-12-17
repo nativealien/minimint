@@ -127,6 +127,8 @@ I have now added the gallery page, that only displays the main ERC721 collection
 
 Created basic structure and style for the collection display page, also refined navigation to toggle between collection and nfts, aswell as making sure a faulty navigation path ends up on NotFound where I put in a "Go back" button.
 
+Made a display page for NFTs aswell. Had errors on my frequency calls against infura, when user isnt connected with metamask. So I added a delay function, placed in the ERC721.ts. I will soon add a utils folder, as I see the need of more multi use functions.
+
 > Wednesday
 
 > Thursday

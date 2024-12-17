@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useAppContext } from "./context/context";
 import Header from "./pages/parts/Header";
