@@ -1,0 +1,27 @@
+import { useEffect, useState } from 'react'
+import Card from './Card'
+import './grid.css'
+
+const cardGenerator = (items: IMeta[]) => {
+    const temp: JSX.Element[] = []
+    let cardkey = 1
+    items.map((item: IMeta) => {
+        temp.push(<Card key={`key-${cardkey}`} meta={item} />)
+        cardkey++
+    })
+    return temp
+}
+
+const Grid = ({items}: { items: IMeta[] }) => {
+    const [cards, setCards] = useState<JSX.Element[] | null>(null)
+    useEffect(() => {
+        const newCards = cardGenerator(items)
+        setCards(newCards)
+    }, [items])
+
+    return <div className="grid">
+        {cards && cards}
+    </div>
+}
+
+export default Grid

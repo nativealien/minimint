@@ -6,3 +6,10 @@ interface Window{
         removeListener: any;
     } | any
 }
+
+interface IMeta {
+    type: string,
+    name: string,
+    description: string,
+    image: string
+}
