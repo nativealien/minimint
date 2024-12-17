@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom"
 import { useAppContext } from "../context/context"
 import { useEffect } from "react"
-import ConnectWeb3 from "../components/ConnectWeb3"
+import ConnectWeb3 from "../components/buttons/ConnectWeb3"
 import './home.css'
 
 const Home = () => {

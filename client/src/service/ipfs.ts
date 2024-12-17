@@ -60,25 +60,40 @@ const unpin = async (cid: string) => {
     }
 };
 
-const fetchIPFS = async (cid: string, timeout = 3000) => {
-    const pureCid = cid.replace("ipfs://", "")
-    console.log(pureCid)
-    const gatewayURL = `https://gateway.pinata.cloud/ipfs/${pureCid}`;
-
-    try {
+const fetchIPFSJSON = async (cid: string, timeout = 3000) => {
+    const pureCid1 = cid.replace("ipfs://", "");
+    const pureCid = pureCid1.replace("/", "");
+    const gateways = [
+      `https://cloudflare-ipfs.com/ipfs/${pureCid}`,
+      `https://ipfs.io/ipfs/${pureCid}`,
+      `https://gateway.pinata.cloud/ipfs/${pureCid}`,
+    ];
+  
+    console.log("Trying gateways:", gateways);
+  
+    for (const gatewayURL of gateways) {
+      try {
         const source = axios.CancelToken.source();
-    
         const timer = setTimeout(() => {
           source.cancel(`Request timed out after ${timeout} ms`);
         }, timeout);
-
-        const response = await axios.get(gatewayURL, { cancelToken: source.token });
+  
+        console.log(`Fetching: ${gatewayURL}`);
+        const response = await axios.get(gatewayURL, {
+          cancelToken: source.token,
+          headers: { Accept: "application/json" },
+        });
+  
         clearTimeout(timer);
-        return response.data;
-    } catch (error) {
-        // console.error(`Error fetching file with CID ${pureCid}:`, error);
-        throw error;
+        if (response.status === 200) {
+          return response.data; 
+        }
+      } catch (error: any) {
+        console.error(`Error fetching from ${gatewayURL}:`, error.message);
+      }
     }
+  
+    throw new Error("All gateways failed to fetch the file.");
 };
 
 const makeImgURL = (ipfsUrl: string) => {
@@ -87,4 +102,4 @@ const makeImgURL = (ipfsUrl: string) => {
     return gatewayUrl 
 };
 
-export default { checkKeys, pinFile, pinJSON, unpin, fetchIPFS, makeImgURL }
+export default { checkKeys, pinFile, pinJSON, unpin, fetchIPFSJSON, makeImgURL }

@@ -13,7 +13,7 @@
     flex-direction: column;
 
     & > header {
-      height: 100px;
+      height: 200px;
       background-color: rgb(134, 134, 192);
     }
     & > main {

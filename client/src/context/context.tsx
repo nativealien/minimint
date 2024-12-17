@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import factory from '../service/blockchain/factory'
-import erc721 from '../service/blockchain/ERC721'
+import metafetcher from "../service/metafetcher";
+// import factory from '../service/blockchain/factory'
+// import erc721 from '../service/blockchain/ERC721'
 
 interface AppContextType {
   web3: any;
@@ -23,11 +24,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const getCollections = async () => {
-            const colls = await factory.getAllCollections(web3.provider)
-            console.log(colls)
-            const erc = await erc721.getContractMetadataURI(web3.provider)
-            const tokenIds = await erc721.getAllMintedTokens(web3.provider)
-            const token = await erc721.getTokenURI(1,web3.provider)
+          const test = await metafetcher.initMarketplace(web3)
+          setCollections([test.collection])
+          setNfts(test.nfts)
+            // const colls = await factory.getAllCollections(web3.provider)
+            // console.log(colls)
+            // const erc = await erc721.getContractMetadataURI(web3.provider)
+            // const tokenIds = await erc721.getAllMintedTokens(web3.provider)
+            // const token = await erc721.getTokenURI(1,web3.provider)
         }
         if(web3) getCollections()
         console.log('Context:', web3)

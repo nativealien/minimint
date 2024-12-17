@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import { useAppContext } from "../context/context"
-import { connectProvider } from "../service/provider"
+import { useAppContext } from "../../context/context"
+import { connectProvider } from "../../service/provider"
 
 const ConnectWeb3 = () => {
     const { web3, setWeb3, setStatus }: any = useAppContext()

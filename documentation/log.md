@@ -119,7 +119,11 @@ The basic structure has been set up, with most pages added. For easier developme
 
 Made the front 'Home' page, will add content later (welcome text) and have decided to utilize React Markdown to store content in .md files. I also added my wireframe, this might be updated abit as I go but the basic idea and structure is there.
 
+Added AppContext for universal state handling, along with some test calls towards the deployed contracts.
+
 > Tuesday
+
+I have now added the gallery page, that only displays the main ERC721 collection and the pre minted NFTs. For this I created a new file for bundeling fetches, and custom contract calls. 
 
 > Wednesday
 

@@ -3,14 +3,14 @@ import { ethers } from "ethers"
 import MiniMintABI from "../../../../hardhat/artifacts/contracts/MiniMintERC721.sol/MiniMintERC721.json"
 
 // const address = '0x5fbdb2315678afecb367f032d93f642f64180aa3'
-const address = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
+const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
-export const minimintContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
+export const minimintContract = (signerOrProvider: ethers.Signer | ethers.Provider, address: string = mainAddress) => {
     return new ethers.Contract(address, MiniMintABI.abi, signerOrProvider);
-  }
+}
 
-const setContractMetadataURI = async (uri: string, signer: any) => {
-    const contract = minimintContract(signer)
+const setContractMetadataURI = async (uri: string, signer: any, address?: string) => {
+    const contract = minimintContract(signer, address)
     const tx = await contract.setContractURI(uri);
     console.log("Setting contract metadata URI transaction sent:", tx.hash);
     const receipt = await tx.wait();
@@ -19,15 +19,17 @@ const setContractMetadataURI = async (uri: string, signer: any) => {
 
 };
 
-const getContractMetadataURI = async (signer: any) => {
-    const contract = minimintContract(signer)
+const getContractMetadataURI = async (signer: any, address?: string) => {
+    const contract = minimintContract(signer, address)
+    const owner = await contract.owner()
     const uri = await contract.contractURI();
     console.log("Contract Metadata URI:", uri);
-    return uri;
+    const res = { uri, owner}
+    return res;
 };
 
-const mintNFT = async (to: string, uri: string, signer: any) => {
-    const contract = minimintContract(signer)
+const mintNFT = async (to: string, uri: string, signer: any, address?: string) => {
+    const contract = minimintContract(signer, address)
     const tx = await contract.safeMint(to, uri);
     console.log("Minting transaction sent:", tx.hash);
     const receipt = await tx.wait();
@@ -36,25 +38,27 @@ const mintNFT = async (to: string, uri: string, signer: any) => {
 
 };
 
-const getNextTokenId = async (signer: any) => {
-    const contract = minimintContract(signer)
+const getNextTokenId = async (signer: any, address?: string) => {
+    const contract = minimintContract(signer, address)
     const nextTokenId = await contract.getNextTokenId();
     console.log("Next Token ID:", nextTokenId.toString());
     return nextTokenId.toString();
 };
 
-const getAllMintedTokens = async (signer: any) => {
-    const contract = minimintContract(signer)
+const getAllMintedTokens = async (signer: any, address?: string) => {
+    const contract = minimintContract(signer, address)
     const tokenIds: number[] = await contract.getAllMintedTokens();
     console.log("All Minted Tokens:", tokenIds.map(id => id.toString()));
     return tokenIds.map(id => id.toString());
 };
 
 
-const getTokenURI = async (tokenId: number, signer: any) => {
-    const contract = minimintContract(signer)
+const getTokenURI = async (tokenId: number, signer: any, address?: string) => {
+    const contract = minimintContract(signer, address)
     const uri = await contract.tokenURI(tokenId);
+    const owner = await contract.ownerOf(tokenId)
     console.log(`Metadata URI for Token ID ${tokenId}:`, uri);
+    console.log(`Owner for Token ID ${tokenId}:`, owner);
     return uri;
 };
 
