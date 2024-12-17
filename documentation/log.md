@@ -123,7 +123,9 @@ Added AppContext for universal state handling, along with some test calls toward
 
 > Tuesday
 
-I have now added the gallery page, that only displays the main ERC721 collection and the pre minted NFTs. For this I created a new file for bundeling fetches, and custom contract calls. 
+I have now added the gallery page, that only displays the main ERC721 collection and the pre minted NFTs. For this I created a new file for bundeling fetches, and custom contract calls. The function I added in this file first, was to fetch URI's from the main collection, along with the NFTs minted on it. Put together the metadata in objects along with keys to identify the parent/child relationship, along with the owner/owners of each item. This makes it easier to handle, and next up I will utilize it creating the display page for collections. 
+
+Created basic structure and style for the collection display page, also refined navigation to toggle between collection and nfts, aswell as making sure a faulty navigation path ends up on NotFound where I put in a "Go back" button.
 
 > Wednesday
 
