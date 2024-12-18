@@ -13,7 +13,7 @@ const cardGenerator = (items: IMeta[] | INFTMeta[]) => {
     return temp
 }
 
-const Grid = ({items}: { items: IMeta[] | INFTMeta[] }) => {
+const Grid = ({items}: { items: IMeta[] | INFTMeta[] | any }) => {
     const [cards, setCards] = useState<JSX.Element[] | null>(null)
     useEffect(() => {
         const newCards = cardGenerator(items)

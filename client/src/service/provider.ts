@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 
 const infura = import.meta.env.VITE_INFURA_ENDPOINT
 
-export const connectProvider = async (metamask: boolean) => {
+export const connectProvider = async (metamask: boolean ): Promise<IWeb3 | string> => {
     if(window.ethereum && metamask){
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
@@ -19,7 +19,7 @@ export const connectProvider = async (metamask: boolean) => {
 
 export const addListener = (
     // setWeb3: React.Dispatch<React.SetStateAction<any>>,
-    setStatus: React.Dispatch<React.SetStateAction<any>>
+    setStatus: React.Dispatch<React.SetStateAction<string>>
     // setChain: React.Dispatch<React.SetStateAction<string | null>>,
     // setConnected: React.Dispatch<React.SetStateAction<boolean>>
 ) => {

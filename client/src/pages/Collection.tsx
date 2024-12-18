@@ -18,7 +18,7 @@ const Collection = () => {
             <p>{meta.owner}</p>
             <img src={meta.image} alt="" />
         </section>
-        <Grid items={items.nfts} />
+        <Grid items={items?.nfts} />
     </div>
     
 }

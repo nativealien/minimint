@@ -4,22 +4,7 @@ import metafetcher from "../service/metafetcher";
 
 const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
-interface AppContextType {
-  web3: any;
-  setWeb3: (web3: any) => void;
-  items: any,
-  setItems: (web3: any) => void;
-  // collections: any;
-  // setCollections: (colls: any) => void;
-  // nfts: any;
-  // setNfts: (nfts: any) => void;
-  status: string;
-  setStatus: (string: any) => void;
-  loading: boolean;
-  setLoading: (boolean: any) => void;
-}
-
-const AppContext = createContext<AppContextType | undefined>(undefined);
+const AppContext = createContext<IAppContext | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [web3, setWeb3] = useState<any>(null)
@@ -53,10 +38,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         setWeb3,
         items,
         setItems,
-        // collections,
-        // setCollections,
-        // nfts,
-        // setNfts,
         status,
         setStatus,
         loading,

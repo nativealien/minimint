@@ -7,6 +7,23 @@ interface Window{
     } | any
 }
 
+interface IAppContext {
+    web3: IWeb3 | null;
+    setWeb3: (web3: IWeb3 | null) => void;
+    items: ICollMeta | null,
+    setItems: (items: ICollMeta) => void;
+    status: string | null;
+    setStatus: (status: string | null) => void;
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+}
+
+interface IWeb3 {
+    provider: ethers.BrowserProvider | ethers.JsonRpcProvider;
+    signer?: ethers.Signer;
+    address?: string
+}
+
 interface IMeta {
     name: string;
     description: string;
@@ -27,5 +44,5 @@ interface INFTMeta extends IMeta {
 
 interface ICollMeta {
     collection: IMeta;
-    nfts: INFTMeta[] | [];
+    nfts: INFTMeta[] | undefined;
 }

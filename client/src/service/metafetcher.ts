@@ -6,7 +6,7 @@ import ipfs from './ipfs';
 
 const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
-const processNFTs = async (web3: any, contract: any): Promise<INFTMeta[]> => {
+const processNFTs = async (web3: IWeb3, contract: string): Promise<INFTMeta[]> => {
     const tokenIds = await ERC721.getAllMintedTokens(web3.provider, contract)
     let nftArr: any = [];
     nftArr = await Promise.all(
@@ -29,7 +29,7 @@ const processNFTs = async (web3: any, contract: any): Promise<INFTMeta[]> => {
 
 }
 
-const processCollection = async (web3: any, contract: any): Promise<ICollMeta> => {
+const processCollection = async (web3: IWeb3, contract: string): Promise<ICollMeta> => {
     const mainColl = await ERC721.getContractMetadataURI(web3.provider, contract)
     const mainMeta = await ipfs.fetchIPFSJSON(mainColl.uri)
     const mainURL = ipfs.makeImgURL(mainMeta.image)
@@ -49,7 +49,7 @@ const processCollection = async (web3: any, contract: any): Promise<ICollMeta> =
     return collMeta;
 }
 
-const initMinimint = async (web3: any, contract: any): Promise<ICollMeta> => {
+const initMinimint = async (web3: IWeb3, contract: string): Promise<ICollMeta> => {
     const result = await processCollection(web3, contract)
     return result
 }

@@ -11,12 +11,12 @@ const ListNFT = ({meta}: {meta: INFTMeta}) => {
     }
 
     const handleList = async () => {
-        const res = await marketplace.listNFT(web3.signer, meta.address, meta.tokenId, price )
+        const res = await marketplace.listNFT(web3?.signer, meta.address, meta.tokenId, price )
         console.log(res)
     }
 
     const handleDelist = async () => {
-        const res = await marketplace.delistNFT(web3.signer, meta.address, meta.tokenId )
+        const res = await marketplace.delistNFT(web3?.signer, meta.address, meta.tokenId )
         console.log(res)
     }
 
