@@ -15,7 +15,7 @@ const NFT = () => {
     useEffect(() => {
         const check = async () => {
             // const test = await marketplace.isSupportedCollection(web3.provider, address)
-            const test = await marketplace.getMainCollection(web3.provider)
+            const test = await marketplace.getMainCollection(web3?.provider)
             console.log(test)
         }
         check()
@@ -31,7 +31,7 @@ const NFT = () => {
                 <p>{meta.description}</p>
                 <p>{meta.owner}</p>
                 {meta.owner === web3?.address ? <ListNFT meta={meta} /> : meta.listing.list ? <button>ON SALE FOR {meta.listing.eth} ETH</button> : <>This NFT is not on sale</>}
-                <a onClick={() => navigate('/gallery/collection', {state: {meta: items.collection}})}>{items.collection.name}</a>
+                <a onClick={() => navigate('/gallery/collection', {state: {meta: items?.collection}})}>{items?.collection.name}</a>
             </div>
         </section>
     </div>

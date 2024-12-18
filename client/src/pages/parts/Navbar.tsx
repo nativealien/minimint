@@ -3,7 +3,7 @@ import './navbar.css'
 import { useAppContext } from "../../context/context"
 
 const Navbar = () => {
-    const {loading, web3, setWeb3} = useAppContext()
+    const {loading} = useAppContext()
 
     return <nav>
         <ul>
