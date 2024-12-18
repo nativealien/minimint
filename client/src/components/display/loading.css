@@ -1,0 +1,48 @@
+/* Container Styling */
+.loading-container {
+    height: 90px;
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff00;
+    position: relative
+  }
+  
+  /* Spinner Animation */
+  .spinner {
+    width: 100%;
+    height: 100%;
+    border: 8px solid #ffffff; /* Light gray */
+    border-top: 8px solid #3498db; /* Blue color for animation */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Loading Text */
+  .loading-text {
+    font-size: 0.9em;
+    color: #555;
+    font-family: Arial, sans-serif;
+    animation: fade 2s infinite alternate;
+    position: absolute;
+  }
+  
+  @keyframes fade {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0.1;
+    }
+  }

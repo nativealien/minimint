@@ -4,13 +4,14 @@ import Grid from '../components/display/Grid'
 import './gallery.css'
 
 const Gallery = () => {
-    const { collections, nfts } = useAppContext()
+    const { items } = useAppContext()
     const [toggle, setToggle] = useState<any>(false)
     useEffect(() => {
         console.log(toggle)
+        console.log(items)
     }, [toggle])
 
-    const items = toggle === true ? collections : nfts
+    const display = toggle === true ? [items.collection] : items.nfts
 
     return <div className="gallery">
         <h2>Gallery</h2>
@@ -21,7 +22,7 @@ const Gallery = () => {
             <button onClick={() => setToggle(true)}>collections</button>
             <button onClick={() => setToggle(false)}>nfts</button>
         </nav>
-        <Grid items={items} />
+        {display && <Grid items={display} />}
     </div>
 
 }

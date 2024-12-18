@@ -131,6 +131,8 @@ Made a display page for NFTs aswell. Had errors on my frequency calls against in
 
 > Wednesday
 
+I have now added marketplace functionallity to the app, with minor details left. I will continue to add more refined types to make the processs easier as the app starts to grow! After that I will start working on contract deployment from the factory contract.
+
 > Thursday
 
 > Friday

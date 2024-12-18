@@ -8,9 +8,24 @@ interface Window{
 }
 
 interface IMeta {
-    type: string;
     name: string;
     description: string;
-    image: string;
+    address: string;
     owner: string;
+    image: string;
+    type: string;
+}
+
+interface INFTMeta extends IMeta {
+    tokenId: any;
+    listing: {
+        list: boolean;
+        wei: bigint;
+        eth: number;
+    }
+}
+
+interface ICollMeta {
+    collection: IMeta;
+    nfts: INFTMeta[] | [];
 }

@@ -4,6 +4,7 @@ import MiniMintABI from "../../../../hardhat/artifacts/contracts/MiniMintERC721.
 
 // const address = '0x5fbdb2315678afecb367f032d93f642f64180aa3'
 const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
+const marketAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
@@ -66,11 +67,19 @@ const getTokenURI = async (tokenId: number, signer: any, address?: string) => {
     return {uri: uri, owner: owner};
 };
 
+const approveMarketplace = async (signer: ethers.Signer) => {
+    const contract = minimintContract(signer)
+    const tx = await contract.setApprovalForAll(marketAddress, true);
+    await tx.wait();
+    console.log("Marketplace approved successfully!", tx);
+};
+
 export default {
     setContractMetadataURI,
     getContractMetadataURI,
     mintNFT,
     getNextTokenId,
     getTokenURI,
-    getAllMintedTokens
+    getAllMintedTokens,
+    approveMarketplace
 }
