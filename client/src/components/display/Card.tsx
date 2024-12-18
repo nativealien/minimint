@@ -25,7 +25,7 @@ const Card = ({meta}: {meta: IMeta}) => {
         {/* <img src={meta.image} alt="" /> */}
         <div className="item-info">
             <h3>{meta.name}</h3>
-            {web3.address === meta.owner && <>OWN</>}
+            {web3?.address === meta.owner && <>OWN</>}
         </div>
         {/* <p>{meta.description}</p>
         <p>{meta.type}</p> */}

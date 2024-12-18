@@ -1,51 +1,66 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import { addListener } from "../service/provider";
 import metafetcher from "../service/metafetcher";
-// import factory from '../service/blockchain/factory'
-// import erc721 from '../service/blockchain/ERC721'
+
+const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
 interface AppContextType {
   web3: any;
   setWeb3: (web3: any) => void;
-  collections: any;
-  setCollections: (colls: any) => void;
-  nfts: any;
-  setNfts: (nfts: any) => void;
+  items: any,
+  setItems: (web3: any) => void;
+  // collections: any;
+  // setCollections: (colls: any) => void;
+  // nfts: any;
+  // setNfts: (nfts: any) => void;
   status: string;
   setStatus: (string: any) => void;
+  loading: boolean;
+  setLoading: (boolean: any) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [web3, setWeb3] = useState<any>(null)
-    const [collections, setCollections] = useState<any>(null)
-    const [nfts, setNfts] = useState<any>(null)
+    const [items, setItems] = useState<any>(null)
+    // const [collections, setCollections] = useState<any>(null)
+    // const [nfts, setNfts] = useState<any>(null)
     const [status, setStatus] = useState<any>(null)
+    const [loading, setLoading] = useState<any>(false)
+
+    useEffect(() => {
+      console.log(status)
+    }, [status, loading])
 
     useEffect(() => {
         const getCollections = async () => {
-          const test = await metafetcher.initMarketplace(web3)
-          setCollections([test.collection])
-          setNfts(test.nfts)
-            // const colls = await factory.getAllCollections(web3.provider)
-            // console.log(colls)
-            // const erc = await erc721.getContractMetadataURI(web3.provider)
-            // const tokenIds = await erc721.getAllMintedTokens(web3.provider)
-            // const token = await erc721.getTokenURI(1,web3.provider)
+          setLoading(true)
+          const test = await metafetcher.initMinimint(web3, mainAddress)
+          console.log('CONTEXT', test)
+          setItems(test)
+          setLoading(false)
+          // setCollections([test.collection])
+          // setNfts(test.nfts)
         }
         if(web3) getCollections()
         console.log('Context:', web3)
+        addListener(setStatus)
     }, [web3])
 
     const contextValue = {
         web3,
         setWeb3,
-        collections,
-        setCollections,
-        nfts,
-        setNfts,
+        items,
+        setItems,
+        // collections,
+        // setCollections,
+        // nfts,
+        // setNfts,
         status,
-        setStatus
+        setStatus,
+        loading,
+        setLoading
     }
 
     return <AppContext.Provider value={contextValue}>

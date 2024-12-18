@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 // import MiniMintMarketplaceABI from "./abi/MiniMintMarketplace.json"
 import MiniMintMarketplaceABI from "../../../../hardhat/artifacts/contracts/MiniMintMarketplace.sol/MiniMintMarketplace.json"
 
-const marketplaceAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0";
+const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
 
 export const marketplaceContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
   return new ethers.Contract(marketplaceAddress, MiniMintMarketplaceABI.abi, signerOrProvider);
@@ -16,10 +16,10 @@ const listNFT = async (signer: ethers.Signer, collAddress: string, tokenId: numb
   console.log("NFT listed successfully:", receipt);
 }
 
-const buyNFT = async (signer: ethers.Signer, collAddress: string, tokenId: number, priceInEth: string) => {
+const buyNFT = async (signer: ethers.Signer, collAddress: string, tokenId: number, priceInWei: number) => {
   const contract = marketplaceContract(signer);
-  const price = ethers.parseEther(priceInEth); // Convert Ether to Wei
-  const tx = await contract.buyNFT(collAddress, tokenId, { value: price });
+  // const price = ethers.parseEther(priceInEth); // Convert Ether to Wei
+  const tx = await contract.buyNFT(collAddress, tokenId, { value: priceInWei});
   const receipt = await tx.wait();
   console.log("NFT bought successfully:", receipt);
 }
@@ -38,6 +38,14 @@ const getListing = async (provider: ethers.Provider, collAddress: string, tokenI
   return listing;
 }
 
+const getMainCollection = async (provider: ethers.Provider) => {
+  const contract = marketplaceContract(provider);
+  const mainCollectionAddress = await contract.mainCollection();
+  console.log("Main Collection Address:", mainCollectionAddress);
+  return mainCollectionAddress
+
+};
+
 const isSupportedCollection = async (provider: ethers.Provider, collAddress: string) => {
   const contract = marketplaceContract(provider);
   const isSupported = await contract.isFactoryDeployedCollection(collAddress);
@@ -50,5 +58,6 @@ export default {
   buyNFT,
   delistNFT,
   getListing,
+  getMainCollection,
   isSupportedCollection
 }

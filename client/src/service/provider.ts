@@ -2,18 +2,6 @@ import { ethers } from "ethers";
 
 const infura = import.meta.env.VITE_INFURA_ENDPOINT
 
-// export const checkLocalChain = async (): Promise<boolean> => {
-//     try {
-//         const provider = new ethers.JsonRpcProvider('http://127.0.0.1:8545');
-//         const block = await provider.getBlockNumber();
-//         console.log(`Local chain running. Block count ${block}`)
-//         return true
-//     } catch (error) {
-//         console.log('Local chain offline...')
-//         return false
-//     }
-// }
-
 export const connectProvider = async (metamask: boolean) => {
     if(window.ethereum && metamask){
         const provider = new ethers.BrowserProvider(window.ethereum);
@@ -30,27 +18,22 @@ export const connectProvider = async (metamask: boolean) => {
 }
 
 export const addListener = (
-    setAccount: React.Dispatch<React.SetStateAction<string>>,
-    setChain: React.Dispatch<React.SetStateAction<string | null>>,
-    setConnected: React.Dispatch<React.SetStateAction<boolean>>
+    // setWeb3: React.Dispatch<React.SetStateAction<any>>,
+    setStatus: React.Dispatch<React.SetStateAction<any>>
+    // setChain: React.Dispatch<React.SetStateAction<string | null>>,
+    // setConnected: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
     if (window.ethereum) {
         window.ethereum.on("accountsChanged", (accounts: string[]) => {
-            console.log("Accounts changed:", accounts);
-            setAccount(accounts[0]);
-            setConnected(accounts.length > 0);
+            setStatus(`Accounts changed: ${accounts[0]}`);
         });
 
         window.ethereum.on("chainChanged", (chainId: string) => {
-            console.log("Network changed to:", chainId);
-            setChain(chainId);
+            setStatus(`Network changed to: ${chainId}`);
         });
 
         window.ethereum.on("disconnect", (error: any) => {
-            console.log("Disconnected:", error);
-            setAccount('');
-            setChain('');
-            setConnected(false);
+            setStatus(`Disconnected: ${error}`);
         });
 
         console.log("Event listeners added for provider.");
