@@ -51,6 +51,7 @@ const delistNFT = async (signer: ethers.Signer, collAddress: string, tokenId: nu
 }
 
 const getListing = async (provider: ethers.Provider, collAddress: string, tokenId: number, setStatus: (status: string | null) => void) => {
+  await delay(1000)
   const contract = marketplaceContract(provider);
   try {
     const listing = await contract.getListing(collAddress, tokenId);

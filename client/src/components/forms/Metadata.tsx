@@ -14,9 +14,11 @@ interface ICids {
     jsonCid: string
 }
 
-const Metadata = ({process, del, className, setNew}: {process: boolean, del: boolean, className: string, setNew: (value?: any) => void;}) => {
-    const [cids, setCids] = useState<ICids | null>(null)
+const Metadata = ({className, height, cids, setCids}: {className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void;}) => {
+    const [process, setProcess] = useState<boolean>(false)
+    const [del, setDel] = useState<boolean>(false)
     const [status, setStatus] = useState<any>(null)
+    const [imgURL, setImgURL] = useState<any>('none')
     const [nftMeta, setNftMeta] = useState<IMetadata>({
         name: '',
         description: '',
@@ -24,7 +26,6 @@ const Metadata = ({process, del, className, setNew}: {process: boolean, del: boo
     })
     useEffect(() => {
         const handleProcess = async () => {
-            setNew(true)
             console.log(process)
             setStatus('Process')
             const {name, description, imageURI} = nftMeta;
@@ -39,19 +40,19 @@ const Metadata = ({process, del, className, setNew}: {process: boolean, del: boo
                     const newCid = { imgCid: await imgCid.IpfsHash, jsonCid: await jsonCid.IpfsHash}
                     setStatus(`Success: Img: ${imgCid} - JSON: ${jsonCid}_`)
                     console.log(jsonCid)
-                    setNew(newCid)
-                    setCids( newCid )//{ ...cids, ['imgCid']: await imgCid.IpfsHash, ['jsonCid']: await jsonCid.IpfsHash})
+                    setCids(newCid)
+                    setProcess(false)
+                    // setCids( newCid )//{ ...cids, ['imgCid']: await imgCid.IpfsHash, ['jsonCid']: await jsonCid.IpfsHash})
                 }
             } else {
                 setStatus('Something is missing..._')
+                setProcess(false)
             }
         }
         if(process) handleProcess()
     }, [process])
     useEffect(() => {
         const handleDelete = async () => {
-            setNew(false)
-            console.log(del)
             setStatus('Deleteing CIDs')
             if(cids){
                 const resetImg = await ipfs.unpin(cids.imgCid)
@@ -62,9 +63,10 @@ const Metadata = ({process, del, className, setNew}: {process: boolean, del: boo
                     setStatus('CIDs has been deleted_')
                 }
                 setCids(null)
-                setNew(null)
+                setDel(false)
             } else {
                 setStatus('No Cids')
+                setDel(false)
             }
         }
         if(del) handleDelete()
@@ -77,25 +79,42 @@ const Metadata = ({process, del, className, setNew}: {process: boolean, del: boo
         if(files){
             const test = value.split('\\')[2]
             console.log(test)
+            const url = URL.createObjectURL(files[0])
+            setImgURL(url)
             setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
         } else {
             setNftMeta({ ...nftMeta, [name]: value})
         }
     }
 
-    return <div className={`metadata ${className}`}>
+    const displayUrl = imgURL
+    console.log("DISPLAY", cids)
+
+    const handleProcess = (e: any) => {
+        e.preventDefault()
+        setProcess(true)
+    }
+    const handleDelete = (e: any) => {
+        e.preventDefault()
+        setDel(true)
+    }
+
+    return <div className={`metadata ${className}`} style={{height: cids ? '40px' : height}}>
         {status && <Modal status={status} setStatus={setStatus} />}
-        <form>
-            <div className="meta-image">
+        <form style={{display: cids ? 'none' : 'flex'}}>
+            <div className="meta-image" style={{backgroundImage: `url(${displayUrl})`}}>
                 <input type="file" name="image-file" className="image-file" onChange={handleChange} />
             </div>
 
             <div className="meta-info">
+                <p>Click to add image</p>
                 <input type="text" className='name' value={nftMeta.name} name='name' onChange={handleChange} placeholder='Name' />
                 <textarea className='description' value={nftMeta.description} name='description' onChange={handleChange} placeholder='Description' />
             </div>
         </form>
-
+        {!cids ? 
+        <button style={{bottom: cids ? '0' : '40px'}} onClick={(e) => handleProcess(e)}>Process</button> : 
+        <button style={{bottom: cids ? '0' : '40px'}} onClick={(e) => handleDelete(e)}>Reset</button>}
         {cids && cids.imgCid !== '' && <a href={`${ipfs.makeImgURL(cids.imgCid)}`}>Img</a>}
         {cids && cids.jsonCid !== '' && <a href={`${ipfs.makeImgURL(cids.jsonCid)}`}>JSON</a>}
 

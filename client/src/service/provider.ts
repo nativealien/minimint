@@ -19,7 +19,7 @@ export const connectProvider = async (metamask: boolean, setStatus: (status: str
           if (error.code === 4001) {
             setStatus && setStatus("User rejected the connection request.");
           } else {
-            setStatus && setStatus("An error occurred during signature.");
+            setStatus && setStatus("An error occurred during signature._");
             console.error("Error during connection:", error);
           }
           return "Error occurred";

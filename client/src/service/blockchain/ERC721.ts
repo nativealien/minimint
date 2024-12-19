@@ -13,7 +13,7 @@ export const minimintContract = (signerOrProvider: ethers.Signer | ethers.Provid
 }
 
 const setContractMetadataURI = async (uri: string, signer: any, address?: string) => {
-    delay(500)
+    await delay(500)
     const contract = minimintContract(signer, address)
     const tx = await contract.setContractURI(uri);
     console.log("Setting contract metadata URI transaction sent:", tx.hash);
