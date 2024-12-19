@@ -1,7 +1,7 @@
 /* Container Styling */
 .loading-container {
-    height: 90px;
-    width: 90px;
+    height: 150px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,8 +14,8 @@
   .spinner {
     width: 100%;
     height: 100%;
-    border: 8px solid #ffffff; /* Light gray */
-    border-top: 8px solid #3498db; /* Blue color for animation */
+    border: 20px solid #ffffff; /* Light gray */
+    border-top: 20px solid #3498db; /* Blue color for animation */
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }

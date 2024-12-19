@@ -1,17 +1,11 @@
-// import { useOutletContext } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { useAppContext } from "../context/context"
-import { useEffect } from "react"
 import ConnectWeb3 from "../components/buttons/ConnectWeb3"
-import Loading from "../components/display/Loading"
 import './home.css'
 
 const Home = () => {
-    const { web3, loading }: any = useAppContext()
+    const { web3, loading, setStatus }: any = useAppContext()
     const navigate = useNavigate()
-    useEffect(() => {
-        console.log(web3)
-    }, [web3])
 
     return <div className="home">
             <h2>Home</h2>
@@ -21,10 +15,10 @@ const Home = () => {
             {!web3?.address ? <div>
                 {window.ethereum ? <ConnectWeb3 /> : <>You need metamask...</>}
                 <p onClick={() => navigate('gallery')}>{"continue without connecting ->"}</p>
+                <button onClick={() => setStatus('Status')}>Set</button>
             </div> : <div>
                     {!loading && <h2 onClick={() => navigate('gallery')}>Continue to the gallery!</h2>}
-                </div>}
-            {loading && <Loading />}
+            </div>}
     </div>
 }
 

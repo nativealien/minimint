@@ -1,20 +1,9 @@
 
 
-.grid {
-    height: 100%;
-    min-height: 300px;
-    width: 100%;
-    min-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 16px;
-
-    background-color: rgba(126, 166, 212, 0.265);
-}
-
-/* .grid-item {
-    width: 100%;
+.nft-card, .collection-card {
+    /* background: #f8f9fa; */
+    height: 280px;
+    height: 280px;
     border: 1px solid #ddd;
     border-radius: 8px;
     display: flex;
@@ -23,9 +12,13 @@
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
     background-size: contain;
-    background-repeat: no-repeat;
     background-position: top;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1); 
+        box-shadow: 0 20px 18px rgba(0, 0, 0, 0.6); 
+    }
 
     & > .item-info {
         height: 40px;
@@ -51,4 +44,4 @@
             background-color: rgb(203, 185, 185);
         }
     }
-} */
+}

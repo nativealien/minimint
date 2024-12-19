@@ -8,7 +8,6 @@ const Gallery = () => {
     const [toggle, setToggle] = useState<boolean>(false)
     useEffect(() => {
         console.log(toggle)
-        console.log(items)
     }, [toggle])
 
     const display = toggle === true ? [items?.collection] : items?.nfts

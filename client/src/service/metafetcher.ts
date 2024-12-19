@@ -6,6 +6,21 @@ import ipfs from './ipfs';
 
 const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 
+const processNFT = async (web3: IWeb3, tokenId: any, contract: string): Promise<INFTMeta> => {
+    const nft = await ERC721.getTokenURI(tokenId, web3.provider);
+    const listing = await marketplace.getListing(web3.provider, contract, tokenId)
+    const priceInEth = ethers.formatUnits(listing[1])
+    const nftMeta = await ipfs.fetchIPFSJSON(nft.uri)
+    const newImg = ipfs.makeImgURL(nftMeta.image)
+    nftMeta.address = contract
+    nftMeta.owner = nft.owner
+    nftMeta.listing = {list: +priceInEth>0,wei: listing[1], eth: +priceInEth}
+    nftMeta.image = newImg
+    nftMeta.tokenId = tokenId
+    nftMeta.type = 'nft'
+    return nftMeta;
+}
+
 const processNFTs = async (web3: IWeb3, contract: string): Promise<INFTMeta[]> => {
     const tokenIds = await ERC721.getAllMintedTokens(web3.provider, contract)
     let nftArr: any = [];
@@ -50,6 +65,7 @@ const processCollection = async (web3: IWeb3, contract: string): Promise<ICollMe
 }
 
 const initMinimint = async (web3: IWeb3, contract: string): Promise<ICollMeta> => {
+    // await ERC721.approveMarketplace(web3.signer)
     const result = await processCollection(web3, contract)
     return result
 }
@@ -92,6 +108,7 @@ const initMinimint = async (web3: IWeb3, contract: string): Promise<ICollMeta> =
 // }
 
 export default {
+    processNFT,
     processNFTs,
     processCollection,
     initMinimint,

@@ -69,9 +69,13 @@ const getTokenURI = async (tokenId: number, signer: any, address?: string) => {
 
 const approveMarketplace = async (signer: ethers.Signer) => {
     const contract = minimintContract(signer)
-    const tx = await contract.setApprovalForAll(marketAddress, true);
-    await tx.wait();
-    console.log("Marketplace approved successfully!", tx);
+    try {
+        const tx = await contract.setApprovalForAll(marketAddress, true);
+        await tx.wait();
+        console.log("Marketplace approved successfully!", tx);
+    } catch (error) {
+        console.log('ERROR', error)
+    }
 };
 
 export default {

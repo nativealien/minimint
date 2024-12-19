@@ -16,6 +16,7 @@ interface IAppContext {
     setStatus: (status: string | null) => void;
     loading: boolean;
     setLoading: (loading: boolean) => void;
+    reloadItems: (contract: string, tokenId: string) => Promise<INFTMeta | undefined>;
 }
 
 interface IWeb3 {
