@@ -5,8 +5,7 @@ import './grid.css'
 const cardGenerator = (items: IMeta[] | INFTMeta[]) => {
     const temp: JSX.Element[] = []
     let cardkey = 1
-    console.log(items)
-    items.map((item: IMeta | INFTMeta) => {
+    items?.map((item: IMeta | INFTMeta) => {
         temp.push(<Card key={`key-${cardkey}`} meta={item} />)
         cardkey++
     })

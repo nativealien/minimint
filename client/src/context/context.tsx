@@ -7,31 +7,37 @@ const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 const AppContext = createContext<IAppContext | undefined>(undefined);
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-    const [web3, setWeb3] = useState<any>(null)
-    const [items, setItems] = useState<any>(null)
-    // const [collections, setCollections] = useState<any>(null)
-    // const [nfts, setNfts] = useState<any>(null)
-    const [status, setStatus] = useState<any>(null)
-    const [loading, setLoading] = useState<any>(false)
+    const [web3, setWeb3] = useState<IWeb3 | null>(null)
+    const [items, setItems] = useState<ICollMeta | null>(null)
+    const [status, setStatus] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
-      console.log(status)
-    }, [status, loading])
+      if(loading) {
+        setStatus('loading')
+      } else setStatus(null)
+    }, [loading])
 
     useEffect(() => {
-        const getCollections = async () => {
+        const getCollections = async (newWeb3: IWeb3) => {
           setLoading(true)
-          const test = await metafetcher.initMinimint(web3, mainAddress)
-          console.log('CONTEXT', test)
+          const test = await metafetcher.initMinimint(newWeb3, mainAddress)
           setItems(test)
           setLoading(false)
-          // setCollections([test.collection])
-          // setNfts(test.nfts)
         }
-        if(web3) getCollections()
-        console.log('Context:', web3)
+        if(web3) getCollections(web3)
         addListener(setStatus)
     }, [web3])
+
+    const reloadItems: (contract: string, tokenId: string) => Promise<INFTMeta | undefined> = async (contract, tokenId) => {
+      if(web3 && items){
+        const newNfts = await metafetcher.processNFTs(web3, contract)
+        const newItems = {...items, nfts: newNfts}
+        setItems(newItems)
+        const nft = newItems.nfts.filter(item => item.tokenId === tokenId)[0]
+        return nft
+      }
+    }
 
     const contextValue = {
         web3,
@@ -41,7 +47,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         status,
         setStatus,
         loading,
-        setLoading
+        setLoading,
+        reloadItems
     }
 
     return <AppContext.Provider value={contextValue}>

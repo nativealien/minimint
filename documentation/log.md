@@ -133,6 +133,8 @@ Made a display page for NFTs aswell. Had errors on my frequency calls against in
 
 I have now added marketplace functionallity to the app, with minor details left. I will continue to add more refined types to make the processs easier as the app starts to grow! After that I will start working on contract deployment from the factory contract. To do this, i decided to create a modal, that can be used for any popup. Amongst other things, minting and collection deployment!
 
+Made the modal, added some loading features.
+
 > Thursday
 
 > Friday

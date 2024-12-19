@@ -18,10 +18,7 @@ export const connectProvider = async (metamask: boolean ): Promise<IWeb3 | strin
 }
 
 export const addListener = (
-    // setWeb3: React.Dispatch<React.SetStateAction<any>>,
-    setStatus: React.Dispatch<React.SetStateAction<string>>
-    // setChain: React.Dispatch<React.SetStateAction<string | null>>,
-    // setConnected: React.Dispatch<React.SetStateAction<boolean>>
+    setStatus: React.Dispatch<React.SetStateAction<string | null>>
 ) => {
     if (window.ethereum) {
         window.ethereum.on("accountsChanged", (accounts: string[]) => {
