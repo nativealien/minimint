@@ -12,7 +12,7 @@ function App() {
   const { web3, setWeb3, status, setStatus } = useAppContext()
   useEffect(() => {
     const connectInfura = async () => {
-      const infura = await connectProvider(false)
+      const infura = await connectProvider(false, setStatus)
       if(typeof infura === "string"){
         setStatus(infura)
       } else {

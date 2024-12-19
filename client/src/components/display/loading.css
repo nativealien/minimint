@@ -14,8 +14,8 @@
   .spinner {
     width: 100%;
     height: 100%;
-    border: 20px solid #ffffff; /* Light gray */
-    border-top: 20px solid #3498db; /* Blue color for animation */
+    border: 20px solid #ffffff25; /* Light gray */
+    border-top: 20px solid #0c38566b; /* Blue color for animation */
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -31,7 +31,7 @@
   
   /* Loading Text */
   .loading-text {
-    font-size: 0.9em;
+    font-size: 1.5em;
     color: #555;
     font-family: Arial, sans-serif;
     animation: fade 2s infinite alternate;

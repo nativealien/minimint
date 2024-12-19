@@ -15,13 +15,14 @@ const NFT = () => {
     const location = useLocation()
     const { meta } = location.state || {};
     useEffect(() => {
+        console.log('NFT TEST', meta)
         setNft(meta)
     }, [])
     useEffect(() => {
         const check = async () => {
             if(nft){
                 setStatus('Reloading metadata')
-                const newNft = await reloadItems(meta.address, nft.tokenId)
+                const newNft = await reloadItems(meta.address, meta.collName, nft.tokenId)
                 setNft(newNft)
                 setStatus(null)
             }
@@ -35,16 +36,17 @@ const NFT = () => {
     }
 
     return <div className="nft">
-        {nft && <section>
+        {nft && <section className='override'>
             <img src={nft.image} alt="" />
             <div className="nft-info">
                 <h2>{nft.name}</h2>
                 <p>{nft.description}</p>
                 <p>{nft.owner}</p>
                 {nft.owner === web3?.address ? <ListNFT meta={nft} toggle={toggle} setToggle={setToggle} /> : nft.listing.list ? <button onClick={() => handleBuy()}>ON SALE FOR {nft.listing.eth} ETH</button> : <>This NFT is not on sale</>}
-                <a onClick={() => navigate('/gallery/collection', {state: {meta: items?.collection}})}>{items?.collection.name}</a>
+                <a onClick={() => navigate('/gallery/collection', {state: {meta: items}})}>{nft.collName}</a>
             </div>
         </section>}
+        <button onClick={() => navigate(-1)}>{'<--Goback'}</button>
     </div>
     
 }

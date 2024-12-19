@@ -2,19 +2,32 @@ import { ethers } from "ethers";
 
 const infura = import.meta.env.VITE_INFURA_ENDPOINT
 
-export const connectProvider = async (metamask: boolean ): Promise<IWeb3 | string> => {
-    if(window.ethereum && metamask){
+export const connectProvider = async (metamask: boolean, setStatus: (status: string | null) => void ): Promise<IWeb3 | string> => {
+    if (window.ethereum && metamask) {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
-        const sign = await signer.signMessage('Connect?')
-        if (sign) {
-            const address = await signer.getAddress()
-            return { provider, signer, address }
-        } else { return 'Signature failed...' }
-    } else {
+        try {
+          const sign = await signer.signMessage("Connect to MiniMint?");
+          if (sign) {
+            const address = await signer.getAddress();
+            return { provider, signer, address }; 
+          } else {
+            setStatus && setStatus("Signature failed...");
+            return "Signature failed...";
+          }
+        } catch (error: any) {
+          if (error.code === 4001) {
+            setStatus && setStatus("User rejected the connection request.");
+          } else {
+            setStatus && setStatus("An error occurred during signature._");
+            console.error("Error during connection:", error);
+          }
+          return "Error occurred";
+        }
+      } else {
         const provider = new ethers.JsonRpcProvider(infura);
-        return { provider }
-    }
+        return { provider };
+      }
 }
 
 export const addListener = (

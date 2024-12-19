@@ -22,13 +22,23 @@
       margin-bottom: 50px;
     }
     & > main {
-      max-width: 1280px;
+      width: 1200px;
       height: 100%;
       margin: auto;
     }
     & > footer {
       height: 100px;
       background-color: rgb(220, 192, 138);
+    }
+    section {
+      width: 500px; /* Section width applies to all descendants */
+      margin: auto;
+      margin-top: 20px;
+      border: 1px solid red; /* Example styling for section children */
+      margin-bottom: 20px; /* Add spacing for all child elements */
+    }
+    section.override {
+      width: 100%
     }
   }
 }

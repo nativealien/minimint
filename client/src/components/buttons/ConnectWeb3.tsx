@@ -10,10 +10,10 @@ const ConnectWeb3 = () => {
 
     const handleConnect = async () => {
         setStatus('connecting')
-        const res = await connectProvider(true)
+        const res = await connectProvider(true, setStatus)
         if(typeof res !== 'string'){
             setWeb3(res)
-        } else setStatus(res)
+        } else console.log(res)
     }
 
     return <div>

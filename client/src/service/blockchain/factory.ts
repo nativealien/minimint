@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 // import MiniMintFactoryABI from "./abi/MiniMintFactory.json"
 import MiniMintFactoryABI from "../../../../hardhat/artifacts/contracts/MiniMintFactory.sol/MiniMintFactory.json"
+import { delay } from "../../utils/utils"
 
 const contractAddress = import.meta.env.VITE_MINIMINT_FACTORY_CONTRACT
 
@@ -9,15 +10,16 @@ export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provide
 }
 
 const getAllCollections = async (provider: ethers.Provider) => {
+    await delay(1000)
     const contract = factoryContract(provider);
     console.log(contract)
     const collections = await contract.getCollections();
     return collections;
 }
 
-const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string) => {
+const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string, nftUris: string[]) => {
     const contract = factoryContract(signer);
-    const tx = await contract.deployCollection(name, symbol, metadataURI);
+    const tx = await contract.deployCollection(name, symbol, metadataURI, nftUris);
     const receipt = await tx.wait();
     console.log("Collection deployed:", receipt);
     return receipt
@@ -45,6 +47,7 @@ const transferOwnership = async (signer: ethers.Signer, newOwner: string) => {
     const contract = factoryContract(signer);
     const tx = await contract.transferOwnership(newOwner);
     await tx.wait();
+    delay(500)
     console.log("Ownership transferred to:", newOwner);
 }
 
