@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import { useAppContext } from '../context/context'
 import Grid from '../components/display/Grid'
 import './gallery.css'
+import { useNavigate } from 'react-router-dom'
 
 const Gallery = () => {
     const { items } = useAppContext()
+    const navigate = useNavigate()
     const [toggle, setToggle] = useState<boolean>(false)
     useEffect(() => {
         console.log(toggle)
@@ -20,6 +22,7 @@ const Gallery = () => {
         <nav>
             <button onClick={() => setToggle(true)}>collections</button>
             <button onClick={() => setToggle(false)}>nfts</button>
+            <button onClick={() => navigate('collection/mint')}>Create collection</button>
         </nav>
         <Grid items={display} />
     </div>

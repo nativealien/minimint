@@ -1,0 +1,15 @@
+
+
+.metadata {
+    position: relative;
+
+    & > form {
+        border: 2px solid grey;
+        display: flex;
+
+        & > .meta-info {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

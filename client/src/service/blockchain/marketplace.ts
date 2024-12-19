@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 // import MiniMintMarketplaceABI from "./abi/MiniMintMarketplace.json"
 import MiniMintMarketplaceABI from "../../../../hardhat/artifacts/contracts/MiniMintMarketplace.sol/MiniMintMarketplace.json"
+import { delay } from "../../utils/utils"
 
 const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
 
@@ -49,7 +50,7 @@ const delistNFT = async (signer: ethers.Signer, collAddress: string, tokenId: nu
   }
 }
 
-const getListing = async (provider: ethers.Provider, collAddress: string, tokenId: number) => {
+const getListing = async (provider: ethers.Provider, collAddress: string, tokenId: number, setStatus: (status: string | null) => void) => {
   const contract = marketplaceContract(provider);
   try {
     const listing = await contract.getListing(collAddress, tokenId);

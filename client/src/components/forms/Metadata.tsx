@@ -1,0 +1,105 @@
+import { useEffect, useState } from "react"
+import Modal from "../display/Modal"
+import ipfs from '../../service/ipfs'
+import './metadata.css'
+
+interface IMetadata {
+    name: string,
+    description: string,
+    imageURI: string | File
+}
+
+interface ICids {
+    imgCid: string,
+    jsonCid: string
+}
+
+const Metadata = ({process, del, className, setNew}: {process: boolean, del: boolean, className: string, setNew: (value?: any) => void;}) => {
+    const [cids, setCids] = useState<ICids | null>(null)
+    const [status, setStatus] = useState<any>(null)
+    const [nftMeta, setNftMeta] = useState<IMetadata>({
+        name: '',
+        description: '',
+        imageURI: ''
+    })
+    useEffect(() => {
+        const handleProcess = async () => {
+            setNew(true)
+            console.log(process)
+            setStatus('Process')
+            const {name, description, imageURI} = nftMeta;
+            if(name !== '' && description !== '' && imageURI instanceof File){
+                setStatus('Process image cid...')
+                const imgCid = await ipfs.pinFile(imageURI)
+                console.log(imgCid)
+                if(imgCid) {
+                    setStatus('Process json cid...')
+                    const jsonCid = await ipfs.pinJSON(nftMeta)
+
+                    const newCid = { imgCid: await imgCid.IpfsHash, jsonCid: await jsonCid.IpfsHash}
+                    setStatus(`Success: Img: ${imgCid} - JSON: ${jsonCid}_`)
+                    console.log(jsonCid)
+                    setNew(newCid)
+                    setCids( newCid )//{ ...cids, ['imgCid']: await imgCid.IpfsHash, ['jsonCid']: await jsonCid.IpfsHash})
+                }
+            } else {
+                setStatus('Something is missing..._')
+            }
+        }
+        if(process) handleProcess()
+    }, [process])
+    useEffect(() => {
+        const handleDelete = async () => {
+            setNew(false)
+            console.log(del)
+            setStatus('Deleteing CIDs')
+            if(cids){
+                const resetImg = await ipfs.unpin(cids.imgCid)
+                const resetJson = await ipfs.unpin(cids.jsonCid)
+                console.log('Image reset: ', resetImg)
+                console.log('JSON reset: ', resetJson)
+                if(resetImg === 'OK' && resetJson === 'OK'){
+                    setStatus('CIDs has been deleted_')
+                }
+                setCids(null)
+                setNew(null)
+            } else {
+                setStatus('No Cids')
+            }
+        }
+        if(del) handleDelete()
+    }, [del])
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target as HTMLInputElement;
+        const files = (e.target as HTMLInputElement).files;
+        console.log(name, value, files);
+        if(files){
+            const test = value.split('\\')[2]
+            console.log(test)
+            setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
+        } else {
+            setNftMeta({ ...nftMeta, [name]: value})
+        }
+    }
+
+    return <div className={`metadata ${className}`}>
+        {status && <Modal status={status} setStatus={setStatus} />}
+        <form>
+            <div className="meta-image">
+                <input type="file" name="image-file" className="image-file" onChange={handleChange} />
+            </div>
+
+            <div className="meta-info">
+                <input type="text" className='name' value={nftMeta.name} name='name' onChange={handleChange} placeholder='Name' />
+                <textarea className='description' value={nftMeta.description} name='description' onChange={handleChange} placeholder='Description' />
+            </div>
+        </form>
+
+        {cids && cids.imgCid !== '' && <a href={`${ipfs.makeImgURL(cids.imgCid)}`}>Img</a>}
+        {cids && cids.jsonCid !== '' && <a href={`${ipfs.makeImgURL(cids.jsonCid)}`}>JSON</a>}
+
+    </div>
+}
+
+export default Metadata

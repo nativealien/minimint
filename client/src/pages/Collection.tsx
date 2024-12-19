@@ -12,7 +12,7 @@ const Collection = () => {
     if(!meta) navigate(-1)
 
     return <div className="collection" style={{backgroundImage: `url(${meta.image})`}}>
-        <section>
+        <section className='override'>
             <h2>{meta.name}</h2>
             <div>
                 <p>{meta.owner}</p>

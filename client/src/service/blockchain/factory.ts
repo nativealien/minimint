@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 // import MiniMintFactoryABI from "./abi/MiniMintFactory.json"
 import MiniMintFactoryABI from "../../../../hardhat/artifacts/contracts/MiniMintFactory.sol/MiniMintFactory.json"
+import { delay } from "../../utils/utils"
 
 const contractAddress = import.meta.env.VITE_MINIMINT_FACTORY_CONTRACT
 
@@ -12,6 +13,7 @@ const getAllCollections = async (provider: ethers.Provider) => {
     const contract = factoryContract(provider);
     console.log(contract)
     const collections = await contract.getCollections();
+    delay(500)
     return collections;
 }
 
@@ -45,6 +47,7 @@ const transferOwnership = async (signer: ethers.Signer, newOwner: string) => {
     const contract = factoryContract(signer);
     const tx = await contract.transferOwnership(newOwner);
     await tx.wait();
+    delay(500)
     console.log("Ownership transferred to:", newOwner);
 }
 

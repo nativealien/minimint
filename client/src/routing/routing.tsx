@@ -6,6 +6,8 @@ import About from "../pages/About";
 import Gallery from "../pages/Gallery";
 import Collection from "../pages/Collection";
 import NFT from "../pages/NFT";
+import MintCollection from "../pages/MintCollection";
+import MintNFT from "../pages/MintNFT";
 
 export const router = createBrowserRouter([
     {
@@ -30,8 +32,16 @@ export const router = createBrowserRouter([
                 element: <Collection />
             },
             {
+                path: 'gallery/collection/mint',
+                element: <MintCollection />
+            },
+            {
                 path: 'gallery/collection/nft',
                 element: <NFT />
+            },
+            {
+                path: 'gallery/collection/nft/mint',
+                element: <MintNFT />
             },
             {
                 path: 'notfound',
