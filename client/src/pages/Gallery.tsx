@@ -8,11 +8,16 @@ const Gallery = () => {
     const { items } = useAppContext()
     const navigate = useNavigate()
     const [toggle, setToggle] = useState<boolean>(false)
+    const [allNfts, setAllNfts] = useState<any>(null)
     useEffect(() => {
-        console.log(toggle)
+        if(items){
+            let nftArr: any = []
+            items.forEach((item: any) => {
+                nftArr.push(item.nfts)
+            });
+            setAllNfts(nftArr.flat())
+        }
     }, [toggle])
-
-    const display = toggle === true ? [items?.collection] : items?.nfts
 
     return <div className="gallery">
         <h2>Gallery</h2>
@@ -24,7 +29,7 @@ const Gallery = () => {
             <button onClick={() => setToggle(false)}>nfts</button>
             <button onClick={() => navigate('collection/mint')}>Create collection</button>
         </nav>
-        <Grid items={display} />
+        <Grid items={toggle ? items : allNfts} />
     </div>
 
 }

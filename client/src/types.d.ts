@@ -10,13 +10,13 @@ interface Window{
 interface IAppContext {
     web3: IWeb3 | null;
     setWeb3: (web3: IWeb3 | null) => void;
-    items: ICollMeta | null,
-    setItems: (items: ICollMeta) => void;
+    items: ICollMeta[] | null,
+    setItems: (items: ICollMeta[]) => void;
     status: string | null;
     setStatus: (status: string | null) => void;
     loading: boolean;
     setLoading: (loading: boolean) => void;
-    reloadItems: (contract: string, tokenId: string) => Promise<INFTMeta | undefined>;
+    reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined>;
 }
 
 interface IWeb3 {
@@ -28,13 +28,14 @@ interface IWeb3 {
 interface IMeta {
     name: string;
     description: string;
+    image: string;
     address: string;
     owner: string;
-    image: string;
     type: string;
 }
 
 interface INFTMeta extends IMeta {
+    collName: string
     tokenId: any;
     listing: {
         list: boolean;
@@ -43,7 +44,6 @@ interface INFTMeta extends IMeta {
     }
 }
 
-interface ICollMeta {
-    collection: IMeta;
+interface ICollMeta extends IMeta {
     nfts: INFTMeta[] | undefined;
 }

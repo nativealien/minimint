@@ -5,18 +5,19 @@ import { delay } from "../../utils/utils"
 
 const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
 
-export const marketplaceContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
+export const marketplaceContract = async (signerOrProvider: ethers.Signer | ethers.Provider) => {
+  await delay(1000)
   return new ethers.Contract(marketplaceAddress, MiniMintMarketplaceABI.abi, signerOrProvider);
 }
 
 const listNFT = async (signer: ethers.Signer, collAddress: string, tokenId: number, priceInEth: string, setStatus: (status: string | null) => void) => {
-  setStatus(`Listing NFT for ${priceInEth}`)
-  const contract = marketplaceContract(signer);
+  setStatus('Listing NFT')
+  const contract = await marketplaceContract(signer);
   const price = ethers.parseEther(priceInEth);
   try {
     const tx = await contract.listNFT(collAddress, tokenId, price);
     const receipt = await tx.wait();
-    console.log("NFT listed successfully:", receipt);
+    console.log(receipt)
     setStatus(null)
   } catch (error) {
     setStatus('ERROR')
@@ -25,7 +26,7 @@ const listNFT = async (signer: ethers.Signer, collAddress: string, tokenId: numb
 
 const buyNFT = async (signer: ethers.Signer, collAddress: string, tokenId: number, priceInEth: number, setStatus: (status: string | null) => void) => {
   setStatus('Buying NFT')
-  const contract = marketplaceContract(signer);
+  const contract = await marketplaceContract(signer);
   const priceInWei = ethers.parseEther(`${priceInEth}`);
   try {
     const tx = await contract.buyNFT(collAddress, tokenId, { value: priceInWei});
@@ -39,7 +40,7 @@ const buyNFT = async (signer: ethers.Signer, collAddress: string, tokenId: numbe
 
 const delistNFT = async (signer: ethers.Signer, collAddress: string, tokenId: number, setStatus: (status: string | null) => void) => {
   setStatus('Delisting NFT')
-  const contract = marketplaceContract(signer);
+  const contract = await marketplaceContract(signer);
   try {
     const tx = await contract.delistNFT(collAddress, tokenId);
     const receipt = await tx.wait();
@@ -50,12 +51,10 @@ const delistNFT = async (signer: ethers.Signer, collAddress: string, tokenId: nu
   }
 }
 
-const getListing = async (provider: ethers.Provider, collAddress: string, tokenId: number, setStatus: (status: string | null) => void) => {
-  await delay(1000)
-  const contract = marketplaceContract(provider);
+const getListing = async (provider: ethers.Provider, collAddress: string, tokenId: number) => {
+  const contract = await marketplaceContract(provider);
   try {
     const listing = await contract.getListing(collAddress, tokenId);
-    // console.log("Listing details:", listing);
     return listing;
   } catch (error) {
     return 'error'
@@ -63,17 +62,15 @@ const getListing = async (provider: ethers.Provider, collAddress: string, tokenI
 }
 
 const getMainCollection = async (provider: ethers.Provider) => {
-  const contract = marketplaceContract(provider);
+  const contract = await marketplaceContract(provider);
   const mainCollectionAddress = await contract.mainCollection();
-  console.log("Main Collection Address:", mainCollectionAddress);
   return mainCollectionAddress
 
 };
 
 const isSupportedCollection = async (provider: ethers.Provider, collAddress: string) => {
-  const contract = marketplaceContract(provider);
+  const contract = await marketplaceContract(provider);
   const isSupported = await contract.isFactoryDeployedCollection(collAddress);
-  console.log(`Is collection supported: ${isSupported}`);
   return isSupported;
 }
 

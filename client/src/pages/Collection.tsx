@@ -1,11 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import './collection.css'
 import Grid from '../components/display/Grid';
-import { useAppContext } from '../context/context';
 import './collection.css'
 
 const Collection = () => {
-    const { items } = useAppContext()
     const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
@@ -20,7 +18,7 @@ const Collection = () => {
             </div>
             {/* <img src={meta.image} alt="" /> */}
         </section>
-        <Grid items={items?.nfts} />
+        <Grid items={meta.nfts} />
     </div>
 }
 

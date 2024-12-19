@@ -10,16 +10,16 @@ export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provide
 }
 
 const getAllCollections = async (provider: ethers.Provider) => {
+    await delay(1000)
     const contract = factoryContract(provider);
     console.log(contract)
     const collections = await contract.getCollections();
-    delay(500)
     return collections;
 }
 
-const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string) => {
+const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string, nftUris: string[]) => {
     const contract = factoryContract(signer);
-    const tx = await contract.deployCollection(name, symbol, metadataURI);
+    const tx = await contract.deployCollection(name, symbol, metadataURI, nftUris);
     const receipt = await tx.wait();
     console.log("Collection deployed:", receipt);
     return receipt

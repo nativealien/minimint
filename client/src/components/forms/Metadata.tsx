@@ -32,13 +32,14 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
             if(name !== '' && description !== '' && imageURI instanceof File){
                 setStatus('Process image cid...')
                 const imgCid = await ipfs.pinFile(imageURI)
-                console.log(imgCid)
+                nftMeta.imageURI = 'ipfs://' + imgCid.IpfsHash
+                console.log('META DATA', nftMeta)
                 if(imgCid) {
                     setStatus('Process json cid...')
                     const jsonCid = await ipfs.pinJSON(nftMeta)
 
-                    const newCid = { imgCid: await imgCid.IpfsHash, jsonCid: await jsonCid.IpfsHash}
-                    setStatus(`Success: Img: ${imgCid} - JSON: ${jsonCid}_`)
+                    const newCid = { imgCid: 'ipfs://' + await imgCid.IpfsHash, jsonCid: 'ipfs://' + await jsonCid.IpfsHash}
+                    setStatus(`Success: Img: ${newCid.imgCid} - JSON: ${newCid.jsonCid}_`)
                     console.log(jsonCid)
                     setCids(newCid)
                     setProcess(false)
@@ -75,10 +76,7 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target as HTMLInputElement;
         const files = (e.target as HTMLInputElement).files;
-        console.log(name, value, files);
         if(files){
-            const test = value.split('\\')[2]
-            console.log(test)
             const url = URL.createObjectURL(files[0])
             setImgURL(url)
             setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
@@ -88,14 +86,18 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
     }
 
     const displayUrl = imgURL
-    console.log("DISPLAY", cids)
-
     const handleProcess = (e: any) => {
         e.preventDefault()
         setProcess(true)
     }
     const handleDelete = (e: any) => {
         e.preventDefault()
+        setNftMeta({
+            name: '',
+            description: '',
+            imageURI: ''
+        })
+        setImgURL(null)
         setDel(true)
     }
 

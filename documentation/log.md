@@ -135,6 +135,10 @@ I have now added marketplace functionallity to the app, with minor details left.
 
 Made the modal, added some loading features.
 
+I have now completed the collection creation feature, against my factory contract. It was abit of a challange, as my ERC721 takes in 4 NFT URIs on deployment to make the application look better. Im thinking of adding a templet deploy, and store all info in a folder so that the examinors can push a 'Fast deploy example collection' to see it working. Another quite enoying thing is that I realised that the factory is set as owner over the NFTs that mints on deployment... This will need to be fixed, and all it really takes is to pass an address on deployment of the ERC721. So I will need to redeploy my contracts, but I had a feeling that would be needed along the way. I will also need to reshape the tests, so that they run flawlessly in test env.
+
+I refactored alot of code today, as I noticed ways to optimize now that I have two collections deployed. Its starting to look pretty good, and the only feature thats left is to be able to mint! And then its mostly details, such as changing metadata for owners, burn nfts and AHOLE lot of styling!
+
 > Thursday
 
 > Friday
@@ -143,7 +147,7 @@ Made the modal, added some loading features.
 
 --------------------------------------------------------------------------
 
-## Sprint 5: Finalizing, Documentation and Deployment
+## Sprint 5: Refactor, build and final rapport
 
 > Monday
 
