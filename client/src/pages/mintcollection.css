@@ -1,11 +1,12 @@
 
 
 .mintcollection {
-    width: 100%;
+    width: 600px;
+    margin: auto;
     & > .signed {
 
         & > .collmeta {
-            height: 500px;
+            height: 600px;
             width: 100%;
             border: 2px solid blue;
         }
@@ -13,12 +14,13 @@
             height: 400px;
             width: 100%;
             display: flex;
-            border: 2px solid red;
+            gap: 5px;
+            /* border: 2px solid red; */
     
             & > .collnftmeta{
                 height: 100%;
                 width: 25%;
-                border: 2px solid red;
+                /* border: 2px solid red; */
             }
         }
     }

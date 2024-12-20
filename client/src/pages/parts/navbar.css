@@ -1,14 +1,16 @@
 
 
 nav {
-    background-color: rgb(141, 141, 205);
+    background-color: rgba(205, 205, 220, 0);
 
     & > ul {
+        margin: 0;
+        padding: 0;
         list-style: none;
         display: flex;
         justify-content: center;
         gap: 20px;
-        background-color: rgb(204, 164, 164);
+        /* background-color: rgb(221, 221, 221); */
 
         & > li {
 

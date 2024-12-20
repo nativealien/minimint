@@ -8,7 +8,7 @@ const Home = () => {
     const navigate = useNavigate()
 
     return <div className="home">
-            <h2>Home</h2>
+            {/* <h2>Home</h2> */}
             <section>
                 <p>Welcome to MiniMint Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi laboriosam libero quae deserunt maxime doloribus eaque non ad. Similique soluta neque sequi excepturi laborum eligendi ipsam maiores, voluptatem iusto itaque!</p>
             </section>
