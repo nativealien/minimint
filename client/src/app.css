@@ -1,13 +1,24 @@
 @import url('./styles/reset.css');
-body{
-  overflow-x: hidden;
-  /* padding-right: calc(100vw - 100%); */
-}
+@import url('./styles/variables.css');
+
 #root {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
   text-align: center;
+  padding-right: calc(100vw - 100%);
+
+  button {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+    background-color: var(--background-color);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--background-color2);
+    }
+  }
 
   & > .app{
     height: 100%;
@@ -17,30 +28,56 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* position: relative; */
+    position: relative;
     overflow-x: hidden;
-
+    background-color: var(--background-color);
+    background: var(--gradient-background2);
     /* background: linear-gradient(180deg, #ffffff, #cbcccd54, rgba(150, 161, 165, 0.53), rgba(69, 69, 69, 0.416)); */
-
-    & > header {
+    & > .top {
+      height: 90px;
       width: 100%;
-      margin: 0;
-      padding: 0;
-      background-color: rgb(255, 255, 255);
-      & > h1 {
+      margin-bottom: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      /* border-bottom: 0.5px solid var(--color-border); */
+      position: fixed;
+      z-index: 5;
+      left: 0;
+      background-color: var(--background-color);
+      /* box-shadow: 1px 1px 20px var(--color); */
+
+      & > header {
+        width: 1000px;
+        height: 100%;
         margin: 0;
         padding: 0;
-        font-size: 3em;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        & > h1 {
+          margin: 0;
+          padding: 0;
+          line-height: 50px; /* Match the height to align text vertically */
+          vertical-align: bottom;
+          font-size: 3.5em;
+        }
+        & > nav {
+          height: 100%;
+          /* margin-bottom: 20px; */
+          margin-left: 50px;
+          display: flex;
+          align-items: end;
+        }
+        & > .toggles {
+          display: flex;
+        }
       }
-    }
-    & > nav {
-      margin: 0;
-      padding: 0;
-      margin-bottom: 20px;
     }
     & > main {
       height: auto;
-      width: 1200px;
+      width: 1000px;
+      padding-top: 150px;
       padding-bottom: 100px;
     }
     & > footer {
@@ -51,7 +88,7 @@ body{
       position: fixed;
       overflow: hidden;
       bottom: 0;
-      background-color: rgba(118, 42, 42, 0.185);
+      background-color: var(--background-color2);
     }
     section {
       width: 500px; /* Section width applies to all descendants */

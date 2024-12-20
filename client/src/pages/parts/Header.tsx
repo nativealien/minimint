@@ -1,13 +1,17 @@
+import Navbar from './Navbar'
+import ToggleTheme from '../../components/buttons/ToggleTheme'
 import ConnectWeb3 from '../../components/buttons/ConnectWeb3'
-import { useAppContext } from '../../context/context'
 import './header.css'
 
 const Header = () => {
-    const { web3 } = useAppContext()
 
     return <header>
         <h1>MINIMINT</h1>
-        {web3?.address && <ConnectWeb3 />}
+        <Navbar />
+        <div className="toggles">
+            <ToggleTheme />
+            <ConnectWeb3 />
+        </div>
     </header>
 }
 

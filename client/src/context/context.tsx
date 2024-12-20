@@ -9,21 +9,29 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [items, setItems] = useState<ICollMeta[] | null>(null)
     const [status, setStatus] = useState<string | null>(null)
     const [loading, setLoading] = useState<boolean>(false)
+    const [theme, setTheme] = useState(() => {
+      return localStorage.getItem("theme") || "light";
+    })
 
     useEffect(() => {
       if(loading) {
-        setStatus('loading')
+        setStatus('Loading')
       } else setStatus(null)
     }, [loading])
 
     useEffect(() => {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    }, [theme])
+
+    useEffect(() => {
         const getCollections = async (newWeb3: IWeb3) => {
-          setLoading(true)
+          // setLoading(true)
           const test: any = await metafetcher.initMinimint(newWeb3, setStatus)
           setItems(test)
-          setLoading(false)
+          setStatus('Minimint is now connected!_')
         }
-        if(web3) getCollections(web3)
+        if(web3 && !items) getCollections(web3)
         addListener(setStatus)
     }, [web3])
 
@@ -40,6 +48,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       }
     }
 
+    const toggleTheme = () => {
+      setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    }
+
     const contextValue = {
         web3,
         setWeb3,
@@ -49,7 +61,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         setStatus,
         loading,
         setLoading,
-        reloadItems
+        reloadItems,
+        theme,
+        toggleTheme
     }
 
     return <AppContext.Provider value={contextValue}>

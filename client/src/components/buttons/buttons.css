@@ -1,0 +1,70 @@
+
+
+.connectweb3 {
+    /* height: 100%; */
+    width: 200px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & > div {
+        display: flex;
+        & > .no, .inf, .off {
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            cursor: pointer;
+            &:hover {
+                box-shadow: 1px 1px 40px var(--color);
+            }
+        }
+        & > .no {
+            background-color: rgba(255, 0, 0, 0.452);
+        }
+        & > .inf {
+            background-color: rgba(196, 127, 36, 0.518);
+
+            & > img {
+                opacity: 0;
+                transform: scale(0.3);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+            &:hover img {
+                opacity: 1;
+                transform: scale(2)
+            }
+        }
+        & > .off {
+            background-color: rgba(60, 134, 35, 0.648);
+        }
+        & > p {
+            margin: 0;
+            margin-left: 6px;
+            padding: 0;
+            color: rgb(126, 126, 126);
+            font-size: 0.9em;
+        }
+    }
+
+}
+.toggletheme{
+    height: 18px;
+    width: 18px;
+    margin-left: 100px;
+    margin-bottom: 3.5px;
+    border-radius: 50%;
+
+    /* background-color: var(--color); */
+    background: var(--gradient-background);
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 1px 1px 40px var(--color);
+    }
+    & > p {
+        margin: 0;
+        margin-left: 5px;
+        padding: 0;
+    }
+
+}

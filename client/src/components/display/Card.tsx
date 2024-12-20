@@ -27,7 +27,7 @@ const Card = ({meta}: {meta: IMeta | INFTMeta}) => {
             <h3>{meta.name}</h3>
             <div className="signs">
                 {web3?.address === meta.owner && <p className="O">O</p>}
-                {'listing' in meta && meta.listing?.list && <p className="L">L</p>}
+                {'listing' in meta && meta.listing?.list && <img src="/icons/ethereum-sale.svg"></img>}
             </div>
         </div>
         {/* <p>{meta.description}</p>

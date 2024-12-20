@@ -1,8 +1,5 @@
 
-
 nav {
-    background-color: rgba(205, 205, 220, 0);
-
     & > ul {
         margin: 0;
         padding: 0;
@@ -15,8 +12,9 @@ nav {
         & > li {
 
             & > a {
+                text-decoration: none;
                 font-size: 1.5em;
-                color: rgb(27, 61, 102);
+                color: var(--color);
 
                 & :visited {
                     color: grey;
@@ -26,8 +24,8 @@ nav {
 
                     color: grey;
                 }
-                & > :hover {
-                    background-color: aquamarine;
+                &:hover {
+                    border-bottom: 1px dotted black;
                 }
             }
         }

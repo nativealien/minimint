@@ -43,6 +43,9 @@
             justify-content: space-evenly;
             align-items: center;
             background-color: rgb(203, 185, 185);
+            & img {
+                width: 30px;
+            }
         }
     }
 }

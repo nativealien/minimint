@@ -17,6 +17,8 @@ interface IAppContext {
     loading: boolean;
     setLoading: (loading: boolean) => void;
     reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined>;
+    theme: string;
+    toggleTheme: () => void;
 }
 
 interface IWeb3 {
