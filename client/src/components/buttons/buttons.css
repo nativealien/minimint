@@ -41,7 +41,7 @@
             margin: 0;
             margin-left: 6px;
             padding: 0;
-            color: rgb(126, 126, 126);
+            color: var(--color);
             font-size: 0.9em;
         }
     }

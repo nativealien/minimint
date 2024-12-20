@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useAppContext } from '../context/context'
-import Grid from '../components/display/Grid'
+import { useAppContext } from '../../context/context'
+import Grid from '../../components/display/Grid'
 import './gallery.css'
 import { useNavigate } from 'react-router-dom'
 

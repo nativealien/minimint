@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom";
 import { useAppContext } from "./context/context";
 import { connectProvider } from "./service/provider";
 import Modal from "./components/display/Modal";
-import Header from "./pages/parts/Header";
-import Footer from "./pages/parts/Footer";
+import Header from "./pages/parts/header/Header";
+import Footer from "./pages/parts/footer/Footer";
 import './app.css'
 
 

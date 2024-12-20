@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import NotFound from "../pages/NotFound";
-import Home from "../pages/Home";
-import About from "../pages/About";
-import Gallery from "../pages/Gallery";
-import Collection from "../pages/Collection";
-import NFT from "../pages/NFT";
-import MintCollection from "../pages/MintCollection";
-import MintNFT from "../pages/MintNFT";
+import NotFound from "../pages/notfound/NotFound";
+import Home from "../pages/home/Home";
+import About from "../pages/about/About";
+import Gallery from "../pages/gallery/Gallery";
+import Collection from "../pages/collection/Collection";
+import NFT from "../pages/nft/NFT";
+import MintCollection from "../pages/mintcollection/MintCollection";
+import MintNFT from "../pages/mintnft/MintNFT";
 
 export const router = createBrowserRouter([
     {

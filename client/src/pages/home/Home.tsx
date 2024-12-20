@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useAppContext } from "../context/context"
+import { useAppContext } from "../../context/context"
 import './home.css'
 
 const Home = () => {

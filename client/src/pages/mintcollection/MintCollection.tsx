@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { useAppContext } from "../context/context"
-import Metadata from "../components/forms/Metadata"
-import ConnectWeb3 from "../components/buttons/ConnectWeb3"
-import factory from "../service/blockchain/factory"
-import ipfs from "../service/ipfs"
+import { useAppContext } from "../../context/context"
+import Metadata from "../../components/forms/Metadata"
+import ConnectWeb3 from "../../components/buttons/ConnectWeb3"
+import factory from "../../service/blockchain/factory"
+import ipfs from "../../service/ipfs"
 import './mintcollection.css'
 
 const MintCollection = () => {

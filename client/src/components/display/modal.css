@@ -1,6 +1,7 @@
 
 
 .modal {
+    padding-top: 300px;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -10,8 +11,8 @@
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 
-    background-color: rgba(236, 230, 224, 0.137);
+    background-color: var(--background-color-50);
     backdrop-filter: blur(2px);
 }

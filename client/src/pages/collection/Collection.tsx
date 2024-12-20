@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
-import { useAppContext } from '../context/context';
-import Grid from '../components/display/Grid';
-import Metadata from '../components/forms/Metadata';
-import ERC721 from '../service/blockchain/ERC721';
+import { useAppContext } from '../../context/context';
+import Grid from '../../components/display/Grid';
+import Metadata from '../../components/forms/Metadata';
+import ERC721 from '../../service/blockchain/ERC721';
 import './collection.css'
 
 const Collection = () => {

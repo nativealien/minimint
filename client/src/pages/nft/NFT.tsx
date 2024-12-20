@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useAppContext } from '../context/context'
-import marketplace from '../service/blockchain/marketplace'
-import ListNFT from '../components/forms/ListNFT'
+import { useAppContext } from '../../context/context'
+import marketplace from '../../service/blockchain/marketplace'
+import ListNFT from '../../components/forms/ListNFT'
 import './nft.css'
 
 // const address = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT

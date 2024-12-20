@@ -1,5 +1,6 @@
 @import url('./styles/reset.css');
 @import url('./styles/variables.css');
+@import url('./styles/elemets.css');
 
 #root {
   width: 100vw;
@@ -23,8 +24,6 @@
   & > .app{
     height: 100%;
     width: 100%;
-    
-    /* border: 2px solid black; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,7 +31,6 @@
     overflow-x: hidden;
     background-color: var(--background-color);
     background: var(--gradient-background2);
-    /* background: linear-gradient(180deg, #ffffff, #cbcccd54, rgba(150, 161, 165, 0.53), rgba(69, 69, 69, 0.416)); */
     & > .top {
       height: 90px;
       width: 100%;
@@ -40,39 +38,10 @@
       display: flex;
       justify-content: center;
       align-items: end;
-      /* border-bottom: 0.5px solid var(--color-border); */
       position: fixed;
       z-index: 5;
       left: 0;
       background-color: var(--background-color);
-      /* box-shadow: 1px 1px 20px var(--color); */
-
-      & > header {
-        width: 1000px;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-        & > h1 {
-          margin: 0;
-          padding: 0;
-          line-height: 50px; /* Match the height to align text vertically */
-          vertical-align: bottom;
-          font-size: 3.5em;
-        }
-        & > nav {
-          height: 100%;
-          /* margin-bottom: 20px; */
-          margin-left: 50px;
-          display: flex;
-          align-items: end;
-        }
-        & > .toggles {
-          display: flex;
-        }
-      }
     }
     & > main {
       height: auto;
@@ -80,16 +49,7 @@
       padding-top: 150px;
       padding-bottom: 100px;
     }
-    & > footer {
-      height: 100px;
-      width: 100%;
-      margin: 0;
-      padding: 0;
-      position: fixed;
-      overflow: hidden;
-      bottom: 0;
-      background-color: var(--background-color2);
-    }
+
     section {
       width: 500px; /* Section width applies to all descendants */
       margin: auto;

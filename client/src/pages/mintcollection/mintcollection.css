@@ -8,19 +8,16 @@
         & > .collmeta {
             height: 600px;
             width: 100%;
-            border: 2px solid blue;
+            background-color: var(--background-color-50);
         }
         & > .collnfts {
             height: 400px;
             width: 100%;
             display: flex;
             gap: 5px;
-            /* border: 2px solid red; */
-    
             & > .collnftmeta{
                 height: 100%;
                 width: 25%;
-                /* border: 2px solid red; */
             }
         }
     }

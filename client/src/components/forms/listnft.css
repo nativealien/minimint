@@ -12,14 +12,14 @@
         /* border: 1px solid blue; */
         display: flex;
         gap: 10px;
-        background-color: rgba(177, 160, 145, 0.123);
+        background-color: var(--background-color);
         font-size: 1.2em;
 
         input {
             width: 80px;
             border: 0;
-            border-bottom: 1px solid grey;
-            background-color: rgba(255, 255, 255, 0.217);
+            border-bottom: 1px solid var(--color-border);
+            background-color: var(--background-color);
         }
         p {
             display: flex;
@@ -27,7 +27,7 @@
         }
         button {
             border: 0;
-            background-color: rgba(255, 255, 255, 0.153);
+            background-color: var(--background-color);
             cursor: pointer;
         }
     }

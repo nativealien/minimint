@@ -145,6 +145,10 @@ I refactored alot of code today, as I noticed ways to optimize now that I have t
 
 Its now possible to mint on collections.
 
+I have now refactored the CSS and organized the code into separate files for each component. Additionally, I created an element.css file for general element styling and a variables.css file to manage variables that control the app's overall styling.
+
+There's still more work to be done, but the app is starting to take shape. The design style I chose is minimalistic, focusing on a black, white, and grayscale palette, with subtle hints of color in certain areas.
+
 ### Retrospect:
 
 --------------------------------------------------------------------------
