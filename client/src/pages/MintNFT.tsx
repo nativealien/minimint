@@ -1,4 +1,4 @@
-
+import './mintnft.css'
 
 const MintNFT = () => {
 

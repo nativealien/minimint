@@ -14,7 +14,7 @@
         flex-direction: column;
         justify-content: end;
 
-        border: 2px solid grey;
+        /* border: 2px solid grey; */
 
         & > .meta-image {
             height: 50%;
@@ -24,7 +24,7 @@
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
-            /* background-color: red; */
+            background-color: rgba(158, 164, 169, 0.228);
             p{
                 font-style: italic;
             }

@@ -20,10 +20,10 @@ const Gallery = () => {
     }, [toggle])
 
     return <div className="gallery">
-        <h2>Gallery</h2>
-        <section>
+        {/* <h2>Gallery</h2> */}
+        {/* <section>
             <p>Welcome to the Gallery Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi laboriosam libero quae deserunt maxime doloribus eaque non ad. Similique soluta neque sequi excepturi laborum eligendi ipsam maiores, voluptatem iusto itaque!</p>
-        </section>
+        </section> */}
         <nav>
             <button onClick={() => setToggle(true)}>collections</button>
             <button onClick={() => setToggle(false)}>nfts</button>

@@ -47,3 +47,14 @@ interface INFTMeta extends IMeta {
 interface ICollMeta extends IMeta {
     nfts: INFTMeta[] | undefined;
 }
+
+interface IMetadata {
+    name: string,
+    description: string,
+    imageURI: string | File
+}
+
+interface ICids {
+    imgCid: string,
+    jsonCid: string
+}
