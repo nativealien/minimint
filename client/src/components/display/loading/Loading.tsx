@@ -1,4 +1,4 @@
-import { delay } from "../../utils/utils";
+import { delay } from "../../../utils/utils";
 import "./loading.css";
 
 const Loading: React.FC<{text: string, setStatus: (value?: any)=>void}> = ({text, setStatus}) => {
@@ -15,7 +15,12 @@ const Loading: React.FC<{text: string, setStatus: (value?: any)=>void}> = ({text
   return (
     <div className="loading-container" onClick={() => setStatus(null)}>
       <div className="spinner"></div>
-      <p style={{color: "black"}} className="loading-text">{txt}</p>
+      <div className="spinner2"></div>
+      <div className="spinner3"></div>
+      <div className="spinner4"></div>
+      <div className="spinner5"></div>
+      <div className="spinner6"></div>
+      <p className="loading-text">{txt}</p>
     </div>
   );
 };

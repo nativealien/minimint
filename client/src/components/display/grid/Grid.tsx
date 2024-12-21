@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Card from './Card'
+import Card from '../card/Card'
 import './grid.css'
 
 const cardGenerator = (items: ICollMeta[] | INFTMeta[]) => {
@@ -15,16 +15,14 @@ const cardGenerator = (items: ICollMeta[] | INFTMeta[]) => {
 const Grid = ({items}: { items: ICollMeta[] | INFTMeta[] | any }) => {
     const [cards, setCards] = useState<JSX.Element[] | null>(null)
     useEffect(() => {
-        console.log('ITEMS', items[0].type)
         setCards(null)
         const newCards = cardGenerator(items)
         setCards(newCards)
-        console.log(newCards)
     }, [items])
 
-    return <div className="grid" style={{gridTemplateColumns: items[0].type === 'nft' ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)'}}>
-        {cards && cards}
-    </div>
+    return <>{items && <div className="grid" style={{gridTemplateColumns: items.length > 0 ? items[0].type === 'nft' ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)' : ''}}>
+        {cards && cards.length > 0 && cards}
+    </div>}</>
 }
 
 export default Grid

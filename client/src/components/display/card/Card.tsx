@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom"
-import { useAppContext } from "../../context/context"
+import { useAppContext } from "../../../context/context"
 import './card.css'
 import { useEffect, useState } from "react"
 
 const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
-    const { web3 } = useAppContext()
+    const { web3, theme } = useAppContext()
     const [sample, setSample] = useState<INFTMeta[] | null>(null)
     const navigate = useNavigate()
     useEffect(() => {
         if(meta.type === 'collection'){
-            console.log('ENTER', meta.type)
             const samp = (meta as ICollMeta).nfts?.slice(0, 3) || []
             setSample(samp)
         }
@@ -30,8 +29,8 @@ const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
                 {sample.map((sam: INFTMeta) => <img src={sam.image} />)}    
             </div>}
             <div className="signs">
-                {web3?.address === meta.owner && <img src="/icons/ethereum-wallet.svg"></img>}
-                {'listing' in meta && meta.listing?.list && <img src="/icons/ethereum-send.svg"></img>}
+                {web3?.address === meta.owner && <img src={`/icons/star-${theme}.svg`}></img>}
+                {'listing' in meta && meta.listing?.list && <img src={`/icons/ethereum-${theme}.svg`}></img>}
             </div>
             <h3>{meta.name}</h3>
         </div>
@@ -39,3 +38,5 @@ const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
 }
 
 export default Card
+
+// 'listing' in meta

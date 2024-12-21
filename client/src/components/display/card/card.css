@@ -55,13 +55,14 @@
         }
 
         & > .signs {
-            height: 30px;
+            height: 20px;
             width: 100%;
-            border: 1px solid grey;
             display: flex;
-            justify-content: start;
+            justify-content: end;
             align-items: start;
-            position: relative;
+            position: absolute;
+            bottom: -20px;
+            background-color: var(--background-color-25);
             & img {
                 width: 30px;
                 position: relative;

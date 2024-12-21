@@ -1,20 +1,31 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/context';
-import Grid from '../../components/display/Grid';
-import Metadata from '../../components/forms/Metadata';
+import Grid from '../../components/display/grid/Grid';
+import Metadata from '../../components/forms/metadata/Metadata';
 import GoBack from '../../components/buttons/GoBack';
 import ERC721 from '../../service/blockchain/ERC721';
 import './collection.css'
+import Toggle from '../../components/buttons/Toggle';
 
 const Collection = () => {
     const { web3, setStatus, reloadItems } = useAppContext()
     const [nftMeta, setNftMeta] = useState<ICids | null>(null)
+    const [nfts, setNfts] = useState<any>(null)
     const [toggle, setToggle] = useState<boolean>(true)
+    const [own, setOwn] = useState<boolean>(false)
+    const [sale, setSale] = useState<boolean>(false)
     const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
     if(!meta) navigate(-1)
+
+    useEffect(() => {
+        let newNfts = meta.nfts;
+        if(own) newNfts = newNfts.filter((item: any) => item.owner === web3?.address) 
+        if(sale) newNfts = newNfts.filter((item: any) => item.listing.list)
+        setNfts(newNfts)
+    }, [own, sale])
 
     const handleMint = async () => {
         if(web3 && web3.address && nftMeta){
@@ -29,22 +40,23 @@ const Collection = () => {
     }
 
     return <div className="collection">
-        <section className='override'>
-            {/* <img src={meta.image} /> */}
-            <div className='wrap' style={{backgroundImage: `url(${meta.image})`}}>
-                <div className="info">
-                    <h2>{meta.name}</h2>
-                    <p>{meta.owner}</p>
-                    <p className='des'>{meta.description}</p>
-                </div>
+        <section style={{backgroundImage: `url(${meta.image})`}}>
+            <div className="info">
+                <h2>{meta.name}</h2>
+                <p>{meta.owner}</p>
+                <p className='des'>{meta.description}</p>
             </div>
-            {/* <img src={meta.image} alt="" /> */}
         </section>
         <nav>
-            {toggle ? <button onClick={() => setToggle(!toggle)}>Mint NFT</button> : <button onClick={() => setToggle(!toggle)}>Show NFTs</button>}
-            <button>set meta</button>
+            <div className="coll-btns">
+                {toggle ? <button onClick={() => setToggle(!toggle)}>Mint NFT</button> : <button onClick={() => setToggle(!toggle)}>Show NFTs</button>}
+                <button>set meta</button>
+            </div>
+            <div className="coll-toggle">
+                <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />
+            </div>
         </nav>
-        {toggle ? <Grid items={meta.nfts} /> :
+        {toggle ? <Grid items={nfts} /> :
         <Metadata className={'mint-meta'} height='400px' cids={nftMeta} setCids={setNftMeta} />}
         {nftMeta && <button onClick={() => handleMint()}>Mint</button>}
         <GoBack />

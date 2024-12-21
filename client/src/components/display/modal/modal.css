@@ -8,11 +8,8 @@
     right: 0;
     left: 0;
     z-index: 10;
-
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-
     background-color: var(--background-color-50);
     backdrop-filter: blur(2px);
 }

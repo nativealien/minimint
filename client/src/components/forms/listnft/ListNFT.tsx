@@ -1,6 +1,6 @@
 import { useState } from "react"
-import marketplace from "../../service/blockchain/marketplace"
-import { useAppContext } from "../../context/context"
+import marketplace from "../../../service/blockchain/marketplace"
+import { useAppContext } from "../../../context/context"
 import './listnft.css'
 
 const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, setToggle: (toggle: boolean) => void}) => {
@@ -12,11 +12,14 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
     }
 
     const handleList = async () => {
-        if(+price > 0)
-        console.log(meta.address)
-        const res = await marketplace.listNFT(web3?.signer, meta.address, meta.tokenId, price, setStatus )
-        console.log(res)
-        setToggle(!toggle)
+        if(+price > 0){
+            console.log(meta.address)
+            const res = await marketplace.listNFT(web3?.signer, meta.address, meta.tokenId, price, setStatus )
+            console.log(res)
+            setToggle(!toggle)
+        } else {
+            setStatus('Price has to be higher than 0_')
+        }
     }
 
     const handleDelist = async () => {

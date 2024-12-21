@@ -151,6 +151,8 @@ There's still more work to be done, but the app is starting to take shape. The d
 
 ### Retrospect:
 
+Its been a packed week, and there is some detail work. But Im happy with how the app looks, also how true it stays to the vision I had of it when I begun! Next week will be spent testing for bugs, refining code, documenting and putting together a final report along with presentation. I will spend some time this weekend to put in the tasks in my project board for the last sprint.
+
 --------------------------------------------------------------------------
 
 ## Sprint 5: Refactor, build and final rapport

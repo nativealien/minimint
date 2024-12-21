@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import Modal from "../display/Modal"
-import ipfs from '../../service/ipfs'
+import Modal from "../../display/modal/Modal"
+import ipfs from "../../../service/ipfs"
 import './metadata.css'
-import { useAppContext } from "../../context/context"
 
 interface IMetadata {
     name: string,

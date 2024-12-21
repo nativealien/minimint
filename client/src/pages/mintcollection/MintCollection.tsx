@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useAppContext } from "../../context/context"
-import Metadata from "../../components/forms/Metadata"
+import Metadata from "../../components/forms/metadata/Metadata"
 import ConnectWeb3 from "../../components/buttons/ConnectWeb3"
+import GoBack from "../../components/buttons/GoBack"
 import factory from "../../service/blockchain/factory"
 import ipfs from "../../service/ipfs"
 import './mintcollection.css'
-import GoBack from "../../components/buttons/GoBack"
 
 const MintCollection = () => {
     const { web3, setStatus } = useAppContext()
