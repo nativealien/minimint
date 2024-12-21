@@ -15,7 +15,7 @@ const Loading: React.FC<{text: string, setStatus: (value?: any)=>void}> = ({text
   return (
     <div className="loading-container" onClick={() => setStatus(null)}>
       <div className="spinner"></div>
-      <p className="loading-text">{txt}</p>
+      <p style={{color: "black"}} className="loading-text">{txt}</p>
     </div>
   );
 };

@@ -4,15 +4,18 @@ const infura = import.meta.env.VITE_INFURA_ENDPOINT
 
 export const connectProvider = async (metamask: boolean, setStatus: (status: string | null) => void ): Promise<IWeb3 | string> => {
     if (window.ethereum && metamask) {
+        setStatus('Connecting...')
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         try {
+          setStatus('Sign to connect...')
           const sign = await signer.signMessage("Connect to MiniMint?");
           if (sign) {
             const address = await signer.getAddress();
+            setStatus('You are connected!_')
             return { provider, signer, address }; 
           } else {
-            setStatus && setStatus("Signature failed...");
+            setStatus && setStatus("Signature failed..._");
             return "Signature failed...";
           }
         } catch (error: any) {
@@ -25,6 +28,7 @@ export const connectProvider = async (metamask: boolean, setStatus: (status: str
           return "Error occurred";
         }
       } else {
+        setStatus('Connected without wallet_')
         const provider = new ethers.JsonRpcProvider(infura);
         return { provider };
       }

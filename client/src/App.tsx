@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 import { useAppContext } from "./context/context";
 import { connectProvider } from "./service/provider";
 import Modal from "./components/display/Modal";
-import Header from "./pages/parts/Header";
-import Footer from "./pages/parts/Footer";
-import Navbar from "./pages/parts/Navbar";
+import Header from "./pages/parts/header/Header";
+import Footer from "./pages/parts/footer/Footer";
 import './app.css'
+
 
 function App() {
   const { web3, setWeb3, status, setStatus } = useAppContext()
@@ -24,8 +24,9 @@ function App() {
 
   return <div className="app">
     {status && <Modal status={status} setStatus={setStatus} />}
-    <Header />
-    <Navbar />
+    <div className="top">
+      <Header />
+    </div>
     <main><Outlet/></main>
     <Footer />
   </div>

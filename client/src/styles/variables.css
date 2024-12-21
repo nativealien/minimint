@@ -1,0 +1,31 @@
+
+:root {
+    --background-color: rgba(255, 255, 255, 0.409);
+    --background-color-25: rgba(255, 255, 255, 0.758);
+    --background-color-50: rgba(255, 255, 255, 0.507);
+    --background-color-75: rgba(255, 255, 255, 0.233);
+    --background-color-mid: rgba(82, 82, 82, 0.653);
+
+    --gradient-background: radial-gradient(circle, #9a9a9a, #000000a2);
+    --gradient-background2: radial-gradient(circle, #c6bfb67d, rgba(228, 228, 228, 0.219), #ffffff);
+
+    --color: black;
+    --color-rev: white;
+    --color-border: rgba(0, 0, 0, 0.557);
+    --color-button: rgba(43, 47, 50, 0.112);
+    --color-shadow: rgb(135, 135, 135);
+
+}
+[data-theme="dark"] {
+    --background-color: rgba(26, 27, 27, 0.201);
+    --background-color2: rgba(206, 206, 206, 0.183);
+
+    --gradient-background: radial-gradient(circle, #d9d9d9c9, #ffffffbd);
+    --gradient-background2: radial-gradient(circle, #0000008c, rgba(0, 0, 0, 0.605), #000000);
+
+    --color: white;
+    --color-rev: black;
+    --color-border: rgb(255, 255, 255);
+    --color-button: rgb(50, 51, 53);
+    --color-shadow: rgb(135, 135, 135);
+}

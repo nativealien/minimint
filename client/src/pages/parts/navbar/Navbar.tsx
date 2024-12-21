@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
+import { useAppContext } from "../../../context/context"
 import './navbar.css'
-import { useAppContext } from "../../context/context"
 
 const Navbar = () => {
     const {loading} = useAppContext()

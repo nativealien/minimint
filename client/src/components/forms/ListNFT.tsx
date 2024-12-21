@@ -12,6 +12,7 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
     }
 
     const handleList = async () => {
+        if(+price > 0)
         console.log(meta.address)
         const res = await marketplace.listNFT(web3?.signer, meta.address, meta.tokenId, price, setStatus )
         console.log(res)
@@ -26,11 +27,11 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
 
     return <div className="listnft">
         {!meta.listing.list ? <div className="list-wrap">
-                <button onClick={() => handleList()}>List for sale</button>
-                <input type="number" onChange={(e) => handleChange(e)}/>
-                <p>x ETH</p>
+                <h4 onClick={() => handleList()}>List for sale</h4>
+                <input min='0' type="number" onChange={(e) => handleChange(e)}/>
+                <img src="/icons/ethereum-light.svg" alt="" />
             </div> : <div className="list-wrap">
-                <button onClick={() => handleDelist()}>Delist</button>
+                <h4 onClick={() => handleDelist()}>Delist</h4>
             </div>}
     </div>
 }

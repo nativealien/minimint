@@ -7,7 +7,7 @@
     gap: 20px;
 
     & > h2 {
-        background-color: bisque;
+        background-color: var(--background-color);
     }
     & > section {
         width: 500px;
