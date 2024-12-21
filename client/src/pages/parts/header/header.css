@@ -8,14 +8,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: end;
-    & > h1 {
+    /* & > h1 {
       margin: 0;
       padding: 0;
-      line-height: 50px; /* Match the height to align text vertically */
+      line-height: 50px; 
       vertical-align: bottom;
       font-size: 3.5em;
       color: var(--color)
-    }
+    } */
     & > .toggles {
         display: flex;
     }

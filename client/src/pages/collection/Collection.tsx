@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useAppContext } from '../../context/context';
 import Grid from '../../components/display/Grid';
 import Metadata from '../../components/forms/Metadata';
+import GoBack from '../../components/buttons/GoBack';
 import ERC721 from '../../service/blockchain/ERC721';
 import './collection.css'
 
@@ -27,21 +28,26 @@ const Collection = () => {
         }
     }
 
-    return <div className="collection" style={{backgroundImage: `url(${meta.image})`}}>
+    return <div className="collection">
         <section className='override'>
-            <h2>{meta.name}</h2>
-            <div>
-                <p>{meta.owner}</p>
-                <p className='des'>{meta.description}</p>
+            {/* <img src={meta.image} /> */}
+            <div className='wrap' style={{backgroundImage: `url(${meta.image})`}}>
+                <div className="info">
+                    <h2>{meta.name}</h2>
+                    <p>{meta.owner}</p>
+                    <p className='des'>{meta.description}</p>
+                </div>
             </div>
             {/* <img src={meta.image} alt="" /> */}
         </section>
         <nav>
             {toggle ? <button onClick={() => setToggle(!toggle)}>Mint NFT</button> : <button onClick={() => setToggle(!toggle)}>Show NFTs</button>}
+            <button>set meta</button>
         </nav>
         {toggle ? <Grid items={meta.nfts} /> :
         <Metadata className={'mint-meta'} height='400px' cids={nftMeta} setCids={setNftMeta} />}
         {nftMeta && <button onClick={() => handleMint()}>Mint</button>}
+        <GoBack />
     </div>
 }
 

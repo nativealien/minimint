@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Modal from "../display/Modal"
 import ipfs from '../../service/ipfs'
 import './metadata.css'
+import { useAppContext } from "../../context/context"
 
 interface IMetadata {
     name: string,
@@ -66,7 +67,7 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
                 setCids(null)
                 setDel(false)
             } else {
-                setStatus('No Cids')
+                setStatus('No Cids_')
                 setDel(false)
             }
         }
@@ -76,10 +77,27 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target as HTMLInputElement;
         const files = (e.target as HTMLInputElement).files;
+        console.log(className)
         if(files){
             const url = URL.createObjectURL(files[0])
-            setImgURL(url)
-            setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
+            if(className === 'collmeta'){
+                const img =  new Image()
+                img.src = url;
+                img.onload = () => {
+                    const {width, height} = img;
+                    console.log(width)
+                    if(width >= 3 * height) {
+                        setImgURL(url)
+                        setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
+                    } else {
+                        setImgURL(null)
+                        setStatus('The width of the banner needs too be 3 times the size of the height._')
+                    }
+                }
+            } else {
+                setImgURL(url)
+                setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
+            }
         } else {
             setNftMeta({ ...nftMeta, [name]: value})
         }
@@ -115,8 +133,8 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
             </div>
         </form>
         {!cids ? 
-        <button style={{bottom: cids ? '0' : '40px'}} onClick={(e) => handleProcess(e)}>Process</button> : 
-        <button style={{bottom: cids ? '0' : '40px'}} onClick={(e) => handleDelete(e)}>Reset</button>}
+        <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleProcess(e)}>Process</button> : 
+        <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleDelete(e)}>Reset</button>}
         {cids && cids.imgCid !== '' && <a href={`${ipfs.makeImgURL(cids.imgCid)}`}>Img</a>}
         {cids && cids.jsonCid !== '' && <a href={`${ipfs.makeImgURL(cids.jsonCid)}`}>JSON</a>}
 

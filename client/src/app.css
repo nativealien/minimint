@@ -9,18 +9,6 @@
   text-align: center;
   padding-right: calc(100vw - 100%);
 
-  button {
-    border: 0;
-    border-top: 1px solid var(--color-border);
-    border-left: 1px solid var(--color-border);
-    background-color: var(--background-color);
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--background-color2);
-    }
-  }
-
   & > .app{
     height: 100%;
     width: 100%;
@@ -42,6 +30,7 @@
       z-index: 5;
       left: 0;
       background-color: var(--background-color);
+      backdrop-filter: blur(80px);
     }
     & > main {
       height: auto;
@@ -52,10 +41,7 @@
 
     section {
       width: 500px; /* Section width applies to all descendants */
-      margin: auto;
       margin-top: 20px;
-      font-size: 1.5em;
-      /* border: 1px solid red;  */
       margin-bottom: 20px; /* Add spacing for all child elements */
     }
     section.override {

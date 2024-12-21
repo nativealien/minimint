@@ -13,9 +13,8 @@ const Home = () => {
                 <p>Welcome to MiniMint Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi laboriosam libero quae deserunt maxime doloribus eaque non ad. Similique soluta neque sequi excepturi laborum eligendi ipsam maiores, voluptatem iusto itaque!</p>
             </section>
             {!web3?.address ? <div>
-                {window.ethereum ? <img src={`/icons/metamask.svg`} alt="Metamask icon"></img> : <>You need metamask...</>}
+                {window.ethereum ? <img src={`/icons/metamask.svg`} alt="Metamask icon"></img> : <p>You need metamask...</p>}
                 <p onClick={() => navigate('gallery')}>{"continue without connecting ->"}</p>
-                <button onClick={() => setStatus('Status')}>Set</button>
             </div> : <div>
                     {!loading && <h2 onClick={() => navigate('gallery')}>Continue to the gallery!</h2>}
             </div>}

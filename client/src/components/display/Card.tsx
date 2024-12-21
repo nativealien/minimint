@@ -1,37 +1,40 @@
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useAppContext } from "../../context/context"
 import './card.css'
+import { useEffect, useState } from "react"
 
-const Card = ({meta}: {meta: IMeta | INFTMeta}) => {
+const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
     const { web3 } = useAppContext()
-    const location = useLocation()
+    const [sample, setSample] = useState<INFTMeta[] | null>(null)
     const navigate = useNavigate()
-    let path = ''
-    if(meta.type === 'collection'){
-        path = meta.type
-    }else {
-        if(location.pathname === '/gallery'){
-            path = '/gallery/collection/' + meta.type;
-        } else {
-            path = location.pathname + '/' + meta.type
+    useEffect(() => {
+        if(meta.type === 'collection'){
+            console.log('ENTER', meta.type)
+            const samp = (meta as ICollMeta).nfts?.slice(0, 3) || []
+            setSample(samp)
         }
-    }
+    }, [])
 
     const handleClick = () => {
-        navigate(path, { state: { meta } });
+        if(meta.type === 'collection'){
+            navigate('/gallery/collection', { state: { meta } });
+        } else {
+            navigate('/gallery/collection/nft', { state: { meta } });
+        }
     }
-
-    return <div style={{backgroundImage: `url(${meta.image})`}} onClick={handleClick} className={`${meta.type}-card grid-item`}>
-        {/* <img src={meta.image} alt="" /> */}
+    
+    return <div onClick={handleClick} className={`${meta.type}-card grid-item`}>
+        <img src={meta.image} />
         <div className="item-info">
-            <h3>{meta.name}</h3>
+            {sample && meta.type === 'collection' && <div className="sample">
+                {sample.map((sam: INFTMeta) => <img src={sam.image} />)}    
+            </div>}
             <div className="signs">
                 {web3?.address === meta.owner && <img src="/icons/ethereum-wallet.svg"></img>}
                 {'listing' in meta && meta.listing?.list && <img src="/icons/ethereum-send.svg"></img>}
             </div>
+            <h3>{meta.name}</h3>
         </div>
-        {/* <p>{meta.description}</p>
-        <p>{meta.type}</p> */}
     </div>
 }
 

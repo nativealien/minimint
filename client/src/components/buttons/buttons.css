@@ -45,6 +45,10 @@
             font-size: 0.9em;
         }
     }
+    & img {
+        width: 50px;
+        cursor: pointer;
+    }
 
 }
 .toggletheme{

@@ -5,6 +5,7 @@ import ConnectWeb3 from "../../components/buttons/ConnectWeb3"
 import factory from "../../service/blockchain/factory"
 import ipfs from "../../service/ipfs"
 import './mintcollection.css'
+import GoBack from "../../components/buttons/GoBack"
 
 const MintCollection = () => {
     const { web3, setStatus } = useAppContext()
@@ -50,15 +51,15 @@ const MintCollection = () => {
                 <Metadata className={'collnftmeta'} height='400px' cids={nft3} setCids={setNft3} />
                 <Metadata className={'collnftmeta'} height='400px' cids={nft4} setCids={setNft4} />
             </div>}
-            {collMeta && nft1 && nft2 && nft3 && nft4 && <div>
+            {collMeta && nft1 && nft2 && nft3 && nft4 && <div className="mintcoll-btn">
                 <button onClick={(e) => handleMint(e)}>Mint Collection</button>
                 <button>Reset All</button>
             </div>}
-        </div> : <div>
+        </div> : <div className="nometamask">
+            <ConnectWeb3 mm={true} />
             <p>You need too connect with metamask</p>
-            <ConnectWeb3 />
         </div>}
-
+        <GoBack />
     </div>
 }
 

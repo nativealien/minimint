@@ -2,33 +2,34 @@
 
 .listnft {
     height: 40px;
-    width: 300px;
-    /* border: 2px solid grey; */
+    width: 100%;
     display: flex;
     justify-content: start;
 
     & > .list-wrap {
         width: 100%;
-        /* border: 1px solid blue; */
         display: flex;
-        gap: 10px;
-        background-color: var(--background-color);
-        font-size: 1.2em;
-
+        gap: 5px;
+        /* border: 2px solid red; */
         input {
             width: 80px;
             border: 0;
             border-bottom: 1px solid var(--color-border);
             background-color: var(--background-color);
         }
-        p {
-            display: flex;
-            align-items: center;
+        & h4{
+            width: 38%;
         }
-        button {
+        & input{
+
+        }
+        & img {
+      
+        }
+        /* h4 {
             border: 0;
             background-color: var(--background-color);
             cursor: pointer;
-        }
+        } */
     }
 }
