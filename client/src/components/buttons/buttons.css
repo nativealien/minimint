@@ -76,3 +76,8 @@
     position: relative;
     z-index: 3;
 }
+.toggle {
+    img {
+        cursor: pointer;
+    }
+}
