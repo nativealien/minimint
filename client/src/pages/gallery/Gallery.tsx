@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/context'
 import Grid from '../../components/display/grid/Grid'
 import GoBack from '../../components/buttons/GoBack'
-import './gallery.css'
 import Toggle from '../../components/buttons/Toggle'
+import Section from '../../components/display/section/Section'
+import gallery from '../../content/gallery.md?raw'
+import './gallery.css'
 
 const Gallery = () => {
     const { items, web3 } = useAppContext()
@@ -29,6 +31,7 @@ const Gallery = () => {
     }, [own, sale])
 
     return <div className="gallery">
+            <Section markdown={gallery}/>
             {colls && nfts && <div className="gallery-buttons">
                 <div className='type'>
                     <button style={{opacity: type ? '1' : '0.3'}} onClick={() => setType(false)}>collections</button>

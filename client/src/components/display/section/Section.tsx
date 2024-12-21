@@ -1,21 +1,13 @@
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import './section.css'
 
-const Section: React.FC<{
-    imgSrc: string, 
-    imgAlt: string,
-    h2Text: string,
-    pText: string}> = ({
-    imgSrc, imgAlt, h2Text, pText
-}) => {
-
-    console.log(imgSrc)
+const Section: React.FC<{markdown: any}> = ({markdown}) => {
 
     return <section className='section'>
-        {imgSrc !== 'none' && <div className='section-img'>
-            <img src={imgSrc} alt={imgAlt} />
-        </div>}
-        <h3>{h2Text}</h3>
-        <p>{pText}</p>
+        <div className="content">
+            <ReactMarkdown rehypePlugins={[rehypeRaw]} children={markdown} />
+        </div>
     </section>
 }
 

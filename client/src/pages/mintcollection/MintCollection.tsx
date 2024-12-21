@@ -46,10 +46,10 @@ const MintCollection = () => {
         {web3 && web3.signer ? <div className="signed">
             {<Metadata className={'collmeta'} height="500px" cids={collMeta} setCids={setCollmeta} />}
             {collMeta && <div className="collnfts">
-                <Metadata className={'collnftmeta'} height='400px' cids={nft1} setCids={setNft1} />
-                <Metadata className={'collnftmeta'} height='400px' cids={nft2} setCids={setNft2} />
-                <Metadata className={'collnftmeta'} height='400px' cids={nft3} setCids={setNft3} />
-                <Metadata className={'collnftmeta'} height='400px' cids={nft4} setCids={setNft4} />
+                <Metadata className={'collnftmeta'} height='300px' cids={nft1} setCids={setNft1} />
+                <Metadata className={'collnftmeta'} height='300px' cids={nft2} setCids={setNft2} />
+                <Metadata className={'collnftmeta'} height='300px' cids={nft3} setCids={setNft3} />
+                <Metadata className={'collnftmeta'} height='300px' cids={nft4} setCids={setNft4} />
             </div>}
             {collMeta && nft1 && nft2 && nft3 && nft4 && <div className="mintcoll-btn">
                 <button onClick={(e) => handleMint(e)}>Mint Collection</button>

@@ -1,12 +1,12 @@
 import GoBack from '../../components/buttons/GoBack'
 import Section from '../../components/display/section/Section'
+import about from '../../content/about.md?raw'
 import './about.css'
 
 const About = () => {
 
     return <div className="about">
-        <h2>About</h2>
-        <Section imgSrc={'none'} imgAlt='none' h2Text='Title' pText='lorem ipsum' />
+        <Section markdown={about} />
         <GoBack />
     </div>
 }
