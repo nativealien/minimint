@@ -11,8 +11,8 @@ const Toggle: React.FC<{
 
     return <div className="toggle">
         <p>toggle</p>
-        <img onClick={() => setOwn(!own)} src={`/icons/star-${theme}.svg`} alt="Icon star" />
-        <img onClick={() => setSale(!sale)} src={`/icons/ethereum-${theme}.svg`} alt="Icon ETH" />
+        <img onClick={() => setOwn(!own)} src={`/icons/star-${own ? 'act' : theme}.svg`} alt="Icon star" />
+        <img onClick={() => setSale(!sale)} src={`/icons/ethereum-${sale ? 'act' : theme}.svg`} alt="Icon ETH" />
     </div>
 }
 

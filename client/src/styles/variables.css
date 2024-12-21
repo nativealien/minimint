@@ -15,6 +15,8 @@
     --color-button: rgba(43, 47, 50, 0.112);
     --color-shadow: rgb(135, 135, 135);
 
+    --font-one: "Ubuntu", sans-serif; 
+
 }
 [data-theme="dark"] {
     --background-color: rgb(0, 0, 0);

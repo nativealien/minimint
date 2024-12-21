@@ -147,7 +147,7 @@ Its now possible to mint on collections.
 
 I have now refactored the CSS and organized the code into separate files for each component. Additionally, I created an element.css file for general element styling and a variables.css file to manage variables that control the app's overall styling.
 
-There's still more work to be done, but the app is starting to take shape. The design style I chose is minimalistic, focusing on a black, white, and grayscale palette, with subtle hints of color in certain areas.
+There's still more work to be done, but the app is starting to take shape. The design style I chose is minimalistic, focusing on a black, white, and grayscale palette, with subtle hints of color in certain areas. I have now also added the React Markdown package, and moved my content to .md files that gets imported into the Section component.
 
 ### Retrospect:
 
