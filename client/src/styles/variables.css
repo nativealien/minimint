@@ -1,6 +1,6 @@
 
 :root {
-    --background-color: rgba(255, 255, 255, 0.409);
+    --background-color: rgb(255, 255, 255);
     --background-color-25: rgba(255, 255, 255, 0.758);
     --background-color-50: rgba(255, 255, 255, 0.507);
     --background-color-75: rgba(255, 255, 255, 0.233);
@@ -17,11 +17,14 @@
 
 }
 [data-theme="dark"] {
-    --background-color: rgba(26, 27, 27, 0.201);
-    --background-color2: rgba(206, 206, 206, 0.183);
+    --background-color: rgb(0, 0, 0);
+    --background-color-25: rgba(0, 0, 0, 0.758);
+    --background-color-50: rgba(0, 0, 0, 0.507);
+    --background-color-75: rgba(0, 0, 0, 0.233);
+    --background-color-mid: rgba(82, 82, 82, 0.653);
 
     --gradient-background: radial-gradient(circle, #d9d9d9c9, #ffffffbd);
-    --gradient-background2: radial-gradient(circle, #0000008c, rgba(0, 0, 0, 0.605), #000000);
+    --gradient-background2: radial-gradient(circle, #000000b6, rgba(0, 0, 0, 0.779), #000000);
 
     --color: white;
     --color-rev: black;

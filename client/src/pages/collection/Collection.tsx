@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react';
 import { useAppContext } from '../../context/context';
-import Grid from '../../components/display/Grid';
-import Metadata from '../../components/forms/Metadata';
+import Grid from '../../components/display/grid/Grid';
+import Metadata from '../../components/forms/metadata/Metadata';
 import GoBack from '../../components/buttons/GoBack';
 import ERC721 from '../../service/blockchain/ERC721';
 import './collection.css'
@@ -29,15 +29,15 @@ const Collection = () => {
     }
 
     return <div className="collection">
-        <section className='override'>
+        <section style={{backgroundImage: `url(${meta.image})`}}>
             {/* <img src={meta.image} /> */}
-            <div className='wrap' style={{backgroundImage: `url(${meta.image})`}}>
+            {/* <div className='wrap' style={{backgroundImage: `url(${meta.image})`}}> */}
                 <div className="info">
                     <h2>{meta.name}</h2>
                     <p>{meta.owner}</p>
                     <p className='des'>{meta.description}</p>
                 </div>
-            </div>
+            {/* </div> */}
             {/* <img src={meta.image} alt="" /> */}
         </section>
         <nav>

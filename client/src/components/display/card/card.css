@@ -57,11 +57,12 @@
         & > .signs {
             height: 30px;
             width: 100%;
-            border: 1px solid grey;
             display: flex;
-            justify-content: start;
+            justify-content: end;
             align-items: start;
-            position: relative;
+            position: absolute;
+            bottom: -20px;
+            right: -10px;
             & img {
                 width: 30px;
                 position: relative;

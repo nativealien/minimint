@@ -10,18 +10,20 @@
     gap: 20px;
 
     & > section {
+        width: 100%;
         display: flex;
         
         & > img {
-            width: 100%;
+            width: 50%;
             box-shadow: 0 15px 60px rgb(88, 73, 61);
         }
         & > .nft-info {
             padding: 20px;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: start;
             align-items: start;
+            gap: 10px;
 
             & h4 {
                 width: auto;

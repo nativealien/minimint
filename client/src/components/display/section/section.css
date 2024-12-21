@@ -1,0 +1,32 @@
+
+
+.section {
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;    /* Left column (img), right column (title & text) */
+    grid-template-rows: auto 1fr;     /* Top row (title), bottom row (text) */
+    grid-template-areas:
+      "img title"
+      "img text";
+    gap: 1rem; /* Space between grid cells */
+    max-width: 1000px;
+    margin: 0 auto; /* Center it, if you want */
+    padding: 1rem;
+    box-sizing: border-box;
+
+    & .section-img {
+        grid-area: img;
+        /* background-color: grey; */
+    }
+    & h3 {
+        grid-area: title;
+        /* font-size: 1.5rem; */
+        margin: 0;
+        align-self: start;
+        text-align: start;
+    }
+    & p {
+        grid-area: text;
+        line-height: 1.5;
+    }
+}

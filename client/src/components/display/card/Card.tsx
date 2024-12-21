@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { useAppContext } from "../../context/context"
+import { useAppContext } from "../../../context/context"
 import './card.css'
 import { useEffect, useState } from "react"
 
@@ -30,8 +30,8 @@ const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
                 {sample.map((sam: INFTMeta) => <img src={sam.image} />)}    
             </div>}
             <div className="signs">
-                {web3?.address === meta.owner && <img src="/icons/ethereum-wallet.svg"></img>}
-                {'listing' in meta && meta.listing?.list && <img src="/icons/ethereum-send.svg"></img>}
+                {web3?.address === meta.owner && <img src="/icons/star.svg"></img>}
+                {'listing' in meta && meta.listing?.list && <img src="/icons/ethereum-sale.svg"></img>}
             </div>
             <h3>{meta.name}</h3>
         </div>

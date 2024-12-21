@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Card from './Card'
+import Card from '../card/Card'
 import './grid.css'
 
 const cardGenerator = (items: ICollMeta[] | INFTMeta[]) => {

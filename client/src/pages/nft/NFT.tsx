@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/context'
-import marketplace from '../../service/blockchain/marketplace'
-import ListNFT from '../../components/forms/ListNFT'
-import './nft.css'
+import ListNFT from '../../components/forms/listnft/ListNFT'
 import GoBack from '../../components/buttons/GoBack'
-
-// const address = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
+import marketplace from '../../service/blockchain/marketplace'
+import './nft.css'
 
 const NFT = () => {
     const { web3, items, reloadItems, setStatus } = useAppContext()
@@ -54,7 +52,7 @@ const NFT = () => {
                     nft.listing.list ? 
                         <h4 onClick={() => handleBuy()}>For sale: {nft.listing.eth} <img style={{width: "25px"}} src='/icons/ethereum-light.svg' /></h4> : 
                         <p>This NFT is not on sale</p>}
-                <a onClick={() => navigate('/gallery/collection', {state: {meta: coll}})}>{nft.collName}</a>
+                <h4 onClick={() => navigate('/gallery/collection', {state: {meta: coll}})}>{nft.collName}</h4>
             </div>
         </section>}
         <GoBack />
