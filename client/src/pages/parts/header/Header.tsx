@@ -6,7 +6,7 @@ import './header.css'
 const Header = () => {
 
     return <header>
-        <h1>MINIMINT</h1>
+        <h1>MINIMINT <span>marketplace</span></h1>
         <Navbar />
         <div className="toggles">
             <ToggleTheme />

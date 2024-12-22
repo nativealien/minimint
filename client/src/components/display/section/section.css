@@ -1,7 +1,7 @@
 
 
 .section {
-    width: 60%;
+    width: 85%;
 
     & .content-right, .content-left {
         width: 100%;
@@ -10,7 +10,7 @@
         /* align-items: start; */
 
         & img {
-            width: 30%;
+            width: 20%;
             float: right;
             margin-right: 1rem;
             margin-bottom: 1rem;

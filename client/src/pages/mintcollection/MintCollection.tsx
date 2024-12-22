@@ -3,8 +3,10 @@ import { useAppContext } from "../../context/context"
 import Metadata from "../../components/forms/metadata/Metadata"
 import ConnectWeb3 from "../../components/buttons/ConnectWeb3"
 import GoBack from "../../components/buttons/GoBack"
+import Section from "../../components/display/section/Section"
 import factory from "../../service/blockchain/factory"
 import ipfs from "../../service/ipfs"
+import mintcollection from '../../content/mintcollection.md?raw'
 import './mintcollection.css'
 
 const MintCollection = () => {
@@ -39,10 +41,11 @@ const MintCollection = () => {
     }
 
     return <div className="mintcollection">
-        <h2>Mint Collection</h2>
-        <section>
+        {/* <h2>Mint Collection</h2> */}
+        <Section markdown={mintcollection} />
+        {/* <section>
             <p>Mint a collection, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolorum modi eos distinctio ad. Doloribus tempore quia nam, voluptate aliquid possimus velit expedita illo quos cupiditate placeat animi sit veritatis?</p>
-        </section>
+        </section> */}
         {web3 && web3.signer ? <div className="signed">
             {<Metadata className={'collmeta'} height="500px" cids={collMeta} setCids={setCollmeta} />}
             {collMeta && <div className="collnfts">
