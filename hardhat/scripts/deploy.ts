@@ -2,12 +2,13 @@ import { ethers } from "hardhat";
 import { MiniMintFactory, MiniMintMarketplace } from "../types"; // Update the path if needed
 
 // npx hardhat run scripts/deploy.ts --network localhost
+// npx hardhat run scripts/deploy.ts --network sepolia
 
 
 async function main() {
   const name = "MiniMint";
   const symbol = "MM";
-  const contractMetadataURI = "ipfs://bafkreihwyznlwgmb3ortnw3th63cowmaguxm6efjyqggdfymqv7b34zt7e";
+  const contractMetadataURI = "ipfs://bafkreiccawontwktqofbmxsmwpwtrebw6g3p6fykwrecpi3oogjsrmvwq4";
 
   // const MiniMintERC721 = await ethers.getContractFactory("MiniMintERC721");
   // const collection = await MiniMintERC721.deploy(name, symbol, contractMetadataURI);

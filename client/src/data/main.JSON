@@ -1,5 +1,5 @@
 {
     "name": "MiniMint",
-    "description": "This is the test ERC721 collection contract, deployed at marketplace initialization. To mint a new ERC721 from the factory contract, please go to the gallery and follow instructions!",
+    "description": "This is the test ERC721 collection contract, deployed during the marketplace initialization. To mint a new ERC721 token using the factory contract, please visit the gallery and follow the provided instructions!",
     "imageURI": "ipfs://bafkreie2ru7v3duwejdzjk4uxeulfpsjoytbbjleon6635m7lxvey3xi3i"
 }

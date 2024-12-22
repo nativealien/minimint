@@ -149,6 +149,10 @@ I have now refactored the CSS and organized the code into separate files for eac
 
 There's still more work to be done, but the app is starting to take shape. The design style I chose is minimalistic, focusing on a black, white, and grayscale palette, with subtle hints of color in certain areas. I have now also added the React Markdown package, and moved my content to .md files that gets imported into the Section component.
 
+> Weekend
+
+Had some time over this weekend, so I refactored and deployed new contracts! The application is now running pretty much flawlessly, with no restrictions on who can mint or interact with it (wich will be added in security flaws in the final report). I have however not adjusted the tests, and hope I will find time before the next sprint that starts tomorrow!
+
 ### Retrospect:
 
 Its been a packed week, and there is some detail work. But Im happy with how the app looks, also how true it stays to the vision I had of it when I begun! Next week will be spent testing for bugs, refining code, documenting and putting together a final report along with presentation. I will spend some time this weekend to put in the tasks in my project board for the last sprint.
