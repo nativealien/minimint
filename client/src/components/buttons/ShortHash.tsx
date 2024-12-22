@@ -5,7 +5,7 @@ import './shorthash.css'
 const ShortHash: React.FC<{hash: string}> = ({hash}) => {
     const [state, setState] = useState<boolean>(true)
 
-    return <p onClick={() => setState(!state)}>{shortHash(hash, state)}</p>
+    return <p style={{fontStyle: 'italic', cursor: 'pointer', position: 'absolute', left: '15px'}} onClick={() => setState(!state)}>{shortHash(hash, state)}</p>
 }
 
 export default ShortHash

@@ -1,6 +1,6 @@
 // import { useEffect, useState } from "react"
 import { useAppContext } from "../../context/context"
-
+import './toggle.css'
 
 const Toggle: React.FC<{
     own: boolean;

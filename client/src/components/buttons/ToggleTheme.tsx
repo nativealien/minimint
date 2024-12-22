@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAppContext } from '../../context/context'
+import Tip from '../display/tip/Tip'
 import './toggletheme.css'
 
 const ToggleTheme = () => {
@@ -10,11 +11,7 @@ const ToggleTheme = () => {
                 className="toggletheme"
                 onMouseEnter={() => setHover(true)} 
                 onMouseLeave={() => setHover(false)}>
-            <div className="tip" style={{
-                        opacity: `${hover ? '1' : '0'}`,
-                        transform: `${hover ? 'translate(0, -25px)' : ''}`,
-                        visibility: 'visible'
-                    }}>toggle darkmode</div>
+                <Tip hover={hover} text='toggle darkmode' />
             </div>
 }
 export default ToggleTheme

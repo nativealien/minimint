@@ -8,6 +8,7 @@ import Toggle from '../../components/buttons/Toggle';
 import ERC721 from '../../service/blockchain/ERC721';
 import { shortHash } from '../../utils/utils';
 import './collection.css'
+import ShortHash from '../../components/buttons/ShortHash';
 
 const Collection = () => {
     const { web3, setStatus, reloadItems } = useAppContext()
@@ -16,6 +17,7 @@ const Collection = () => {
     const [toggle, setToggle] = useState<boolean>(true)
     const [own, setOwn] = useState<boolean>(false)
     const [sale, setSale] = useState<boolean>(false)
+    const [hash, setHash] = useState<boolean>(false)
     const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
@@ -44,7 +46,7 @@ const Collection = () => {
         <section style={{backgroundImage: `url(${meta.image})`}}>
             <div className="info">
                 <h2>{meta.name}</h2>
-                <p>{meta.owner}</p>
+                <ShortHash hash={meta.owner} />
                 <p className='des'>{meta.description}</p>
             </div>
         </section>

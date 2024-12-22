@@ -10,6 +10,8 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
     uint256[] private _allMintedTokens;
 
+    error NotOwner(address caller, uint256 tokenId);
+
     event NFTMinted(address indexed to, uint256 indexed tokenId, string uri);
     event MetadataUpdated(string oldURI, string newURI);
     event NFTBurned(address indexed owner, uint256 indexed tokenId);
@@ -17,10 +19,17 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     constructor(
         string memory name,
         string memory symbol,
-        string memory contractMetadataURI
+        string memory contractMetadataURI,
+        string[] memory uris
+        // address recipient
     ) ERC721(name, symbol) Ownable(msg.sender) {
+        require(uris.length == 4, "Must provide exactly 4 URIs");
         _contractURI = contractMetadataURI;
         _nextTokenId = 1;
+
+        for (uint256 i = 0; i < 4; i++) {
+            _mintNFT(msg.sender, uris[i]);
+        }
     }
 
     function setContractURI(
@@ -34,8 +43,7 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return _contractURI;
     }
 
-    // Make minting public
-    function safeMint(address to, string memory uri) public {
+    function safeMint(address to, string memory uri) public onlyOwner {
         _mintNFT(to, uri);
     }
 
@@ -50,7 +58,9 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     }
 
     function burn(uint256 tokenId) public {
-        require(ownerOf(tokenId) == msg.sender, "You are not the owner");
+        if (ownerOf(tokenId) != msg.sender) {
+            revert NotOwner(msg.sender, tokenId);
+        }
         _burn(tokenId);
 
         uint256 index;
@@ -84,7 +94,7 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     function tokenURI(
         uint256 tokenId
     ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        ownerOf(tokenId); // Ensures the token exists
+        ownerOf(tokenId);
         return super.tokenURI(tokenId);
     }
 
@@ -94,4 +104,3 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return super.supportsInterface(interfaceId);
     }
 }
-

@@ -41,7 +41,7 @@ export interface MiniMintFactoryInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "deployCollection",
-    values: [string, string, string, string[]]
+    values: [string, string, string]
   ): string;
   encodeFunctionData(
     functionFragment: "getCollections",
@@ -146,7 +146,7 @@ export interface MiniMintFactory extends BaseContract {
   collections: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
   deployCollection: TypedContractMethod<
-    [name: string, symbol: string, contractMetadataURI: string, uris: string[]],
+    [name: string, symbol: string, contractMetadataURI: string],
     [void],
     "nonpayable"
   >;
@@ -171,7 +171,7 @@ export interface MiniMintFactory extends BaseContract {
   getFunction(
     nameOrSignature: "deployCollection"
   ): TypedContractMethod<
-    [name: string, symbol: string, contractMetadataURI: string, uris: string[]],
+    [name: string, symbol: string, contractMetadataURI: string],
     [void],
     "nonpayable"
   >;
