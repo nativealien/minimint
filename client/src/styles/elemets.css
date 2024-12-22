@@ -7,11 +7,18 @@ h1, h2, h3, h4, p, button, a {
 }
 
 h1 {
-    line-height: 50px; 
+    line-height: 40px; 
     vertical-align: bottom;
-    font-size: 4em;
+    font-size: 4.6em;
     color: var(--color);
     font-family: var(--font-one);
+    text-align: start;
+    position: relative;
+    top: 44px;
+    & span {
+        font-size: 0.6em;
+        color: var(--color-sec);
+    }
 }
 
 h2 {
@@ -35,7 +42,7 @@ h4 {
     font-size: 1.2em;
     cursor: pointer;
     &:hover{
-        color: rgba(211, 130, 48, 0.833);
+        color: var(--color-sec);
     }
 }
 
@@ -46,11 +53,12 @@ p {
 }
 
 button {
+    padding: 10px;
     margin-left: 5px;
     border: 1px solid var(--color);
     border-top: 1px solid var(--color-border);
     border-left: 1px solid var(--color-border);
-    background-color: var(--color-button);
+    background-color: var(--color-sec);
     color: var(--color);
     cursor: pointer;
     text-transform: uppercase;

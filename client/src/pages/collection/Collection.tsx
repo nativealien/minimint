@@ -4,9 +4,10 @@ import { useAppContext } from '../../context/context';
 import Grid from '../../components/display/grid/Grid';
 import Metadata from '../../components/forms/metadata/Metadata';
 import GoBack from '../../components/buttons/GoBack';
-import ERC721 from '../../service/blockchain/ERC721';
-import './collection.css'
 import Toggle from '../../components/buttons/Toggle';
+import ERC721 from '../../service/blockchain/ERC721';
+import { shortHash } from '../../utils/utils';
+import './collection.css'
 
 const Collection = () => {
     const { web3, setStatus, reloadItems } = useAppContext()
