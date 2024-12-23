@@ -41,7 +41,7 @@ export interface MiniMintFactoryInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "deployCollection",
-    values: [string, string, string, string[]]
+    values: [string, string, string, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "getCollections",
@@ -78,14 +78,16 @@ export namespace CollectionDeployedEvent {
     collectionAddress: AddressLike,
     name: string,
     symbol: string,
-    contractMetadataURI: string
+    contractMetadataURI: string,
+    marketplaceAddress: AddressLike
   ];
   export type OutputTuple = [
     owner: string,
     collectionAddress: string,
     name: string,
     symbol: string,
-    contractMetadataURI: string
+    contractMetadataURI: string,
+    marketplaceAddress: string
   ];
   export interface OutputObject {
     owner: string;
@@ -93,6 +95,7 @@ export namespace CollectionDeployedEvent {
     name: string;
     symbol: string;
     contractMetadataURI: string;
+    marketplaceAddress: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -146,7 +149,12 @@ export interface MiniMintFactory extends BaseContract {
   collections: TypedContractMethod<[arg0: BigNumberish], [string], "view">;
 
   deployCollection: TypedContractMethod<
-    [name: string, symbol: string, contractMetadataURI: string, uris: string[]],
+    [
+      name: string,
+      symbol: string,
+      contractMetadataURI: string,
+      marketplaceAddress: AddressLike
+    ],
     [void],
     "nonpayable"
   >;
@@ -171,7 +179,12 @@ export interface MiniMintFactory extends BaseContract {
   getFunction(
     nameOrSignature: "deployCollection"
   ): TypedContractMethod<
-    [name: string, symbol: string, contractMetadataURI: string, uris: string[]],
+    [
+      name: string,
+      symbol: string,
+      contractMetadataURI: string,
+      marketplaceAddress: AddressLike
+    ],
     [void],
     "nonpayable"
   >;
@@ -194,7 +207,7 @@ export interface MiniMintFactory extends BaseContract {
   >;
 
   filters: {
-    "CollectionDeployed(address,address,string,string,string)": TypedContractEvent<
+    "CollectionDeployed(address,address,string,string,string,address)": TypedContractEvent<
       CollectionDeployedEvent.InputTuple,
       CollectionDeployedEvent.OutputTuple,
       CollectionDeployedEvent.OutputObject

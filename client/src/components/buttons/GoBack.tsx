@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import './goback.css'
 
 
 const GoBack: React.FC<{path?: string, state?: any}> = ({path, state}) => {

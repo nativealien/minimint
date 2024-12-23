@@ -3,7 +3,15 @@ import { ethers } from "ethers";
 import MiniMintFactoryABI from "../../../../hardhat/artifacts/contracts/MiniMintFactory.sol/MiniMintFactory.json"
 import { delay } from "../../utils/utils"
 
+const erc721Address = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
 const contractAddress = import.meta.env.VITE_MINIMINT_FACTORY_CONTRACT
+const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
+
+export const checkAddressess = () => {
+    console.log(erc721Address)
+    console.log(contractAddress)
+    console.log(marketplaceAddress)
+}
 
 export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
     return new ethers.Contract(contractAddress, MiniMintFactoryABI.abi, signerOrProvider);
@@ -17,30 +25,12 @@ const getAllCollections = async (provider: ethers.Provider) => {
     return collections;
 }
 
-const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string, nftUris: string[]) => {
+const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string) => {
     const contract = factoryContract(signer);
-    const tx = await contract.deployCollection(name, symbol, metadataURI, nftUris);
+    const tx = await contract.deployCollection(name, symbol, metadataURI, marketplaceAddress);
     const receipt = await tx.wait();
     console.log("Collection deployed:", receipt);
     return receipt
-}
-
-const whitelistUser = async (signer: ethers.Signer, userAddress: string, isWhitelisted: boolean) => {
-    console.log('Signer', signer)
-    console.log('Address', userAddress)
-    console.log('isWhitelist', isWhitelisted)
-    const contract = factoryContract(signer);
-    console.log('contract', contract)
-    const tx = await contract.whitelistUser(userAddress, isWhitelisted);
-    const test = await tx.wait();
-    console.log(`User ${userAddress} whitelisted: ${isWhitelisted}`);
-    return test
-}
-
-const isUserWhitelisted = async (provider: ethers.Provider, userAddress: string) => {
-    const contract = factoryContract(provider);
-    const whitelisted = await contract.whitelisted(userAddress);
-    return whitelisted;
 }
 
 const transferOwnership = async (signer: ethers.Signer, newOwner: string) => {
@@ -54,7 +44,6 @@ const transferOwnership = async (signer: ethers.Signer, newOwner: string) => {
 export default {
     getAllCollections,
     deployCollection,
-    whitelistUser,
-    isUserWhitelisted,
-    transferOwnership
+    transferOwnership,
+    checkAddressess
 }

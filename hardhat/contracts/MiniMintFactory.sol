@@ -9,7 +9,8 @@ contract MiniMintFactory {
         address collectionAddress,
         string name,
         string symbol,
-        string contractMetadataURI
+        string contractMetadataURI,
+        address marketplaceAddress
     );
 
     address[] public collections;
@@ -28,10 +29,15 @@ contract MiniMintFactory {
         string memory name,
         string memory symbol,
         string memory contractMetadataURI,
-        string[] memory uris
-    ) external { 
-        require(uris.length == 4, "Must provide exactly 4 URIs");
-        MiniMintERC721 collection = new MiniMintERC721(name, symbol, contractMetadataURI, uris);
+        address marketplaceAddress
+    ) external {
+        MiniMintERC721 collection = new MiniMintERC721(
+            name,
+            symbol,
+            contractMetadataURI,
+            marketplaceAddress
+        );
+        require(address(collection) != address(0), "Failed to deploy MiniMintERC721");
 
         collection.transferOwnership(msg.sender);
 
@@ -42,7 +48,8 @@ contract MiniMintFactory {
             address(collection),
             name,
             symbol,
-            contractMetadataURI
+            contractMetadataURI,
+            marketplaceAddress
         );
     }
 

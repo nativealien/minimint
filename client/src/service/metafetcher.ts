@@ -12,18 +12,18 @@ const processNFT = async (web3: IWeb3, tokenId: any, contract: string, name: str
     const listing = await marketplace.getListing(web3.provider, contract, tokenId)
     const priceInEth = ethers.formatUnits(listing[1])
     const nftMeta = await ipfs.fetchIPFSJSON(nft.uri)
-    let newImg;
-    if(nftMeta.image){
-        newImg = ipfs.makeImgURL(nftMeta.image)
-    } else {
-        newImg = ipfs.makeImgURL(nftMeta.imageURI)
-        delete nftMeta.imageURI
-    }
+    // let newImg;
+    // if(nftMeta.image){
+    //     newImg = ipfs.makeImgURL(nftMeta.image)
+    // } else {
+    //     newImg = ipfs.makeImgURL(nftMeta.imageURI)
+    //     delete nftMeta.imageURI
+    // }
     nftMeta.collName = name
     nftMeta.address = contract
     nftMeta.owner = nft.owner
     nftMeta.listing = {list: +priceInEth>0,wei: listing[1], eth: +priceInEth}
-    nftMeta.image = newImg
+    nftMeta.image = ipfs.makeImgURL(nftMeta.imageURI)
     nftMeta.tokenId = tokenId
     nftMeta.type = 'nft'
     return nftMeta;
@@ -47,17 +47,17 @@ const processCollection = async (web3: IWeb3, contract: string, setStatus: (stat
     setStatus('Proccess Collection')
     const mainColl = await ERC721.getContractMetadataURI(web3.provider, contract)
     const mainMeta = await ipfs.fetchIPFSJSON(mainColl.uri)
-    let mainUrl = ''
-    if(mainMeta.image){
-        mainUrl = ipfs.makeImgURL(mainMeta.image)
-    }else {
-        mainUrl = ipfs.makeImgURL(mainMeta.imageURI)
-        delete mainMeta.imageURI
-    }
+    // let mainUrl = ''
+    // if(mainMeta.image){
+    //     mainUrl = ipfs.makeImgURL(mainMeta.image)
+    // }else {
+    //     mainUrl = ipfs.makeImgURL(mainMeta.imageURI)
+    //     delete mainMeta.imageURI
+    // }
     mainMeta.name = mainMeta.name
     mainMeta.address = contract;
     mainMeta.owner = mainColl.owner;
-    mainMeta.image = mainUrl;
+    mainMeta.image = ipfs.makeImgURL(mainMeta.imageURI);
     mainMeta.type = 'collection'
 
     const nftArr = await processNFTs(web3, contract, mainMeta.name, setStatus)
@@ -71,7 +71,7 @@ const initMinimint = async (web3: IWeb3, setStatus: (status: string | null) => v
     setStatus('Initializing MiniMint')
     const factoryContracts = await factory.getAllCollections(web3.provider)
     const contractArray = Object.values(factoryContracts)
-    contractArray.push(mainAddress)
+    // contractArray.push(mainAddress)
     const results = await Promise.all(
         contractArray.map(async (con: any) => {
           const result = await processCollection(web3, con, setStatus);

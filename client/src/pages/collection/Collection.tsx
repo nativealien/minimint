@@ -5,9 +5,11 @@ import Grid from '../../components/display/grid/Grid';
 import Metadata from '../../components/forms/metadata/Metadata';
 import GoBack from '../../components/buttons/GoBack';
 import Toggle from '../../components/buttons/Toggle';
+import ShortHash from '../../components/buttons/ShortHash';
+import Tip from '../../components/display/tip/Tip';
 import ERC721 from '../../service/blockchain/ERC721';
-import { shortHash } from '../../utils/utils';
 import './collection.css'
+// wtf
 
 const Collection = () => {
     const { web3, setStatus, reloadItems } = useAppContext()
@@ -16,12 +18,14 @@ const Collection = () => {
     const [toggle, setToggle] = useState<boolean>(true)
     const [own, setOwn] = useState<boolean>(false)
     const [sale, setSale] = useState<boolean>(false)
+    const [hover, setHover] = useState<boolean>(true)
     const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
     if(!meta) navigate(-1)
 
     useEffect(() => {
+        console.log(meta)
         let newNfts = meta.nfts;
         if(own) newNfts = newNfts.filter((item: any) => item.owner === web3?.address) 
         if(sale) newNfts = newNfts.filter((item: any) => item.listing.list)
@@ -44,7 +48,8 @@ const Collection = () => {
         <section style={{backgroundImage: `url(${meta.image})`}}>
             <div className="info">
                 <h2>{meta.name}</h2>
-                <p>{meta.owner}</p>
+                <ShortHash hash={meta.owner} setHover={setHover} />
+                <Tip hover={hover} text={'owner address'} />
                 <p className='des'>{meta.description}</p>
             </div>
         </section>

@@ -29,10 +29,10 @@ const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
                 {sample.map((sam: INFTMeta) => <img src={sam.image} />)}    
             </div>}
             <div className="signs">
+                <h3>{meta.name}</h3>
                 {web3?.address === meta.owner && <img src={`/icons/star-${theme}.svg`}></img>}
                 {'listing' in meta && meta.listing?.list && <img src={`/icons/ethereum-${theme}.svg`}></img>}
             </div>
-            <h3>{meta.name}</h3>
         </div>
     </div>
 }

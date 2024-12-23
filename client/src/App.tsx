@@ -5,8 +5,10 @@ import { connectProvider } from "./service/provider";
 import Modal from "./components/display/modal/Modal";
 import Header from "./pages/parts/header/Header";
 import Footer from "./pages/parts/footer/Footer";
+import factory from "./service/blockchain/factory";
 import './app.css'
 
+factory.checkAddressess()
 
 function App() {
   const { web3, setWeb3, status, setStatus } = useAppContext()

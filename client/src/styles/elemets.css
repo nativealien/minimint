@@ -6,7 +6,7 @@ h1, h2, h3, h4, p, button, a {
     font-family: var(--font-one);
 }
 
-h1 {
+/* h1 {
     line-height: 40px; 
     vertical-align: bottom;
     font-size: 4.6em;
@@ -15,10 +15,37 @@ h1 {
     text-align: start;
     position: relative;
     top: 44px;
-    & span {
-        font-size: 0.6em;
-        color: var(--color-sec);
-    }
+}
+
+header h1 span {
+    font-size: 0.6em;
+    color: var(--color-sec);
+    position: sticky;
+    top: 60px;
+    display: inline-block;
+    padding: 0 5px;
+    z-index: 999;
+} */
+h1 {
+    line-height: 40px; 
+    vertical-align: bottom;
+    font-size: 4.6em;
+    color: var(--color);
+    font-family: var(--font-one);
+    text-align: start;
+    position: relative; /* Keeps its original placement */
+    top: 0; /* Remove this adjustment for sticky span to work */
+}
+  
+span {
+    font-size: 0.6em;
+    color: var(--color-sec);
+    position: sticky;
+    top: 60px; /* Adjust this value to ensure proper placement */
+    display: inline-block;
+    padding: 0 5px;
+    background-color: var(--bg-color); /* Add a background to avoid overlap */
+    z-index: 999; /* Ensure it appears above content */
 }
 
 h2 {
@@ -30,7 +57,7 @@ h3 {
     padding: 5px;
     font-size: 1.5em;
     color: var(--color);
-    background-color: var(--background-color-25);
+    /* background-color: var(--background-color-25); */
     text-align: start;
 }
 
@@ -53,18 +80,17 @@ p {
 }
 
 button {
-    padding: 10px;
     margin-left: 5px;
     border: 1px solid var(--color);
     border-top: 1px solid var(--color-border);
     border-left: 1px solid var(--color-border);
-    background-color: var(--color-sec);
+    background-color: var(--background-color2);
     color: var(--color);
     cursor: pointer;
     text-transform: uppercase;
     font-size: 1.4em;
 
     &:hover {
-      background-color: var(--background-color2);
+      background-color: var(--background-color-25);
     }
 }
