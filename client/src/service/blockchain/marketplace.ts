@@ -4,6 +4,7 @@ import MiniMintMarketplaceABI from "../../../../hardhat/artifacts/contracts/Mini
 import { delay } from "../../utils/utils"
 
 const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
+console.log(marketplaceAddress)
 
 export const marketplaceContract = async (signerOrProvider: ethers.Signer | ethers.Provider) => {
   await delay(1000)

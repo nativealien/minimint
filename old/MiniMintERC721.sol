@@ -4,13 +4,13 @@ pragma solidity ^0.8.27;
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
-import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     string private _contractURI;
     uint256 private _nextTokenId;
     uint256[] private _allMintedTokens;
-    address public marketplaceAddress;
+
+    error NotOwner(address caller, uint256 tokenId);
 
     event NFTMinted(address indexed to, uint256 indexed tokenId, string uri);
     event MetadataUpdated(string oldURI, string newURI);
@@ -20,13 +20,16 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         string memory name,
         string memory symbol,
         string memory contractMetadataURI,
-        address _marketplaceAddress
+        string[] memory uris
+        // address recipient
     ) ERC721(name, symbol) Ownable(msg.sender) {
-        require(_marketplaceAddress != address(0), "Invalid marketplace address");
+        require(uris.length == 4, "Must provide exactly 4 URIs");
         _contractURI = contractMetadataURI;
         _nextTokenId = 1;
-        marketplaceAddress = _marketplaceAddress;
-        _setApprovalForAll(msg.sender, marketplaceAddress, true);
+
+        for (uint256 i = 0; i < 4; i++) {
+            _mintNFT(msg.sender, uris[i]);
+        }
     }
 
     function setContractURI(
@@ -40,15 +43,7 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return _contractURI;
     }
 
-    function isApprovedForAll(address owner, address operator) public view override(ERC721, IERC721) returns (bool) {
-        if (operator == marketplaceAddress) {
-            return true; // Automatically approve the marketplace
-        }
-        return super.isApprovedForAll(owner, operator);
-    }
-
-    // Make minting public
-    function safeMint(address to, string memory uri) public {
+    function safeMint(address to, string memory uri) public onlyOwner {
         _mintNFT(to, uri);
     }
 
@@ -63,7 +58,9 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     }
 
     function burn(uint256 tokenId) public {
-        require(ownerOf(tokenId) == msg.sender, "You are not the owner");
+        if (ownerOf(tokenId) != msg.sender) {
+            revert NotOwner(msg.sender, tokenId);
+        }
         _burn(tokenId);
 
         uint256 index;
@@ -97,13 +94,8 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     function tokenURI(
         uint256 tokenId
     ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        ownerOf(tokenId); // Ensures the token exists
+        ownerOf(tokenId);
         return super.tokenURI(tokenId);
-    }
-
-    function setMarketplaceAddress(address newMarketplaceAddress) external onlyOwner {
-        require(newMarketplaceAddress != address(0), "Invalid marketplace address");
-        marketplaceAddress = newMarketplaceAddress;
     }
 
     function supportsInterface(
@@ -112,4 +104,3 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         return super.supportsInterface(interfaceId);
     }
 }
-

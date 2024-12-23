@@ -34,6 +34,7 @@ export interface MiniMintERC721Interface extends Interface {
       | "getApproved"
       | "getNextTokenId"
       | "isApprovedForAll"
+      | "marketplaceAddress"
       | "name"
       | "owner"
       | "ownerOf"
@@ -43,6 +44,7 @@ export interface MiniMintERC721Interface extends Interface {
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
       | "setContractURI"
+      | "setMarketplaceAddress"
       | "supportsInterface"
       | "symbol"
       | "tokenURI"
@@ -92,6 +94,10 @@ export interface MiniMintERC721Interface extends Interface {
     functionFragment: "isApprovedForAll",
     values: [AddressLike, AddressLike]
   ): string;
+  encodeFunctionData(
+    functionFragment: "marketplaceAddress",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -121,6 +127,10 @@ export interface MiniMintERC721Interface extends Interface {
   encodeFunctionData(
     functionFragment: "setContractURI",
     values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMarketplaceAddress",
+    values: [AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -163,6 +173,10 @@ export interface MiniMintERC721Interface extends Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "marketplaceAddress",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
@@ -185,6 +199,10 @@ export interface MiniMintERC721Interface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setContractURI",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setMarketplaceAddress",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -413,6 +431,8 @@ export interface MiniMintERC721 extends BaseContract {
     "view"
   >;
 
+  marketplaceAddress: TypedContractMethod<[], [string], "view">;
+
   name: TypedContractMethod<[], [string], "view">;
 
   owner: TypedContractMethod<[], [string], "view">;
@@ -452,6 +472,12 @@ export interface MiniMintERC721 extends BaseContract {
 
   setContractURI: TypedContractMethod<
     [contractMetadataURI: string],
+    [void],
+    "nonpayable"
+  >;
+
+  setMarketplaceAddress: TypedContractMethod<
+    [newMarketplaceAddress: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -515,6 +541,9 @@ export interface MiniMintERC721 extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "marketplaceAddress"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "name"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
@@ -558,6 +587,13 @@ export interface MiniMintERC721 extends BaseContract {
   getFunction(
     nameOrSignature: "setContractURI"
   ): TypedContractMethod<[contractMetadataURI: string], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setMarketplaceAddress"
+  ): TypedContractMethod<
+    [newMarketplaceAddress: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "supportsInterface"
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
