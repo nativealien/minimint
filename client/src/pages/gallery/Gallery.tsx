@@ -40,9 +40,7 @@ const Gallery = () => {
                 </div>
                 <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />
             </div>}
- 
             {colls && nfts && <Grid items={!type ? colls : nfts} />}
-            {/* {type && colls && nfts ? <Grid items={colls} /> : <Grid items={nfts} />} */}
             <GoBack />
         </div>
 

@@ -9,6 +9,7 @@ import ShortHash from '../../components/buttons/ShortHash';
 import Tip from '../../components/display/tip/Tip';
 import ERC721 from '../../service/blockchain/ERC721';
 import './collection.css'
+// wtf
 
 const Collection = () => {
     const { web3, setStatus, reloadItems } = useAppContext()
