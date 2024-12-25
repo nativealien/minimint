@@ -163,6 +163,8 @@ Its been a packed week, and there is some detail work. But Im happy with how the
 
 > Monday
 
+It's all in the details... This sprint is focused on harmonizing the project plan, application, and final report, along with the Pecha Kucha presentation. I’ve decided to limit this sprint’s tasks to coding and application development only, ensuring all work on the final report is quietly managed behind the scenes. Plus, it’s the day before Christmas 🎄—so the festive spirit is definitely in the air!
+
 > Tuesday
 
 > Wednesday

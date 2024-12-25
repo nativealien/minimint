@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/context'
+
 import ListNFT from '../../components/forms/listnft/ListNFT'
 import GoBack from '../../components/buttons/GoBack'
 import marketplace from '../../service/blockchain/marketplace'
+
 import './nft.css'
 
 const NFT = () => {

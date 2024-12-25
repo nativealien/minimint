@@ -1,5 +1,4 @@
 
-
 .mintcollection {
     width: 1000px;
     margin: auto;
@@ -11,7 +10,6 @@
         & > .collmeta {
             height: 500px;
             width: 100%;
-            /* background-color: var(--background-color-50); */
         }
         & > .collnfts {
             height: 400px;

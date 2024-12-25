@@ -10,6 +10,7 @@
     --gradient-background2: radial-gradient(circle, #82818048, rgba(210, 210, 210, 0.265), #ffffff);
 
     --color: black;
+    --color-load: rgb(255, 106, 0);
     --color-50: rgba(0, 0, 0, 0.491);
     --color-sec: rgba(202, 107, 52, 0.792);
     --color-rev: white;
@@ -31,6 +32,7 @@
     --gradient-background2: radial-gradient(circle, #000000b6, rgba(0, 0, 0, 0.779), #000000);
 
     --color: white;
+    --color-load: rgb(130, 179, 235);
     --color-50: rgba(255, 255, 255, 0.491);
     --color-sec: rgb(66, 91, 114);
     --color-rev: black;
