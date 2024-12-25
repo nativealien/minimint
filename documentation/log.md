@@ -167,6 +167,8 @@ It's all in the details... This sprint is focused on harmonizing the project pla
 
 > Tuesday
 
+Lottie installed, added animation for loading screen.
+
 > Wednesday
 
 > Thursday
