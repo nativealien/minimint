@@ -81,6 +81,8 @@ p {
 
 button {
     margin-left: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
     border: 1px solid var(--color);
     border-top: 1px solid var(--color-border);
     border-left: 1px solid var(--color-border);

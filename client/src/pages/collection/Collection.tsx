@@ -18,14 +18,13 @@ const Collection = () => {
     const [toggle, setToggle] = useState<boolean>(true)
     const [own, setOwn] = useState<boolean>(false)
     const [sale, setSale] = useState<boolean>(false)
-    const [hover, setHover] = useState<boolean>(true)
+    const [hover, setHover] = useState<boolean>(false)
     const navigate = useNavigate()
     const location = useLocation()
     const { meta } = location.state || {};
     if(!meta) navigate(-1)
 
     useEffect(() => {
-        console.log(meta)
         let newNfts = meta.nfts;
         if(own) newNfts = newNfts.filter((item: any) => item.owner === web3?.address) 
         if(sale) newNfts = newNfts.filter((item: any) => item.listing.list)
@@ -55,8 +54,8 @@ const Collection = () => {
         </section>
         <nav>
             <div className="coll-btns">
-                {toggle ? <button onClick={() => setToggle(!toggle)}>Mint NFT</button> : <button onClick={() => setToggle(!toggle)}>Show NFTs</button>}
-                <button>set meta</button>
+                {web3?.signer ? toggle ? <button onClick={() => setToggle(!toggle)}>MINT</button> : 
+                <button onClick={() => setToggle(!toggle)}>SHOW NFTS</button> : <></>}
             </div>
             <div className="coll-toggle">
                 <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />

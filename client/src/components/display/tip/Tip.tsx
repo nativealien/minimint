@@ -5,7 +5,7 @@ import { delay } from "../../../utils/utils"
 const Tip: React.FC<{hover: boolean, text: string}> = ({hover, text}) => {
     const [show, setShow] = useState<boolean>(hover)
     useEffect(() => {
-        setShow(true)
+        setShow(hover)
         const timeHover = async () => {
             await delay(3000)
             setShow(false)
