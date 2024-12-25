@@ -50,6 +50,7 @@
             margin-right: 10px;
             display: flex;
             justify-content: space-between;
+            gap: 5px;
             & > img {
                 width: 70px;
                 position: relative;

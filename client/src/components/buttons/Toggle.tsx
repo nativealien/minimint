@@ -7,11 +7,11 @@ const Toggle: React.FC<{
     sale: boolean;
     setOwn: (own: boolean) => void;
     setSale: (sale: boolean) => void}> = ({own, sale, setOwn, setSale}) => {
-    const { theme } = useAppContext()
+    const { theme, web3 } = useAppContext()
 
     return <div className="toggle">
         <p>toggle</p>
-        <img onClick={() => setOwn(!own)} src={`/icons/star-${own ? 'act' : theme}.svg`} alt="Icon star" />
+        {web3?.signer && <img onClick={() => setOwn(!own)} src={`/icons/star-${own ? 'act' : theme}.svg`} alt="Icon star" />}
         <img onClick={() => setSale(!sale)} src={`/icons/ethereum-${sale ? 'act' : theme}.svg`} alt="Icon ETH" />
     </div>
 }
