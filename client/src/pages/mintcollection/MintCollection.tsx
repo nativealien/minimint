@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useAppContext } from "../../context/context"
+
 import Metadata from "../../components/forms/metadata/Metadata"
 import ConnectWeb3 from "../../components/buttons/ConnectWeb3"
 import GoBack from "../../components/buttons/GoBack"
@@ -7,15 +8,12 @@ import Section from "../../components/display/section/Section"
 import factory from "../../service/blockchain/factory"
 import ipfs from "../../service/ipfs"
 import mintcollection from '../../content/mintcollection.md?raw'
+
 import './mintcollection.css'
 
 const MintCollection = () => {
     const { web3, setStatus } = useAppContext()
     const [collMeta, setCollmeta] = useState<any>(null)
-    // const [nft1, setNft1] = useState<any>(null)
-    // const [nft2, setNft2] = useState<any>(null)
-    // const [nft3, setNft3] = useState<any>(null)
-    // const [nft4, setNft4] = useState<any>(null)
 
     useEffect(() => {
         console.log(collMeta)
@@ -25,35 +23,16 @@ const MintCollection = () => {
         e.preventDefault()
         setStatus('Minting collection, dont leave the page.')
         const coll = await ipfs.fetchIPFSJSON(collMeta.jsonCid)
-        // const NFTUris = [
-        //     nft1.jsonCid,
-        //     nft2.jsonCid,
-        //     nft3.jsonCid,
-        //     nft4.jsonCid
-        // ]
         const collUri = collMeta.jsonCid
-        // console.log(collUri)
-        // console.log(NFTUris)
-        // console.log(coll)
         const res = await factory.deployCollection(web3?.signer, coll.name, 'MM',collUri)
         console.log(res)
         setStatus('Collection minted!_')
     }
 
     return <div className="mintcollection">
-        {/* <h2>Mint Collection</h2> */}
         <Section markdown={mintcollection} />
-        {/* <section>
-            <p>Mint a collection, Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis dolorum modi eos distinctio ad. Doloribus tempore quia nam, voluptate aliquid possimus velit expedita illo quos cupiditate placeat animi sit veritatis?</p>
-        </section> */}
         {web3 && web3.signer ? <div className="signed">
             {<Metadata className={'collmeta'} height="500px" cids={collMeta} setCids={setCollmeta} />}
-            {/* {collMeta && <div className="collnfts">
-                <Metadata className={'collnftmeta'} height='300px' cids={nft1} setCids={setNft1} />
-                <Metadata className={'collnftmeta'} height='300px' cids={nft2} setCids={setNft2} />
-                <Metadata className={'collnftmeta'} height='300px' cids={nft3} setCids={setNft3} />
-                <Metadata className={'collnftmeta'} height='300px' cids={nft4} setCids={setNft4} />
-            </div>} */}
             {collMeta && <div className="mintcoll-btn">
                 <button onClick={(e) => handleMint(e)}>Mint Collection</button>
             </div>}

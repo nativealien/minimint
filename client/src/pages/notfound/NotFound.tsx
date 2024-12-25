@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
-import './notfound.css'
+
 import GoBack from '../../components/buttons/GoBack'
+
+import './notfound.css'
 
 const NotFound = () => {
     const navigate = useNavigate()
