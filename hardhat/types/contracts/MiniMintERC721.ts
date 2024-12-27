@@ -28,7 +28,6 @@ export interface MiniMintERC721Interface extends Interface {
     nameOrSignature:
       | "approve"
       | "balanceOf"
-      | "burn"
       | "contractURI"
       | "getAllMintedTokens"
       | "getApproved"
@@ -73,7 +72,6 @@ export interface MiniMintERC721Interface extends Interface {
     functionFragment: "balanceOf",
     values: [AddressLike]
   ): string;
-  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "contractURI",
     values?: undefined
@@ -152,7 +150,6 @@ export interface MiniMintERC721Interface extends Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "contractURI",
     data: BytesLike
@@ -415,8 +412,6 @@ export interface MiniMintERC721 extends BaseContract {
 
   balanceOf: TypedContractMethod<[owner: AddressLike], [bigint], "view">;
 
-  burn: TypedContractMethod<[tokenId: BigNumberish], [void], "nonpayable">;
-
   contractURI: TypedContractMethod<[], [string], "view">;
 
   getAllMintedTokens: TypedContractMethod<[], [bigint[]], "view">;
@@ -518,9 +513,6 @@ export interface MiniMintERC721 extends BaseContract {
   getFunction(
     nameOrSignature: "balanceOf"
   ): TypedContractMethod<[owner: AddressLike], [bigint], "view">;
-  getFunction(
-    nameOrSignature: "burn"
-  ): TypedContractMethod<[tokenId: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "contractURI"
   ): TypedContractMethod<[], [string], "view">;

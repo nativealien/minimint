@@ -54,15 +54,6 @@ async function main() {
   await collectionContract.setMarketplaceAddress(marketplaceAddress);
   console.log("Marketplace address updated.");
 
-  // console.log("Updating subsequent collection deployments with marketplace address...");
-  // const nextTx = await factory.deployCollection(
-  //   "NextMiniMint",
-  //   "NMM",
-  //   "ipfs://newmetadata",
-  //   marketplaceAddress // Correct marketplace address for subsequent deployments
-  // );
-  // await nextTx.wait();
-  // console.log("Next collection deployed with updated marketplace address.");
 
 }
 

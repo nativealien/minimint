@@ -1,6 +1,6 @@
 import { delay } from "../../../utils/utils";
 import Lottie from "lottie-react"
-import animate from '../../../content/lottie/ethereum-logo.json'
+import animate from '../../../content/lottie/eth-one.json'
 import "./loading.css";
 
 const Loading: React.FC<{text: string, setStatus: (value?: any)=>void}> = ({text, setStatus}) => {

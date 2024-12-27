@@ -1,9 +1,7 @@
 import axios from 'axios';
+import { VITE_PINATA_API_KEY, VITE_PINATA_API_SECRET } from '../utils/config';
 
-const pinataApiKey = import.meta.env.VITE_PINATA_API_KEY
-const pinataSecretApiKey = import.meta.env.VITE_PINATA_API_SECRET
-
-const checkKeys = () => { console.log(pinataApiKey, pinataSecretApiKey) }
+const checkKeys = () => { console.log(VITE_PINATA_API_KEY, VITE_PINATA_API_SECRET) }
 
 const pinFile = async (file: File | Blob) => {
     const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
@@ -13,8 +11,8 @@ const pinFile = async (file: File | Blob) => {
 
     const headers = {
         'Content-Type': 'multipart/form-data',
-        pinata_api_key: pinataApiKey,
-        pinata_secret_api_key: pinataSecretApiKey,
+        pinata_api_key: VITE_PINATA_API_KEY,
+        pinata_secret_api_key: VITE_PINATA_API_SECRET,
     };
 
     try {
@@ -30,8 +28,8 @@ const pinJSON = async (jsonData: any) => {
     const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
     const headers = {
-        pinata_api_key: pinataApiKey,
-        pinata_secret_api_key: pinataSecretApiKey,
+        pinata_api_key: VITE_PINATA_API_KEY,
+        pinata_secret_api_key: VITE_PINATA_API_SECRET,
         'Content-Type': 'application/json',
     };
 
@@ -48,8 +46,8 @@ const unpin = async (cid: string) => {
     const url = `https://api.pinata.cloud/pinning/unpin/${pureCid}`;
 
     const headers = {
-        pinata_api_key: pinataApiKey,
-        pinata_secret_api_key: pinataSecretApiKey,
+        pinata_api_key: VITE_PINATA_API_KEY,
+        pinata_secret_api_key: VITE_PINATA_API_SECRET,
     };
 
     try {

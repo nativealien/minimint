@@ -42,12 +42,11 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
 
     function isApprovedForAll(address owner, address operator) public view override(ERC721, IERC721) returns (bool) {
         if (operator == marketplaceAddress) {
-            return true; // Automatically approve the marketplace
+            return true; 
         }
         return super.isApprovedForAll(owner, operator);
     }
 
-    // Make minting public
     function safeMint(address to, string memory uri) public {
         _mintNFT(to, uri);
     }
@@ -56,34 +55,10 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
         uint256 tokenId = _nextTokenId;
         _nextTokenId++;
         _allMintedTokens.push(tokenId);
-        _mint(to, tokenId); // Use _mint instead of _safeMint
+        _mint(to, tokenId);
         _setTokenURI(tokenId, uri);
 
         emit NFTMinted(to, tokenId, uri);
-    }
-
-    function burn(uint256 tokenId) public {
-        require(ownerOf(tokenId) == msg.sender, "You are not the owner");
-        _burn(tokenId);
-
-        uint256 index;
-        bool found = false;
-        for (uint256 i = 0; i < _allMintedTokens.length; i++) {
-            if (_allMintedTokens[i] == tokenId) {
-                index = i;
-                found = true;
-                break;
-            }
-        }
-        require(found, "Token ID not found in _allMintedTokens");
-
-        for (uint256 i = index; i < _allMintedTokens.length - 1; i++) {
-            _allMintedTokens[i] = _allMintedTokens[i + 1];
-        }
-
-        _allMintedTokens.pop();
-
-        emit NFTBurned(msg.sender, tokenId);
     }
 
     function getNextTokenId() public view returns (uint256) {

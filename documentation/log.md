@@ -169,11 +169,11 @@ It's all in the details... This sprint is focused on harmonizing the project pla
 
 Lottie installed, added animation for loading screen.
 
-> Wednesday
+> Rest of the week...
 
-> Thursday
+The holydays has taken its tole on the process... I had upds and downs, and I have too admit I lost my trail on this log and decided too just keep track in one final 'rest of the week' heading. 
 
-> Friday
+I have redeployed all the contracts. The reason for this was to remove some functionality. I actually tried to implement a burn function but ran into trouble. When time became a factor, I realized that this wasn’t part of the project plan to begin with, so I decided to remove it. Because of this, I also removed the functions from the ERC721 contract and refactored the others to match the changes. I also added some new tests, which are very basic since I already knew the contracts worked well with my frontend!
 
 ### Retrospect:
 
