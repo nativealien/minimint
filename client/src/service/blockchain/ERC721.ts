@@ -1,12 +1,7 @@
 import { ethers } from "ethers"
-// import MiniMintABI from "./abi/MiniMintERC721.json"
 import MiniMintABI from "../../../../hardhat/artifacts/contracts/MiniMintERC721.sol/MiniMintERC721.json"
 import { delay } from "../../utils/utils"
-
-// const address = '0x5fbdb2315678afecb367f032d93f642f64180aa3'
-// const mainAddress = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
-const marketAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
-
+import { VITE_MINIMINT_MARKET_CONTRACT } from "../../utils/config"
 
 export const minimintContract = async (signerOrProvider: ethers.Signer | ethers.Provider, address: string) => {
     await delay(1000)
@@ -66,7 +61,7 @@ const getTokenURI = async (tokenId: number, signer: any, address: string) => {
 
 const changeMarketplaceAddress = async (signer: ethers.Signer, address: string) => {
     const contract = await minimintContract(signer, address)
-    const res = await contract.setMarketplaceAddress(marketAddress);
+    const res = await contract.setMarketplaceAddress(VITE_MINIMINT_MARKET_CONTRACT);
     console.log('Succes changing address', res)
 
 }
@@ -74,7 +69,7 @@ const changeMarketplaceAddress = async (signer: ethers.Signer, address: string) 
 const approveMarketplace = async (signer: ethers.Signer, address: string) => {
     const contract = await minimintContract(signer, address)
     try {
-        const tx = await contract.setApprovalForAll(marketAddress, true);
+        const tx = await contract.setApprovalForAll(VITE_MINIMINT_MARKET_CONTRACT, true);
         await tx.wait();
         console.log("Marketplace approved successfully!", tx);
     } catch (error) {

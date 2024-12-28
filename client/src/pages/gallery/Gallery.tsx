@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/context'
+
 import Grid from '../../components/display/grid/Grid'
-import GoBack from '../../components/buttons/GoBack'
-import Toggle from '../../components/buttons/Toggle'
+import GoBack from '../../components/buttons/goback/GoBack'
+import Toggle from '../../components/buttons/toggle/Toggle'
 import Section from '../../components/display/section/Section'
+
 import gallery from '../../content/gallery.md?raw'
 import './gallery.css'
 

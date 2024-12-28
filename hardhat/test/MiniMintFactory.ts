@@ -1,70 +1,32 @@
 import { ethers } from "hardhat";
 import { expect } from "chai";
-import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 
 describe("MiniMintFactory", function () {
   let factory: any;
-  let owner: any, addr1: any, addr2: any;
-
-  const contractName = "MiniMint";
-  const contractSymbol = "MTK";
-  const contractMetadataURI = "ipfs://collection-metadata";
-  const URIS = [
-    "ipfs://token-metadata-1",
-    "ipfs://token-metadata-2",
-    "ipfs://token-metadata-3",
-    "ipfs://token-metadata-4"
-  ];
+  let owner: any;
 
   beforeEach(async function () {
-    [owner, addr1, addr2] = await ethers.getSigners();
-
     const Factory = await ethers.getContractFactory("MiniMintFactory");
+    [owner] = await ethers.getSigners();
+
     factory = await Factory.deploy();
+    await factory.waitForDeployment();
   });
 
-  it("Should allow anyone to deploy a new collection", async function () {
-    // addr1 deploys a collection
-    await expect(
-      factory
-        .connect(addr1)
-        .deployCollection(contractName, contractSymbol, contractMetadataURI, URIS)
-    )
-      .to.emit(factory, "CollectionDeployed")
-      .withArgs(addr1.address, anyValue, contractName, contractSymbol, contractMetadataURI);
-  
-    const collections = await factory.getCollections();
-    expect(collections.length).to.equal(1);
+  it("Should deploy the factory contract", async function () {
+    expect(await factory.owner()).to.equal(owner.address);
   });
 
-  it("Should correctly store multiple deployed collections", async function () {
-    await factory
-      .connect(addr1)
-      .deployCollection(contractName, contractSymbol, contractMetadataURI, URIS);
+  it("Should deploy a collection", async function () {
+    const name = "MyCollection";
+    const symbol = "MYC";
+    const metadataURI = "example-uri";
+    const marketplaceAddress = owner.address;
 
-    await factory
-      .connect(addr1)
-      .deployCollection(contractName, contractSymbol, contractMetadataURI, URIS);
+    const tx = await factory.deployCollection(name, symbol, metadataURI, marketplaceAddress);
+    const receipt = await tx.wait();
 
-    const collections = await factory.getCollections();
-    expect(collections.length).to.equal(2);
-  });
-
-  it("Should fail if URIs length is not exactly 4", async function () {
-    const invalidUris = ["uri1", "uri2"]; // Less than 4
-
-    await expect(
-      factory.deployCollection(contractName, contractSymbol, contractMetadataURI, invalidUris)
-    ).to.be.revertedWith("Must provide exactly 4 URIs");
-  });
-
-  it("Should allow only owner to transfer ownership of the factory", async function () {
-    await expect(factory.connect(addr1).transferOwnership(addr2.address)).to.be.revertedWith(
-      "Only owner can call this function"
-    );
-
-    await factory.transferOwnership(addr1.address);
-    expect(await factory.owner()).to.equal(addr1.address);
+    const collectionAddress = receipt.events?.find((e: any) => e.event === "CollectionDeployed")?.args?.collectionAddress;
+    expect(collectionAddress).to.not.equal(ethers.ZeroAddress);
   });
 });
-

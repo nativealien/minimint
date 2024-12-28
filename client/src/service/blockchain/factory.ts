@@ -1,20 +1,15 @@
 import { ethers } from "ethers";
-// import MiniMintFactoryABI from "./abi/MiniMintFactory.json"
 import MiniMintFactoryABI from "../../../../hardhat/artifacts/contracts/MiniMintFactory.sol/MiniMintFactory.json"
+import {VITE_MINIMINT_FACTORY_CONTRACT, VITE_MINIMINT_MARKET_CONTRACT} from '../../utils/config'
 import { delay } from "../../utils/utils"
 
-const erc721Address = import.meta.env.VITE_MINIMINT_MAIN_CONTRACT
-const contractAddress = import.meta.env.VITE_MINIMINT_FACTORY_CONTRACT
-const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
-
 export const checkAddressess = () => {
-    console.log(erc721Address)
-    console.log(contractAddress)
-    console.log(marketplaceAddress)
+    console.log(VITE_MINIMINT_FACTORY_CONTRACT)
+    console.log(VITE_MINIMINT_MARKET_CONTRACT)
 }
 
 export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provider) => {
-    return new ethers.Contract(contractAddress, MiniMintFactoryABI.abi, signerOrProvider);
+    return new ethers.Contract(VITE_MINIMINT_FACTORY_CONTRACT, MiniMintFactoryABI.abi, signerOrProvider);
 }
 
 const getAllCollections = async (provider: ethers.Provider) => {
@@ -27,7 +22,7 @@ const getAllCollections = async (provider: ethers.Provider) => {
 
 const deployCollection = async (signer: ethers.Signer, name: string, symbol: string, metadataURI: string) => {
     const contract = factoryContract(signer);
-    const tx = await contract.deployCollection(name, symbol, metadataURI, marketplaceAddress);
+    const tx = await contract.deployCollection(name, symbol, metadataURI, VITE_MINIMINT_MARKET_CONTRACT);
     const receipt = await tx.wait();
     console.log("Collection deployed:", receipt);
     return receipt

@@ -118,10 +118,10 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
         setDel(true)
     }
 
-    return <div className={`metadata ${className}`} style={{height: cids ? '40px' : height}}>
+    return <div className={`metadata ${className}`}>
         {status && <Modal status={status} setStatus={setStatus} />}
-        <form style={{display: cids ? 'none' : 'flex'}}>
-            <div className="meta-image" style={{backgroundImage: `url(${displayUrl})`}}>
+        <form>
+            <div className="meta-image" style={{backgroundImage: `url(${displayUrl})`, height: `${height}`}}>
                 <input type="file" name="image-file" className="image-file" onChange={handleChange} />
             </div>
 
@@ -134,10 +134,11 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
         {!cids ? 
         <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleProcess(e)}>Process</button> : 
         <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleDelete(e)}>Reset</button>}
-        {cids && cids.imgCid !== '' && <a href={`${ipfs.makeImgURL(cids.imgCid)}`}>Img</a>}
-        {cids && cids.jsonCid !== '' && <a href={`${ipfs.makeImgURL(cids.jsonCid)}`}>JSON</a>}
-
     </div>
 }
 
 export default Metadata
+
+//  cids ? 'none' : 'flex'}}>
+
+// style={{height: cids ? '40px' : height}}>

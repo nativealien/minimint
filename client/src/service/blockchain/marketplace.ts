@@ -1,14 +1,11 @@
 import { ethers } from "ethers";
-// import MiniMintMarketplaceABI from "./abi/MiniMintMarketplace.json"
 import MiniMintMarketplaceABI from "../../../../hardhat/artifacts/contracts/MiniMintMarketplace.sol/MiniMintMarketplace.json"
+import {VITE_MINIMINT_MARKET_CONTRACT} from '../../utils/config'
 import { delay } from "../../utils/utils"
-
-const marketplaceAddress = import.meta.env.VITE_MINIMINT_MARKET_CONTRACT
-console.log(marketplaceAddress)
 
 export const marketplaceContract = async (signerOrProvider: ethers.Signer | ethers.Provider) => {
   await delay(1000)
-  return new ethers.Contract(marketplaceAddress, MiniMintMarketplaceABI.abi, signerOrProvider);
+  return new ethers.Contract(VITE_MINIMINT_MARKET_CONTRACT, MiniMintMarketplaceABI.abi, signerOrProvider);
 }
 
 const listNFT = async (signer: ethers.Signer, collAddress: string, tokenId: number, priceInEth: string, setStatus: (status: string | null) => void) => {

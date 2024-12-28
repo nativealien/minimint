@@ -1,15 +1,16 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/context';
+
 import Grid from '../../components/display/grid/Grid';
 import Metadata from '../../components/forms/metadata/Metadata';
-import GoBack from '../../components/buttons/GoBack';
-import Toggle from '../../components/buttons/Toggle';
-import ShortHash from '../../components/buttons/ShortHash';
+import GoBack from '../../components/buttons/goback/GoBack';
+import Toggle from '../../components/buttons/toggle/Toggle';
+import ShortHash from '../../components/buttons/shorthash/ShortHash';
 import Tip from '../../components/display/tip/Tip';
+
 import ERC721 from '../../service/blockchain/ERC721';
 import './collection.css'
-// wtf
 
 const Collection = () => {
     const { web3, setStatus, reloadItems } = useAppContext()
@@ -62,7 +63,7 @@ const Collection = () => {
             </div>
         </nav>
         {toggle ? <Grid items={nfts} /> :
-        <Metadata className={'mint-meta'} height='400px' cids={nftMeta} setCids={setNftMeta} />}
+        <Metadata className={'mint-meta'} height='250px' cids={nftMeta} setCids={setNftMeta} />}
         {nftMeta && <button onClick={() => handleMint()}>Mint</button>}
         <GoBack />
     </div>

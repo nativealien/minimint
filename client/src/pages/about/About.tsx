@@ -1,5 +1,6 @@
-import GoBack from '../../components/buttons/GoBack'
+import GoBack from '../../components/buttons/goback/GoBack'
 import Section from '../../components/display/section/Section'
+
 import about from '../../content/about.md?raw'
 import './about.css'
 

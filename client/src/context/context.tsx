@@ -26,7 +26,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         const getCollections = async (newWeb3: IWeb3) => {
-          // setLoading(true)
           const test: any = await metafetcher.initMinimint(newWeb3, setStatus)
           setItems(test)
           setStatus('Minimint is now connected!_')
