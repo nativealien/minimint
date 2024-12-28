@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { useAppContext } from "../../context/context"
-import ShortHash from "./ShortHash"
-import Tip from "../display/tip/Tip"
-import { connectProvider } from "../../service/provider"
+import { useAppContext } from "../../../context/context"
+import ShortHash from "../shorthash/ShortHash"
+import Tip from "../../display/tip/Tip"
+import { connectProvider } from "../../../service/provider"
 import './connectweb3.css'
 
 const ConnectWeb3: React.FC<{mm?: boolean}> = ({mm}) => {

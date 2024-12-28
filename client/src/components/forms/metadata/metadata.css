@@ -3,30 +3,32 @@
 .metadata {
     height: 100%;
     width: 100%;
-    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
     position: relative;
-
-    & > form {
+    
+    & form {
         height: 100%;
         width: 100%;
+        /* border: 1px solid red; */
         padding: 10px;
-        padding-bottom: 40px;
         flex-direction: column;
         justify-content: end;
         background-color: rgba(255, 0, 0, 0);
-
-        & > .meta-image {
-            height: 60%;
+        
+        & .meta-image {
+            /* height: 60%; */
             width: 95%;
             position: relative;
+            border: 1px solid rgb(124, 126, 123);
             top:0;
             left: 2.5%;
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
             background-color: var(--background-color-75);
-
-            & > input {
+            
+            & input {
                 height: 100%;
                 width: 100%;
                 position: relative;
@@ -35,8 +37,8 @@
                 cursor: pointer;
             }
         }
-
-        & > .meta-info {
+        
+        & .meta-info {
             height: 40%;
             width: 100%;
             display: flex;
@@ -44,24 +46,24 @@
             justify-content: end;
             align-items: center;
             gap: 10px;
-
+            
             position: relative;
-            p{
+            & p{
                 font-size: 1.2em;
                 font-style: italic;
                 position: relative;
-                bottom: 150px;
+                /* bottom: 150px; */
                 color: black;
             }
-            input{
+            & input{
                 width: 100%;
                 border: 0;
                 position: relative;
                 z-index: 2;
                 background-color: rgb(190, 190, 190);
             }
-            textarea {
-                /* height: 100%; */
+            & textarea {
+                height: 100%;
                 width: 100%;
                 border: 0;
                 position: relative;
@@ -70,11 +72,10 @@
             }
         }
     }
-    & > button {
-        /* height: 40px; */
-        width: 80%;
+    & button {
+        width: 150px;
+        margin: auto;
         position: relative;
         z-index: 3;
-        /* bottom: 40px; */
     }
 }

@@ -1,0 +1,10 @@
+& .tip {
+    position: absolute;
+    bottom: -50px;
+    left: -25px;
+    opacity: 1;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    color:rgba(63, 63, 63, 0.555);
+    font-style: italic;
+}

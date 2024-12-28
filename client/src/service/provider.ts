@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 
-const infura = import.meta.env.VITE_INFURA_ENDPOINT
+import { VITE_INFURA_ENDPOINT } from '../utils/config'
+
 
 export const connectProvider = async (metamask: boolean, setStatus: (status: string | null) => void ): Promise<IWeb3 | string> => {
     if (window.ethereum && metamask) {
@@ -29,17 +30,22 @@ export const connectProvider = async (metamask: boolean, setStatus: (status: str
         }
       } else {
         setStatus('Connected without wallet_')
-        const provider = new ethers.JsonRpcProvider(infura);
+        const provider = new ethers.JsonRpcProvider(VITE_INFURA_ENDPOINT);
         return { provider };
       }
 }
 
-export const addListener = (
-    setStatus: React.Dispatch<React.SetStateAction<string | null>>
+export const addListener = async (
+    setStatus: React.Dispatch<React.SetStateAction<string | null>>,
+    setWeb3: React.Dispatch<React.SetStateAction<any>>
 ) => {
     if (window.ethereum) {
-        window.ethereum.on("accountsChanged", (accounts: string[]) => {
-            setStatus(`Accounts changed: ${accounts[0]}`);
+        window.ethereum.on("accountsChanged", async (accounts: string[]) => {
+          const provider = new ethers.BrowserProvider(window.ethereum);
+          const signer = await provider.getSigner();
+          const address = await signer.getAddress();
+          setWeb3({ provider, signer, address })
+          // setStatus('Account changed, disconnected...')
         });
 
         window.ethereum.on("chainChanged", (chainId: string) => {
@@ -52,6 +58,6 @@ export const addListener = (
 
         console.log("Event listeners added for provider.");
     } else {
-        console.error("No Ethereum provider detected.");
+        // console.error("No Ethereum provider detected.");
     }
 };

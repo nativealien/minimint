@@ -14,6 +14,8 @@ export const factoryContract = (signerOrProvider: ethers.Signer | ethers.Provide
 
 const getAllCollections = async (provider: ethers.Provider) => {
     await delay(1000)
+    console.log(VITE_MINIMINT_FACTORY_CONTRACT)
+    console.log(VITE_MINIMINT_MARKET_CONTRACT)
     const contract = factoryContract(provider);
     console.log(contract)
     const collections = await contract.getCollections();

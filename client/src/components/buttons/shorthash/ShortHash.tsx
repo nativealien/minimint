@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { shortHash } from "../../utils/utils"
+import { shortHash } from "../../../utils/utils"
 import './shorthash.css'
 
 const ShortHash: React.FC<{hash: string, setHover?: (hoover: boolean)=> void}> = ({hash, setHover}) => {

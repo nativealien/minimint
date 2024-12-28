@@ -14,7 +14,7 @@ interface ICids {
     jsonCid: string
 }
 
-const Metadata = ({className, height, cids, setCids}: {className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void;}) => {
+const Metadata = ({className, height, cids, setCids, mint}: {className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void, mint: ()=>void}) => {
     const [process, setProcess] = useState<boolean>(false)
     const [del, setDel] = useState<boolean>(false)
     const [status, setStatus] = useState<any>(null)
@@ -133,7 +133,10 @@ const Metadata = ({className, height, cids, setCids}: {className: string, height
         </form>
         {!cids ? 
         <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleProcess(e)}>Process</button> : 
-        <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleDelete(e)}>Reset</button>}
+        <div>
+            <button onClick={mint}>mint</button>
+            <button style={{bottom: cids ? '0' : '30px'}} onClick={(e) => handleDelete(e)}>Reset</button>
+        </div>}
     </div>
 }
 
