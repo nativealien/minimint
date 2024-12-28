@@ -18,7 +18,7 @@
         & > .meta-image {
             height: 60%;
             width: 95%;
-            position: absolute;
+            position: relative;
             top:0;
             left: 2.5%;
             background-repeat: no-repeat;
@@ -54,7 +54,6 @@
                 color: black;
             }
             input{
-                height: 80px;
                 width: 100%;
                 border: 0;
                 position: relative;
@@ -62,7 +61,7 @@
                 background-color: rgb(190, 190, 190);
             }
             textarea {
-                height: 100%;
+                /* height: 100%; */
                 width: 100%;
                 border: 0;
                 position: relative;
@@ -72,7 +71,7 @@
         }
     }
     & > button {
-        height: 40px;
+        /* height: 40px; */
         width: 80%;
         position: relative;
         z-index: 3;

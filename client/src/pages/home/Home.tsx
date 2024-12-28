@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom"
 import { useAppContext } from "../../context/context"
+
 import Section from "../../components/display/section/Section"
+
 import home from '../../content/home.md?raw'
 import './home.css'
 

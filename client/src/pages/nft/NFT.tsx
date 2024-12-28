@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/context'
 
 import ListNFT from '../../components/forms/listnft/ListNFT'
-import GoBack from '../../components/buttons/GoBack'
+import GoBack from '../../components/buttons/goback/GoBack'
 import marketplace from '../../service/blockchain/marketplace'
 
 import './nft.css'
@@ -38,7 +38,9 @@ const NFT = () => {
     }, [toggle])
 
     const handleBuy = async () => {
+
         if(web3?.signer){
+   
             await marketplace.buyNFT(web3?.signer, nft.address, nft.tokenId, nft.listing.eth, setStatus)
             setToggle(!toggle)
         } else {

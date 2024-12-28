@@ -1,6 +1,7 @@
 import Navbar from '../navbar/Navbar'
-import ToggleTheme from '../../../components/buttons/ToggleTheme'
-import ConnectWeb3 from '../../../components/buttons/ConnectWeb3'
+import ToggleTheme from '../../../components/buttons/toggletheme/ToggleTheme'
+import ConnectWeb3 from '../../../components/buttons/connectweb3/ConnectWeb3';
+
 import './header.css'
 
 const Header = () => {

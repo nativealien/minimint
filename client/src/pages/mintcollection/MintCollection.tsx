@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 import { useAppContext } from "../../context/context"
 
 import Metadata from "../../components/forms/metadata/Metadata"
-import ConnectWeb3 from "../../components/buttons/ConnectWeb3"
-import GoBack from "../../components/buttons/GoBack"
+import ConnectWeb3 from "../../components/buttons/connectweb3/ConnectWeb3"
+import GoBack from "../../components/buttons/goback/GoBack"
 import Section from "../../components/display/section/Section"
+
 import factory from "../../service/blockchain/factory"
 import ipfs from "../../service/ipfs"
-import mintcollection from '../../content/mintcollection.md?raw'
 
+import mintcollection from '../../content/mintcollection.md?raw'
 import './mintcollection.css'
 
 const MintCollection = () => {
@@ -32,7 +33,7 @@ const MintCollection = () => {
     return <div className="mintcollection">
         <Section markdown={mintcollection} />
         {web3 && web3.signer ? <div className="signed">
-            {<Metadata className={'collmeta'} height="500px" cids={collMeta} setCids={setCollmeta} />}
+            {<Metadata className={'collmeta'} height="200px" cids={collMeta} setCids={setCollmeta} />}
             {collMeta && <div className="mintcoll-btn">
                 <button onClick={(e) => handleMint(e)}>Mint Collection</button>
             </div>}

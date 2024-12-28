@@ -10,7 +10,9 @@
         & h4 {
             width: 100%;
             font-size: 1.4em;
+            color: var(--color-sec);
         }
+
     }
 
 }
