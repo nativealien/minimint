@@ -8,16 +8,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const [web3, setWeb3] = useState<IWeb3 | null>(null)
     const [items, setItems] = useState<ICollMeta[] | null>(null)
     const [status, setStatus] = useState<string | null>(null)
-    const [loading, setLoading] = useState<boolean>(false)
     const [theme, setTheme] = useState(() => {
       return localStorage.getItem("theme") || "light";
     })
 
     useEffect(() => {
-      if(loading) {
-        setStatus('Loading')
-      } else setStatus(null)
-    }, [loading])
+      if(status === 'acc-change'){
+        console.log('hej')
+      }
+      
+    }, [status])
 
     useEffect(() => {
       document.documentElement.setAttribute("data-theme", theme);
@@ -31,7 +31,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           setStatus('Minimint is now connected!_')
         }
         if(web3 && !items) getCollections(web3)
-        addListener(setStatus)
+        addListener(setStatus, setWeb3)
     }, [web3])
 
     const reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined> = async (contract, collName, tokenId) => {
@@ -58,8 +58,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         setItems,
         status,
         setStatus,
-        loading,
-        setLoading,
         reloadItems,
         theme,
         toggleTheme

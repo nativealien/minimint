@@ -33,9 +33,9 @@ const MintCollection = () => {
     return <div className="mintcollection">
         <Section markdown={mintcollection} />
         {web3 && web3.signer ? <div className="signed">
-            {<Metadata className={'collmeta'} height="200px" cids={collMeta} setCids={setCollmeta} />}
+            {<Metadata className={'collmeta'} height="200px" cids={collMeta} setCids={setCollmeta} mint={() => handleMint({ preventDefault: () => {} })}/>}
             {collMeta && <div className="mintcoll-btn">
-                <button onClick={(e) => handleMint(e)}>Mint Collection</button>
+                {/* <button onClick={(e) => handleMint(e)}>Mint Collection</button> */}
             </div>}
         </div> : <div className="nometamask">
             <ConnectWeb3 mm={true} />

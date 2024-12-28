@@ -14,8 +14,6 @@ interface IAppContext {
     setItems: (items: ICollMeta[]) => void;
     status: string | null;
     setStatus: (status: string | null) => void;
-    loading: boolean;
-    setLoading: (loading: boolean) => void;
     reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined>;
     theme: string;
     toggleTheme: () => void;

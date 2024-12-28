@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useAppContext } from '../../context/context'
-import Tip from '../display/tip/Tip'
+import { useAppContext } from '../../../context/context'
+import Tip from '../../display/tip/Tip'
 import './toggletheme.css'
 
 const ToggleTheme = () => {

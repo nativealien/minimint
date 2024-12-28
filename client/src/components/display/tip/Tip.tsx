@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { delay } from "../../../utils/utils"
+import './tip.css'
 
 
 const Tip: React.FC<{hover: boolean, text: string}> = ({hover, text}) => {

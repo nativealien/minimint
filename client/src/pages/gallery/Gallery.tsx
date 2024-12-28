@@ -30,7 +30,7 @@ const Gallery = () => {
             if(sale) resFlat = resFlat.filter((item: any) => item.listing.list)
             setNfts(resFlat)
         }
-    }, [own, sale])
+    }, [own, sale, items])
 
     return <div className="gallery">
             <Section markdown={gallery}/>
@@ -38,7 +38,7 @@ const Gallery = () => {
                 <div className='type'>
                     <button style={{opacity: type ? '1' : '0.3'}} onClick={() => setType(false)}>collections</button>
                     <button style={{opacity: type ? '0.3' : '1'}} onClick={() => setType(true)}>nfts</button>
-                    <button onClick={() => navigate('collection/mint')}>Create collection</button>
+                    <button onClick={() => navigate('collection/mint')}>New collection</button>
                 </div>
                 <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />
             </div>}

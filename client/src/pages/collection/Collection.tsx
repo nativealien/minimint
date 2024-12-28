@@ -58,13 +58,13 @@ const Collection = () => {
                 {web3?.signer ? toggle ? <button onClick={() => setToggle(!toggle)}>MINT</button> : 
                 <button onClick={() => setToggle(!toggle)}>SHOW NFTS</button> : <></>}
             </div>
-            <div className="coll-toggle">
+            {toggle && <div className="coll-toggle">
                 <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />
-            </div>
+            </div>}
         </nav>
         {toggle ? <Grid items={nfts} /> :
-        <Metadata className={'mint-meta'} height='250px' cids={nftMeta} setCids={setNftMeta} />}
-        {nftMeta && <button onClick={() => handleMint()}>Mint</button>}
+        <Metadata className={'mint-meta'} height='250px' cids={nftMeta} setCids={setNftMeta} mint={handleMint}/>}
+        {/* {nftMeta && <button onClick={() => handleMint()}>Mint</button>} */}
         <GoBack />
     </div>
 }
