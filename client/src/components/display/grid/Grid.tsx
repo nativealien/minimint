@@ -15,13 +15,14 @@ const cardGenerator = (items: ICollMeta[] | INFTMeta[]) => {
 const Grid = ({items}: { items: ICollMeta[] | INFTMeta[] | any }) => {
     const [cards, setCards] = useState<JSX.Element[] | null>(null)
     useEffect(() => {
+        console.log(items)
         setCards(null)
         const newCards = cardGenerator(items)
         setCards(newCards)
     }, [items])
 
-    return <>{items && <div className="grid" style={{gridTemplateColumns: items.length > 0 ? items[0].type === 'nft' ? 'repeat(4, 1fr)' : 'repeat(2, 1fr)' : ''}}>
-        {cards && cards.length > 0 && cards}
+    return <>{items && items.length > 0 && <div className={`grid${items[0].type === 'nft' ? ' nfts-grid' : ' colls-grid'}`}>
+        {items && cards && cards.length > 0 && cards}
     </div>}</>
 }
 

@@ -49,7 +49,7 @@ const NFT = () => {
     }
 
     return <div className="nft">
-        {nft && <section className='override'>
+        {nft && <section className='section'>
             <img src={nft.image} alt="" />
             <div className="nft-info">
                 <h2>{nft.name}</h2>

@@ -1,4 +1,3 @@
-/* Styling for the Gallery page... */
 
 .gallery {
     width: 100%;
@@ -6,18 +5,18 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
+}
 
-    & .gallery-buttons {
-        height: 40px;
-        width: 100%;
-        display: flex;
-        justify-content: start;
+.gallery .gallery-buttons {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+}
 
-        & .type {
-            width: auto;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-    }
+.gallery .gallery-buttons .type {
+    width: auto;
+    padding: 0;
+    margin: 0;
+    display: flex;
 }
