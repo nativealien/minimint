@@ -63,13 +63,14 @@ h3 {
 
 h4 {
     width: 80px;
-    border-bottom: 2px dotted var(--color);
+    /* border-bottom: 2px dotted var(--color); */
     display: flex;
     gap: 3px;
     font-size: 1.2em;
     cursor: pointer;
+    color: var(--color-sec);
     &:hover{
-        color: var(--color-sec);
+        color: var(--color);
     }
 }
 

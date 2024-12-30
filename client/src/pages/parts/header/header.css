@@ -33,13 +33,11 @@ header > h1 > span {
     padding: 0 5px;
     background-color: var(--bg-color);
     z-index: 999;
-    border: 2px solid red;
 }
 
 @media (max-width: 1200px) {
     header {
         width: 100%;
-        border: 2px solid red;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -61,25 +59,9 @@ header > h1 > span {
     header {
         border: 2px solid rgb(0, 72, 255);
     }
-
-    header > h1 {
-        
-    }
-
-    header > h1 > span {
-
-    }
 }
 @media (max-width: 480px) {
     header {
         border: 2px solid rgb(56, 190, 19);
-    }
-
-    header > h1 {
-        
-    }
-
-    header > h1 > span {
-
     }
 }

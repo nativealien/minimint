@@ -5,7 +5,6 @@ const LoadMetaMask = () => {
 
     return <div className="loading metamask">
         <Lottie animationData={animate} />
-
     </div>
 }
 

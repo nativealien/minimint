@@ -1,4 +1,4 @@
-.toggletheme{
+.toggletheme {
     height: 18px;
     width: 18px;
     margin-left: 100px;
@@ -12,18 +12,18 @@
     &:hover {
         box-shadow: 1px 1px 40px var(--color);
     }
-    & .tip {
-        width: 160px;
-        margin: 0;
-        padding: 0;
-        position: absolute;
-        bottom: -50px;
-        left: -26px;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-        color:rgba(63, 63, 63, 0.555);
-        font-style: italic;
-    }
+}
 
+.toggletheme>.tip {
+    width: 160px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: -50px;
+    left: -26px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    color: rgba(63, 63, 63, 0.555);
+    font-style: italic;
 }
