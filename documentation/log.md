@@ -177,3 +177,10 @@ I have redeployed all the contracts. The reason for this was to remove some func
 
 ### Retrospect:
 
+I have learned a lot in what was supposed to be the final sprint. NEVER schedule important project obligations to collide with important family commitments. Family should ALWAYS come first.
+
+## Sprint 6: The bonus round, the finer details.
+
+> Monday
+
+The aspect that suffered the most from my poor planning was making the application responsive. However, even more so, it was the detailed project report that bore the brunt of this oversight. So today, I have achieved making the application responsive, and, more importantly, I have been working on a more thoroughly thought-out project report! Tomorrow, New Year's Eve, I will continue my commitment to this project and review all the details I might have missed to ensure the application looks perfect!
