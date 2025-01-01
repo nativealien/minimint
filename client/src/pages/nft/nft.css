@@ -14,7 +14,6 @@
     margin: auto;
     display: flex;
     justify-content: center;
-    border: 1px solid red;
 }
 .nft > .section > img {
     width: 50%;
@@ -27,7 +26,6 @@
     justify-content: start;
     align-items: start;
     gap: 10px;
-    border: 1px solid blue;
 }
 .nft > .section > .nft-info > h4 {
     width: 100%;

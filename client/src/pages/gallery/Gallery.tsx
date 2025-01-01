@@ -40,7 +40,7 @@ const Gallery = () => {
                     <button style={{opacity: type ? '0.3' : '1'}} onClick={() => setType(true)}>nfts</button>
                     <button onClick={() => navigate('collection/mint')}>New collection</button>
                 </div>
-                <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />
+                {type && <Toggle own={own} sale={sale} setOwn={setOwn} setSale={setSale} />}
             </div>}
             {colls && nfts && <Grid items={!type ? colls : nfts} />}
             <GoBack />
