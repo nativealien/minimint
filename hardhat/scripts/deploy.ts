@@ -24,11 +24,10 @@ async function main() {
     name,
     symbol,
     contractMetadataURI,
-    deployer.address // Placeholder for marketplaceAddress
+    deployer.address 
   );
   const receipt = await tx.wait();
 
-  // Decode the CollectionDeployed event to get the collection address
   const collectionDeployedEvent: any = receipt?.logs.find((log: any) => {
     return log.fragment && log.fragment.name === "CollectionDeployed";
   });

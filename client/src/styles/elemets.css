@@ -6,48 +6,6 @@ h1, h2, h3, h4, p, button, a {
     font-family: var(--font-one);
 }
 
-/* h1 {
-    line-height: 40px; 
-    vertical-align: bottom;
-    font-size: 4.6em;
-    color: var(--color);
-    font-family: var(--font-one);
-    text-align: start;
-    position: relative;
-    top: 44px;
-}
-
-header h1 span {
-    font-size: 0.6em;
-    color: var(--color-sec);
-    position: sticky;
-    top: 60px;
-    display: inline-block;
-    padding: 0 5px;
-    z-index: 999;
-} */
-h1 {
-    line-height: 40px; 
-    vertical-align: bottom;
-    font-size: 4.6em;
-    color: var(--color);
-    font-family: var(--font-one);
-    text-align: start;
-    position: relative; /* Keeps its original placement */
-    top: 0; /* Remove this adjustment for sticky span to work */
-}
-  
-span {
-    font-size: 0.6em;
-    color: var(--color-sec);
-    position: sticky;
-    top: 60px; /* Adjust this value to ensure proper placement */
-    display: inline-block;
-    padding: 0 5px;
-    background-color: var(--bg-color); /* Add a background to avoid overlap */
-    z-index: 999; /* Ensure it appears above content */
-}
-
 h2 {
     font-size: 1.8em;
 }

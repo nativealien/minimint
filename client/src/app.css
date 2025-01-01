@@ -18,7 +18,6 @@
   align-items: center;
   position: relative;
   overflow-x: hidden;
-  /* background-color: var(--background-color); */
   background: var(--gradient-background2);
 }
 
@@ -26,7 +25,6 @@
   height: 120px;
   width: 100%;
   margin-bottom: 100px;
-  /* border: 1px solid grey; */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -45,13 +43,6 @@
 }
 
 @media (max-width: 1200px) {
-  #root {
-
-  }
-  
-  #root > .app {
-
-  }
   
   #root > .app > .top {
     height: 150px;

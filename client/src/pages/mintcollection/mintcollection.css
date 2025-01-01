@@ -5,45 +5,52 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    & > .signed {
-        width: 80%;
-        & > .collmeta {
-            height: 500px;
-            width: 100%;
-        }
-        & > .collnfts {
-            height: 400px;
-            width: 100%;
-            display: flex;
-            gap: 5px;
-            & > .collnftmeta{
-                height: 100%;
-                width: 25%;
-            }
-        }
+}
+
+.mintcollection > .signed {
+    width: 80%;
+}
+
+.mintcollection > .signed > .collmeta {
+    height: 500px;
+    width: 100%;
+}
+
+.mintcollection > .signed > .collnfts {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.mintcollection > .signed > .collnfts > .collnftmeta {
+    height: 100%;
+    width: 25%;
+}
+
+.mintcollection > .nometamask {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mintcollection > .nometamask > p {
+    font-size: 1.3em;
+}
+
+.mintcollection > .nometamask > .connectweb3 {
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.mintcollection > .nometamask > .connectweb3 > img {
+    width: 100px;
+
+    &:hover{
+        opacity: 0.5;
+        color: red;
     }
-    & .nometamask {
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
 
-        & p {
-            font-size: 1.3em;
-        }
-        & .connectweb3 {
-            width: auto;
-            margin: 0;
-            padding: 0;
-
-            & img {
-                width: 100px;
-
-                &:hover{
-                    opacity: 0.5;
-                    color: red;
-                }
-            }
-        }
-    }
 }

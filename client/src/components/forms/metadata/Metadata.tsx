@@ -3,17 +3,6 @@ import Modal from "../../display/modal/Modal"
 import ipfs from "../../../service/ipfs"
 import './metadata.css'
 
-interface IMetadata {
-    name: string,
-    description: string,
-    imageURI: string | File
-}
-
-interface ICids {
-    imgCid: string,
-    jsonCid: string
-}
-
 const Metadata = ({className, height, cids, setCids, mint}: {className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void, mint: ()=>void}) => {
     const [process, setProcess] = useState<boolean>(false)
     const [del, setDel] = useState<boolean>(false)
@@ -141,7 +130,3 @@ const Metadata = ({className, height, cids, setCids, mint}: {className: string, 
 }
 
 export default Metadata
-
-//  cids ? 'none' : 'flex'}}>
-
-// style={{height: cids ? '40px' : height}}>

@@ -16,7 +16,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       if(status === 'acc-change'){
         console.log('hej')
       }
-      
     }, [status])
 
     useEffect(() => {

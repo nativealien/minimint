@@ -72,7 +72,7 @@ contract MiniMintERC721 is ERC721, ERC721URIStorage, Ownable {
     function tokenURI(
         uint256 tokenId
     ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        ownerOf(tokenId); // Ensures the token exists
+        ownerOf(tokenId);
         return super.tokenURI(tokenId);
     }
 
