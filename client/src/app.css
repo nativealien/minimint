@@ -24,7 +24,7 @@
 #root > .app > .top {
   height: 120px;
   width: 100%;
-  margin-bottom: 100px;
+  /* margin-bottom: 100px; */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -38,7 +38,7 @@
 #root > .app > main {
   height: auto;
   width: 1000px;
-  padding-top: 180px;
+  padding-top: 170px;
   padding-bottom: 100px;
 }
 
@@ -47,7 +47,6 @@
   #root > .app > .top {
     height: 150px;
     flex-direction: column;
-    border: 2px solid grey;
     position: absolute;
   }
   

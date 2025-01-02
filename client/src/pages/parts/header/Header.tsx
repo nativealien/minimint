@@ -1,18 +1,15 @@
 import Navbar from '../navbar/Navbar'
 import ToggleTheme from '../../../components/buttons/toggletheme/ToggleTheme'
-import ConnectWeb3 from '../../../components/buttons/connectweb3/ConnectWeb3';
 
 import './header.css'
 
 const Header = () => {
-
     return <header>
-        <h1>MINIMINT<span>marketplace</span></h1>
-        <Navbar />
-        <div className="toggles">
+        <div className="head-top">
+            <h1>MINIMINT<span>marketplace</span></h1>
             <ToggleTheme />
-            <ConnectWeb3 />
         </div>
+        <Navbar />
     </header>
 }
 

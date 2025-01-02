@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import Modal from "../../display/modal/Modal"
 import ipfs from "../../../service/ipfs"
 import './metadata.css'
+import { useAppContext } from "../../../context/context"
 
 const Metadata = ({className, height, cids, setCids, mint}: {className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void, mint: ()=>void}) => {
+    const { status, setStatus } = useAppContext()
     const [process, setProcess] = useState<boolean>(false)
     const [del, setDel] = useState<boolean>(false)
-    const [status, setStatus] = useState<any>(null)
+    // const [status, setStatus] = useState<any>(null)
     const [imgURL, setImgURL] = useState<any>('none')
     const [nftMeta, setNftMeta] = useState<IMetadata>({
         name: '',
@@ -15,20 +17,18 @@ const Metadata = ({className, height, cids, setCids, mint}: {className: string, 
     })
     useEffect(() => {
         const handleProcess = async () => {
-            console.log(process)
-            setStatus('Process')
+            setStatus('Process IPFS')
             const {name, description, imageURI} = nftMeta;
             if(name !== '' && description !== '' && imageURI instanceof File){
                 setStatus('Process image cid...')
                 const imgCid = await ipfs.pinFile(imageURI)
                 nftMeta.imageURI = 'ipfs://' + imgCid.IpfsHash
-                console.log('META DATA', nftMeta)
                 if(imgCid) {
                     setStatus('Process json cid...')
                     const jsonCid = await ipfs.pinJSON(nftMeta)
 
                     const newCid = { imgCid: 'ipfs://' + await imgCid.IpfsHash, jsonCid: 'ipfs://' + await jsonCid.IpfsHash}
-                    setStatus(`Success: Img: ${newCid.imgCid} - JSON: ${newCid.jsonCid}_`)
+                    setStatus(`IPFS uploaded_`)
                     console.log(jsonCid)
                     setCids(newCid)
                     setProcess(false)
@@ -79,7 +79,7 @@ const Metadata = ({className, height, cids, setCids, mint}: {className: string, 
                         setNftMeta({ ...nftMeta, ['imageURI']: files[0]})
                     } else {
                         setImgURL(null)
-                        setStatus('The width of the banner needs too be 3 times the size of the height._')
+                        setStatus('Banner to small._')
                     }
                 }
             } else {
@@ -108,7 +108,7 @@ const Metadata = ({className, height, cids, setCids, mint}: {className: string, 
     }
 
     return <div className={`metadata ${className}`}>
-        {status && <Modal status={status} setStatus={setStatus} />}
+        {/* {status && <Modal status={status} setStatus={setStatus} />} */}
         <form>
             <div className="meta-image" style={{backgroundImage: `url(${displayUrl})`, height: `${height}`}}>
                 <input type="file" name="image-file" className="image-file" onChange={handleChange} />

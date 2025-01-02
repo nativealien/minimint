@@ -30,7 +30,7 @@ const ConnectWeb3: React.FC<{mm?: boolean}> = ({mm}) => {
                 <img src={`/icons/metamask.svg`} alt="Metamask icon" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}></img>
                 <Tip hover={hover} text="connect to metamask" />
             </div>
-            <p>Infura connection</p>
+            {/* <p>Infura connection</p> */}
         </div>}
         {web3 && web3.signer && !mm && <div className="tool-container">
             <div onClick={() => setWeb3(null)} className="off" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}></div>

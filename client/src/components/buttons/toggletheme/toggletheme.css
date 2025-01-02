@@ -1,16 +1,14 @@
 .toggletheme {
-    height: 18px;
-    width: 18px;
-    margin-left: 100px;
-    margin-bottom: 3.5px;
+    height: 50px;
+    width: 50px;
+    margin-left: 20px;
     border-radius: 50%;
-    background: var(--gradient-background);
     cursor: pointer;
     position: relative;
     z-index: 2;
 
     &:hover {
-        box-shadow: 1px 1px 40px var(--color);
+        box-shadow: 1px 1px 40px rgba(148, 148, 173, 0.438);
     }
 }
 
@@ -26,4 +24,19 @@
     transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
     color: rgba(63, 63, 63, 0.555);
     font-style: italic;
+}
+
+@media (max-width: 1200px) { 
+    .toggletheme {
+        height: 50px;
+        width: 50px;
+        margin-left: 100px;
+    }
+}
+@media (max-width: 768px) {
+    .toggletheme {
+        height: 50px;
+        width: 50px;
+        margin-left: 50px;
+    }
 }

@@ -4,7 +4,7 @@ import { useAppContext } from "../../../context/context"
 import './listnft.css'
 
 const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, setToggle: (toggle: boolean) => void}) => {
-    const { web3, setStatus } = useAppContext()
+    const { web3, setStatus, reloadItems } = useAppContext()
     const [price, setPrice] = useState<string>('')
     const handleChange = (e: any) => {
         e.preventDefault()
@@ -12,10 +12,12 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
     }
 
     const handleList = async () => {
-        if(+price > 0){
-            console.log(meta.address)
+        if(+price >= 0.001){
+            console.log(meta)
             const res = await marketplace.listNFT(web3?.signer, meta.address, meta.tokenId, price, setStatus )
             console.log(res)
+            await reloadItems(meta.address, meta.collName, meta.tokenId)
+            setStatus('NFT listed_')
             setToggle(!toggle)
         } else {
             setStatus('Price has to be higher than 0_')
@@ -25,6 +27,8 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
     const handleDelist = async () => {
         const res = await marketplace.delistNFT(web3?.signer, meta.address, meta.tokenId, setStatus )
         console.log(res)
+        await reloadItems(meta.address, meta.collName, meta.tokenId)
+        setStatus('NFT delisted_')
         setToggle(!toggle)
     }
 

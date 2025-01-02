@@ -1,7 +1,7 @@
 .connectweb3 {
     height: 100%;
-    width: 300px;
-    margin-left: 10px;
+    width: 100%;
+    /* margin-left: 10px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,8 +18,8 @@
 .connectweb3>.tool-container .no,
 .inf,
 .off {
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     cursor: pointer;
 
