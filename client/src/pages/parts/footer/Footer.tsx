@@ -1,9 +1,14 @@
+import { useAppContext } from '../../../context/context'
 import './footer.css'
 
 const Footer = () => {
+    const { theme } = useAppContext()
 
     return <footer>
-        <p>footer</p>
+        <div className="social-icons">
+            <img src={`/icons/linkedin-${theme}.svg`} alt="" />
+            <img src={`/icons/github-${theme}.svg`} alt="" />
+        </div>
     </footer>
 }
 

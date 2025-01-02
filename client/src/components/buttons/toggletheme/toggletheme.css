@@ -6,7 +6,7 @@
     cursor: pointer;
     position: relative;
     top: 30px;
-    z-index: 2;
+    z-index: 4;
 
     &:hover {
         box-shadow: 1px 1px 40px rgba(148, 148, 173, 0.438);
