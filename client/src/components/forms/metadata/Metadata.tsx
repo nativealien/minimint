@@ -5,10 +5,9 @@ import './metadata.css'
 import { useAppContext } from "../../../context/context"
 
 const Metadata = ({className, height, cids, setCids, mint}: {className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void, mint: ()=>void}) => {
-    const { status, setStatus } = useAppContext()
+    const { setStatus } = useAppContext()
     const [process, setProcess] = useState<boolean>(false)
     const [del, setDel] = useState<boolean>(false)
-    // const [status, setStatus] = useState<any>(null)
     const [imgURL, setImgURL] = useState<any>('none')
     const [nftMeta, setNftMeta] = useState<IMetadata>({
         name: '',
@@ -26,13 +25,11 @@ const Metadata = ({className, height, cids, setCids, mint}: {className: string, 
                 if(imgCid) {
                     setStatus('Process json cid...')
                     const jsonCid = await ipfs.pinJSON(nftMeta)
-
                     const newCid = { imgCid: 'ipfs://' + await imgCid.IpfsHash, jsonCid: 'ipfs://' + await jsonCid.IpfsHash}
                     setStatus(`IPFS uploaded_`)
                     console.log(jsonCid)
                     setCids(newCid)
                     setProcess(false)
-                    // setCids( newCid )//{ ...cids, ['imgCid']: await imgCid.IpfsHash, ['jsonCid']: await jsonCid.IpfsHash})
                 }
             } else {
                 setStatus('Something is missing..._')
@@ -108,7 +105,6 @@ const Metadata = ({className, height, cids, setCids, mint}: {className: string, 
     }
 
     return <div className={`metadata ${className}`}>
-        {/* {status && <Modal status={status} setStatus={setStatus} />} */}
         <form>
             <div className="meta-image" style={{backgroundImage: `url(${displayUrl})`, height: `${height}`}}>
                 <input type="file" name="image-file" className="image-file" onChange={handleChange} />

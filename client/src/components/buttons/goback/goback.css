@@ -1,5 +1,6 @@
 .goback {
     position: relative;
     bottom: 0;
+    padding-bottom: 50px;
     z-index: 3;
 }

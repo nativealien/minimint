@@ -41,6 +41,7 @@ ul > li > a {
 @media (max-width: 1200px) {
     nav {
         align-items: center;
+        margin-left: 50px;
     }
     header > h1 > span {
         visibility: hidden;

@@ -15,13 +15,14 @@ header {
 
 header > .head-top {
     height: 70%;
+    margin-bottom: 30px;
     display: flex;
     justify-content: start;
     align-items: end;
 }
 
 header > .head-top > h1 {
-    line-height: 50px; 
+    line-height: 1px; 
     vertical-align: bottom;
     height: 100%;
     padding: 0;

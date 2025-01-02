@@ -9,18 +9,13 @@
     margin-bottom: 50px;
 
     & img {
-        width: 150px;
+        width: 250px;
         float: right;
         margin-right: 1rem;
         margin-bottom: 1rem;
     }
-    & > h3 {
-        width: auto;
+    & p {
         background-color: rgba(255, 255, 255, 0);
-        font-size: 2em;
-    }
-    & > p {
-        font-size: 1.2em;
     }
 }
 .section .content-left {
@@ -35,7 +30,7 @@
         & img{
             display: none;
         }
-        & h3 {
+        & h2 {
             font-size: 1.5em;
         }
         & p {

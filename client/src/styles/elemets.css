@@ -7,14 +7,19 @@ h1, h2, h3, h4, p, button, a, span {
 }
 
 h2 {
-    font-size: 1.8em;
+    width: 100%;
+    padding: 5px;
+    font-size: 2.5em;
+    color: var(--color-sec);
+    /* background-color: var(--background-color-25); */
+    text-align: start;
 }
 
 h3 {
     width: 100%;
     padding: 5px;
     font-size: 1.5em;
-    color: var(--color);
+    color: var(--color-sec);
     /* background-color: var(--background-color-25); */
     text-align: start;
 }
@@ -33,9 +38,11 @@ h4 {
 }
 
 p {
-    font-size: 1em;
+    font-size: 1.2em;
     text-align: start;
-    color: var(--color)
+    padding: 10px;
+    color: var(--color);
+    /* background-color: var(--background-color-75); */
 }
 
 button {

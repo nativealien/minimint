@@ -7,7 +7,6 @@
   height: 100vh;
   margin: 0 auto;
   text-align: center;
-  padding-right: calc(100vw - 100%);
 }
 
 #root > .app {
@@ -19,12 +18,13 @@
   position: relative;
   overflow-x: hidden;
   background: var(--gradient-background2);
+  overflow-y: scroll
+
 }
 
 #root > .app > .top {
   height: 120px;
   width: 100%;
-  /* margin-bottom: 100px; */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -36,10 +36,13 @@
 }
 
 #root > .app > main {
-  height: auto;
+  height: 100%;
   width: 1000px;
+  padding: 20px;
   padding-top: 170px;
   padding-bottom: 100px;
+  box-shadow: 1px 1px 50px rgba(128, 128, 128, 0.24);
+  background-color: rgba(128, 128, 128, 0.057);
 }
 
 @media (max-width: 1200px) {

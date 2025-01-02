@@ -48,9 +48,9 @@ const Collection = () => {
         <section style={{backgroundImage: `url(${meta.image})`}}>
             <div className="info">
                 <h2>{meta.name}</h2>
-                <ShortHash hash={meta.owner} setHover={setHover} />
                 <Tip hover={hover} text={'owner address'} />
                 <p className='des'>{meta.description}</p>
+                <ShortHash hash={meta.owner} setHover={setHover} />
             </div>
         </section>
         <nav>
@@ -64,7 +64,6 @@ const Collection = () => {
         </nav>
         {toggle ? <Grid items={nfts} /> :
         <Metadata className={'mint-meta'} height='250px' cids={nftMeta} setCids={setNftMeta} mint={handleMint}/>}
-        {/* {nftMeta && <button onClick={() => handleMint()}>Mint</button>} */}
         <GoBack />
     </div>
 }
