@@ -6,6 +6,8 @@ footer {
     padding-left: 50px;
     position: fixed;
     bottom: 0;
+    display: flex;
+    align-items: end;
 
     & > p {
         background-color: rgba(255, 255, 255, 0);
@@ -20,5 +22,17 @@ footer > .social-icons {
     & img {
         height: 100%;
         cursor: pointer;
+    }
+}
+
+@media (max-width: 1200px) { 
+    footer > .social-icons {
+        height: 40%;
+        width: 200px;
+    
+        & img {
+            height: 100%;
+            cursor: pointer;
+        }
     }
 }

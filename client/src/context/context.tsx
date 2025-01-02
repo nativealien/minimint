@@ -30,7 +30,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           setStatus('Minimint is now connected!_')
         }
         if(web3 && !items) getCollections(web3)
-        addListener(setStatus, setWeb3)
+        addListener(setStatus, web3, setWeb3)
     }, [web3])
 
     const reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined> = async (contract, collName, tokenId) => {

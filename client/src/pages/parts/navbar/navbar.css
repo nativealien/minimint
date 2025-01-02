@@ -47,3 +47,8 @@ ul > li > a {
         visibility: hidden;
     }
 }
+@media (max-width: 768px) {
+    nav {
+        /* flex-direction: column; */
+    }
+}

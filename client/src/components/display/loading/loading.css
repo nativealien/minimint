@@ -12,7 +12,18 @@
     font-style: italic;
     right: 180px;
     bottom: -10px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     color: var(--color-load);
     background-color: rgba(255, 255, 255, 0);
+}
+@media (max-width: 768px) {
+    .loading-container {
+        width: 100%;
+        /* left: 100px;  */
+        top: 30px;
+    }
+    .loading-container > p {
+        flex-direction: column;
+        right: 0;
+    }
 }

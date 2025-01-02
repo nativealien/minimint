@@ -2,9 +2,21 @@ import { ethers } from "ethers";
 
 import { VITE_INFURA_ENDPOINT } from '../utils/config'
 
+const sepoliaChainId = "0xaa36a7";
 
 export const connectProvider = async (metamask: boolean, setStatus: (status: string | null) => void ): Promise<IWeb3 | string> => {
-    if (window.ethereum && metamask) {
+
+  
+      if (window.ethereum && metamask) {
+        const currentChainId = await window.ethereum.request({ method: "eth_chainId" });
+        console.log(currentChainId)
+        if(currentChainId !== sepoliaChainId){
+          setStatus('Network switch to Sepolia')
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: sepoliaChainId }],
+          });
+        }
         setStatus('Connecting...')
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
@@ -37,19 +49,34 @@ export const connectProvider = async (metamask: boolean, setStatus: (status: str
 
 export const addListener = async (
     setStatus: React.Dispatch<React.SetStateAction<string | null>>,
+    web3: IWeb3 | null,
     setWeb3: React.Dispatch<React.SetStateAction<any>>
 ) => {
     if (window.ethereum) {
-        window.ethereum.on("accountsChanged", async (accounts: string[]) => {
-          const provider = new ethers.BrowserProvider(window.ethereum);
-          const signer = await provider.getSigner();
-          const address = await signer.getAddress();
-          setWeb3({ provider, signer, address })
-          // setStatus('Account changed, disconnected...')
+        window.ethereum.on("accountsChanged", async () => {
+          const currentChainId = await window.ethereum.request({ method: "eth_chainId" });
+          if(web3?.signer) {
+            if(currentChainId === sepoliaChainId){
+              setStatus('Network switch to Sepolia')
+              await window.ethereum.request({
+                method: "wallet_switchEthereumChain",
+                params: [{ chainId: sepoliaChainId }],
+              });
+            }
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            const signer = await provider.getSigner();
+            const address = await signer.getAddress();
+  
+            const adrsString = address.toString()
+  
+            setWeb3({ provider, signer, address })
+            setStatus(`Changed account: ${adrsString.slice(0,4)}...${adrsString.slice(-4)}_`)
+          }
         });
 
         window.ethereum.on("chainChanged", (chainId: string) => {
             setStatus(`Network changed to: ${chainId}`);
+            setWeb3(null)
         });
 
         window.ethereum.on("disconnect", (error: any) => {
