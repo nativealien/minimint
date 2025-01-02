@@ -56,3 +56,9 @@
     }
 
 }
+@media (max-width: 1200px) {
+    .mintcollection {
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {}

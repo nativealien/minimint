@@ -6,8 +6,8 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    
-    & form {
+}
+.metadata > form {
         height: 100%;
         width: 100%;
         /* border: 1px solid red; */
@@ -15,12 +15,12 @@
         flex-direction: column;
         justify-content: end;
         background-color: rgba(255, 0, 0, 0);
-        
-        & .meta-image {
-            /* height: 60%; */
+}      
+.metadata > form > .meta-image {
+            height: 60%;
             width: 95%;
             position: relative;
-            border: 1px solid rgb(124, 126, 123);
+            /* border: 1px solid rgb(124, 126, 123); */
             top:0;
             left: 2.5%;
             background-repeat: no-repeat;
@@ -36,46 +36,49 @@
                 opacity: 0;
                 cursor: pointer;
             }
-        }
-        
-        & .meta-info {
+}     
+.metadata > form > .meta-info {
             height: 40%;
-            width: 100%;
+            /* width: 100%; */
+            margin: auto;
             display: flex;
             flex-direction: column;
             justify-content: end;
             align-items: center;
             gap: 10px;
-            
             position: relative;
-            & p{
+            top: -50px;
+            & > p{
                 font-size: 1.2em;
                 font-style: italic;
                 position: relative;
-                /* bottom: 150px; */
+                bottom: 100px;
                 color: black;
             }
-            & input{
+            & > input{
+                height: 35px;
                 width: 100%;
                 border: 0;
                 position: relative;
                 z-index: 2;
                 background-color: rgb(190, 190, 190);
+                font-family: var(--font-one);
             }
-            & textarea {
-                height: 100%;
+            & > textarea {
+                height: 90px;
                 width: 100%;
                 border: 0;
                 position: relative;
                 z-index: 2;
                 background-color: rgb(190, 190, 190);
+                font-family: var(--font-one);
             }
-        }
-    }
-    & button {
+}
+.metadata > form > button {
+        height: 40px;
         width: 150px;
         margin: auto;
         position: relative;
+        top: -40px;
         z-index: 3;
-    }
 }

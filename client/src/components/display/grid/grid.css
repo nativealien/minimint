@@ -65,7 +65,7 @@
             }
         }
         & .signs {
-            /* height: 20%; */
+            height: 20%;
             /* width: 100%; */
             display: flex;
             justify-content: end;
@@ -75,6 +75,7 @@
             background-color: var(--background-color-25);
 
             & img {
+                height: 30px;
                 width: 30px;
                 position: relative;
             }

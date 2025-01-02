@@ -5,8 +5,6 @@ import { VITE_INFURA_ENDPOINT } from '../utils/config'
 const sepoliaChainId = "0xaa36a7";
 
 export const connectProvider = async (metamask: boolean, setStatus: (status: string | null) => void ): Promise<IWeb3 | string> => {
-
-  
       if (window.ethereum && metamask) {
         const currentChainId = await window.ethereum.request({ method: "eth_chainId" });
         console.log(currentChainId)
@@ -54,8 +52,9 @@ export const addListener = async (
 ) => {
     if (window.ethereum) {
         window.ethereum.on("accountsChanged", async () => {
+          console.log('TEST', web3)
           const currentChainId = await window.ethereum.request({ method: "eth_chainId" });
-          if(web3?.signer) {
+          if(web3?.address) {
             if(currentChainId === sepoliaChainId){
               setStatus('Network switch to Sepolia')
               await window.ethereum.request({
