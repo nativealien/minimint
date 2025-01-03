@@ -26,7 +26,7 @@ const Card = ({meta}: {meta: ICollMeta | INFTMeta}) => {
         <img src={meta.image} />
         <div className="item-info">
             {sample && meta.type === 'collection' && <div className="sample">
-                {sample.map((sam: INFTMeta) => <img src={sam.image} />)}    
+                {sample.map((sam: INFTMeta, idx: any) => <img key={idx} src={sam.image} />)}    
             </div>}
             <div className="signs">
                 <h3>{meta.name}</h3>

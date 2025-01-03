@@ -7,7 +7,7 @@ const Footer = () => {
     return <footer>
         <div className="social-icons">
             <img src={`/icons/linkedin-${theme}.svg`} alt="" />
-            <img src={`/icons/github-${theme}.svg`} alt="" />
+            <a href='https://github.com/nativealien/minimint' target='_blank'><img src={`/icons/github-${theme}.svg`} alt="" /></a>
         </div>
     </footer>
 }
