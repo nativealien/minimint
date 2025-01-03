@@ -6,6 +6,10 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    & > p {
+        font-size: 1.8em;
+        text-align: center;
+    }
 }
 .metadata > form {
         height: 100%;

@@ -3,10 +3,11 @@ import { useAppContext } from "../../../context/context"
 import ipfs from "../../../service/ipfs"
 import './metadata.css'
 
-const Metadata = ({ className, height, cids, setCids, mint }: { className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void, mint: () => void }) => {
+const Metadata = ({ className, height, cids, setCids, mint }: { className: string, height: string, cids: ICids | null, setCids: (value: ICids | null) => void, mint: () => Promise<boolean | undefined> }) => {
     const { setStatus } = useAppContext()
     const [process, setProcess] = useState<boolean>(false)
     const [del, setDel] = useState<boolean>(false)
+    const [success, setSuccess] = useState<boolean | undefined>(false)
     const [imgURL, setImgURL] = useState<any>('none')
     const [nftMeta, setNftMeta] = useState<IMetadata>({
         name: '',
@@ -98,8 +99,14 @@ const Metadata = ({ className, height, cids, setCids, mint }: { className: strin
         setDel(true)
     }
 
+    const handleMint = async (e: any) => {
+        e.preventDefault()
+        const result = await mint()
+        setSuccess(result)
+    }
+
     return <div className={`metadata ${className}`}>
-        <form>
+        {!success ? <form>
             <div className="meta-image" style={{ backgroundImage: `url(${displayUrl})`, height: `${height}` }}>
                 <input type="file" name="image-file" className="image-file" onChange={handleChange} />
             </div>
@@ -112,10 +119,10 @@ const Metadata = ({ className, height, cids, setCids, mint }: { className: strin
         {!cids ?
             <button style={{ bottom: cids ? '0' : '30px' }} onClick={(e) => handleProcess(e)}>Process</button> :
             <div>
-                <button onClick={mint}>mint</button>
+                <button onClick={(e) => handleMint(e)}>mint</button>
                 <button style={{ bottom: cids ? '0' : '30px' }} onClick={(e) => handleDelete(e)}>Reset</button>
             </div>}
-        </form>
+        </form> : <p>Minting complete!</p>}
     </div>
 }
 

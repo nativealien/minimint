@@ -35,11 +35,21 @@ const Collection = () => {
     const handleMint = async () => {
         if(web3 && web3.address && nftMeta){
             setStatus('Minting NFT on ' + meta.name)
-            const res = await ERC721.mintNFT(web3.address, nftMeta?.jsonCid, web3?.signer, meta.address)
-            const tokenArr = await ERC721.getAllMintedTokens(web3.signer, meta.address)
-            const tokenId = tokenArr[tokenArr.length-1]
-            const loaded = await reloadItems(meta.address, meta.name, tokenId)
-            setStatus('Minting complete_')
+            console.log(nftMeta)
+            try {
+                const res = await ERC721.mintNFT(web3.address, nftMeta?.jsonCid, web3?.signer, meta.address)
+                console.log(res)
+                const tokenArr = await ERC721.getAllMintedTokens(web3.signer, meta.address)
+                const tokenId = tokenArr[tokenArr.length-1]
+                const loaded = await reloadItems(meta.address, meta.name, tokenId)
+                console.log(loaded)
+                setStatus('Minting complete_')
+                await reloadItems(meta.address, meta.collName, tokenId)
+                return true
+            } catch (error) {
+                setStatus('Minting error_')
+                return false
+            }
         }
     }
 

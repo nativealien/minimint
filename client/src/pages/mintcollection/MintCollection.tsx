@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useAppContext } from "../../context/context"
 
 import Metadata from "../../components/forms/metadata/Metadata"
@@ -7,6 +7,7 @@ import GoBack from "../../components/buttons/goback/GoBack"
 import Section from "../../components/display/section/Section"
 
 import factory from "../../service/blockchain/factory"
+import metafetcher from "../../service/metafetcher"
 import ipfs from "../../service/ipfs"
 
 import mintcollection from '../../content/mintcollection.md?raw'
@@ -16,19 +17,28 @@ const MintCollection = () => {
     const { web3, setStatus } = useAppContext()
     const [collMeta, setCollmeta] = useState<any>(null)
 
-    const handleMint = async (e: any) => {
-        e.preventDefault()
+    const handleMint = async () => {
         setStatus('Minting collection, dont leave the page.')
-        const coll = await ipfs.fetchIPFSJSON(collMeta.jsonCid)
-        const collUri = collMeta.jsonCid
-        const res = await factory.deployCollection(web3?.signer, coll.name, 'MM',collUri)
-        setStatus('Collection minted!_')
+        try {
+            const coll = await ipfs.fetchIPFSJSON(collMeta.jsonCid)
+            const collUri = collMeta.jsonCid
+            const res = await factory.deployCollection(web3?.signer, coll.name, 'MM',collUri)
+            console.log(res)
+            setStatus('Collection minted!_')
+            if(web3){
+                await metafetcher.initMinimint(web3, setStatus)
+            }
+            return true
+        } catch (error) {
+            setStatus('Minting error_')
+            return false
+        }
     }
 
     return <div className="mintcollection">
         <Section markdown={mintcollection} />
         {web3 && web3.signer ? <div className="signed">
-            {<Metadata className={'collmeta'} height="200px" cids={collMeta} setCids={setCollmeta} mint={() => handleMint({ preventDefault: () => {} })}/>}
+            {<Metadata className={'collmeta'} height="200px" cids={collMeta} setCids={setCollmeta} mint={handleMint}/>}
             {collMeta && <div className="mintcoll-btn">
                 {/* <button onClick={(e) => handleMint(e)}>Mint Collection</button> */}
             </div>}

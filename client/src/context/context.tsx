@@ -33,7 +33,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         if(web3 && !items) getCollections(web3)
     }, [web3])
 
-    const reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined> = async (contract, collName, tokenId) => {
+    const reloadItems: (contract: string, collName: string, tokenId?: string) => Promise<INFTMeta | undefined> = async (contract, collName, tokenId) => {
       if(web3 && items){
         const newNfts = await metafetcher.processNFTs(web3, contract, collName, setStatus)
         items.map(item => {
@@ -41,8 +41,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
             item.nfts = newNfts
           }
         })
-        const nft = newNfts.filter(item => item.tokenId === tokenId)[0]
-        return nft
+        if(tokenId){
+          const nft = newNfts.filter(item => item.tokenId === tokenId)[0]
+          return nft
+        } else {
+          return undefined
+        }
       }
     }
 

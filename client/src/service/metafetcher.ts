@@ -4,7 +4,7 @@ import marketplace from './blockchain/marketplace';
 import factory from './blockchain/factory';
 import ipfs from './ipfs';
 
-const processNFT = async (web3: IWeb3, tokenId: any, contract: string, name: string, setStatus: (status: string | null) => void): Promise<INFTMeta> => {
+const processNFT = async (web3: IWeb3, tokenId: any, contract: string, name: string): Promise<INFTMeta> => {
     const nft = await ERC721.getTokenURI(tokenId, web3.provider, contract);
     const listing = await marketplace.getListing(web3.provider, contract, tokenId)
     const priceInEth = ethers.formatUnits(listing[1])
@@ -20,12 +20,12 @@ const processNFT = async (web3: IWeb3, tokenId: any, contract: string, name: str
 }
 
 const processNFTs = async (web3: IWeb3, contract: string, name: string, setStatus: (status: string | null) => void): Promise<INFTMeta[]> => {
-    setStatus('Process NFTs')
+    setStatus('Process NFTs_')
     const tokenIds = await ERC721.getAllMintedTokens(web3.provider, contract)
     let nftArr: any = [];
     nftArr = await Promise.all(
         tokenIds.map(async (tokenId: any) => {
-            const result = await processNFT(web3, tokenId, contract, name, setStatus)
+            const result = await processNFT(web3, tokenId, contract, name)
             return result; 
         })
     );
@@ -51,7 +51,7 @@ const processCollection = async (web3: IWeb3, contract: string, setStatus: (stat
 }
 
 const initMinimint = async (web3: IWeb3, setStatus: (status: string | null) => void): Promise<ICollMeta[]> => {
-    setStatus('Initializing MiniMint')
+    setStatus('Updating MiniMint')
     const factoryContracts = await factory.getAllCollections(web3.provider)
     const contractArray = Object.values(factoryContracts)
     const results = await Promise.all(
@@ -60,7 +60,7 @@ const initMinimint = async (web3: IWeb3, setStatus: (status: string | null) => v
           return result; 
         })
     );
-    setStatus('Initializing complete_')
+    setStatus('Minimint updated_')
     return results
 }
 

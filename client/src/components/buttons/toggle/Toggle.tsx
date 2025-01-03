@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useAppContext } from "../../../context/context"
 import Tip from "../../display/tip/Tip";
 import './toggle.css'

@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useAppContext } from "../../../context/context"
 import ShortHash from "../shorthash/ShortHash"
 import Tip from "../../display/tip/Tip"
 import './connectweb3.css'
 
 const ConnectWeb3 = () => {
-    const { status, web3, connectWeb3 }: any = useAppContext()
+    const { setStatus, web3, connectWeb3 }: any = useAppContext()
     const [hover, setHover] = useState<boolean>(false)
 
     const handleConnect = async (metamask: boolean) => {
-        if(!status) await connectWeb3(metamask)
+        if(!metamask) setStatus('Disconnecting Metamask_')
+        await connectWeb3(metamask)
+        // if(!status) await connectWeb3(metamask)
     }
 
     return <div className="connectweb3">

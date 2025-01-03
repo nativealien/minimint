@@ -56,6 +56,7 @@ const getTokenURI = async (tokenId: number, signer: any, address: string) => {
 const changeMarketplaceAddress = async (signer: ethers.Signer, address: string) => {
     const contract = await minimintContract(signer, address)
     const res = await contract.setMarketplaceAddress(VITE_MINIMINT_MARKET_CONTRACT);
+    console.log(res)
 }
 
 const approveMarketplace = async (signer: ethers.Signer, address: string) => {

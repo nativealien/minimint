@@ -29,6 +29,7 @@ const buyNFT = async (signer: ethers.Signer, collAddress: string, tokenId: numbe
   try {
     const tx = await contract.buyNFT(collAddress, tokenId, { value: priceInWei});
     const receipt = await tx.wait();
+    console.log(receipt)
     setStatus('NFT bought_')
   } catch (error) {
     setStatus('Error buting the NFT_')
@@ -41,6 +42,7 @@ const delistNFT = async (signer: ethers.Signer, collAddress: string, tokenId: nu
   try {
     const tx = await contract.delistNFT(collAddress, tokenId);
     const receipt = await tx.wait();
+    console.log(receipt)
     setStatus('NFT delisted_')
   } catch (error) {
     setStatus(null)
