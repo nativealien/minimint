@@ -11,9 +11,7 @@ export const minimintContract = async (signerOrProvider: ethers.Signer | ethers.
 const setContractMetadataURI = async (uri: string, signer: any, address: string) => {
     const contract = await minimintContract(signer, address)
     const tx = await contract.setContractURI(uri);
-    console.log("Setting contract metadata URI transaction sent:", tx.hash);
     const receipt = await tx.wait();
-    console.log("Transaction confirmed:", receipt);
     return receipt
 
 };
@@ -23,7 +21,6 @@ const getContractMetadataURI = async (signer: any, address: string) => {
     const owner = await contract.owner()
     await delay(1000)
     const uri = await contract.contractURI();
-    // console.log("Contract Metadata URI:", uri);
     const res = { uri, owner}
     return res;
 };
@@ -31,9 +28,7 @@ const getContractMetadataURI = async (signer: any, address: string) => {
 const mintNFT = async (to: string, uri: string, signer: any, address: string) => {
     const contract = await minimintContract(signer, address)
     const tx = await contract.safeMint(to, uri);
-    console.log("Minting transaction sent:", tx.hash);
     const receipt = await tx.wait();
-    console.log("Transaction confirmed:", receipt);
     return receipt;
 
 };
@@ -41,7 +36,6 @@ const mintNFT = async (to: string, uri: string, signer: any, address: string) =>
 const getNextTokenId = async (signer: any, address: string) => {
     const contract = await minimintContract(signer, address)
     const nextTokenId = await contract.getNextTokenId();
-    console.log("Next Token ID:", nextTokenId.toString());
     return nextTokenId.toString();
 };
 
@@ -62,8 +56,6 @@ const getTokenURI = async (tokenId: number, signer: any, address: string) => {
 const changeMarketplaceAddress = async (signer: ethers.Signer, address: string) => {
     const contract = await minimintContract(signer, address)
     const res = await contract.setMarketplaceAddress(VITE_MINIMINT_MARKET_CONTRACT);
-    console.log('Succes changing address', res)
-
 }
 
 const approveMarketplace = async (signer: ethers.Signer, address: string) => {
@@ -71,7 +63,6 @@ const approveMarketplace = async (signer: ethers.Signer, address: string) => {
     try {
         const tx = await contract.setApprovalForAll(VITE_MINIMINT_MARKET_CONTRACT, true);
         await tx.wait();
-        console.log("Marketplace approved successfully!", tx);
     } catch (error) {
         console.log('ERROR', error)
     }

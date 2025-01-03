@@ -39,8 +39,7 @@ const Collection = () => {
             const tokenArr = await ERC721.getAllMintedTokens(web3.signer, meta.address)
             const tokenId = tokenArr[tokenArr.length-1]
             const loaded = await reloadItems(meta.address, meta.name, tokenId)
-            console.log(loaded)
-            setStatus(null)
+            setStatus('Minting complete_')
         }
     }
 

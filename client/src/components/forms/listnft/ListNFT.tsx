@@ -13,9 +13,7 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
 
     const handleList = async () => {
         if(+price >= 0.001){
-            console.log(meta)
             const res = await marketplace.listNFT(web3?.signer, meta.address, meta.tokenId, price, setStatus )
-            console.log(res)
             await reloadItems(meta.address, meta.collName, meta.tokenId)
             setStatus('NFT listed_')
             setToggle(!toggle)
@@ -26,7 +24,6 @@ const ListNFT = ({meta, toggle, setToggle}: {meta: INFTMeta, toggle: boolean, se
 
     const handleDelist = async () => {
         const res = await marketplace.delistNFT(web3?.signer, meta.address, meta.tokenId, setStatus )
-        console.log(res)
         await reloadItems(meta.address, meta.collName, meta.tokenId)
         setStatus('NFT delisted_')
         setToggle(!toggle)

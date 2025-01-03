@@ -1,5 +1,4 @@
 import Loading from '../loading/Loading'
-
 import './modal.css'
 
 const Modal = ({status, setStatus}: any) => {

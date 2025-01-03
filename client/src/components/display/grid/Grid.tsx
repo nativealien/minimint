@@ -15,7 +15,6 @@ const cardGenerator = (items: ICollMeta[] | INFTMeta[]) => {
 const Grid = ({items}: { items: ICollMeta[] | INFTMeta[] | any }) => {
     const [cards, setCards] = useState<JSX.Element[] | null>(null)
     useEffect(() => {
-        console.log(items)
         setCards(null)
         const newCards = cardGenerator(items)
         setCards(newCards)

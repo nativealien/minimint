@@ -20,9 +20,7 @@ const NFT = () => {
         if(items) {
             const collect = items.filter((item: ICollMeta) => item.name === meta.collName)
             setColl(collect[0])
-
         }
-        console.log('NFT TEST', meta)
         setNft(meta)
     }, [])
     useEffect(() => {

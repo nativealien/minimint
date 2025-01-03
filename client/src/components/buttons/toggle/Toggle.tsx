@@ -10,10 +10,6 @@ const Toggle: React.FC<{
     setSale: (sale: boolean) => void}> = ({own, sale, setOwn, setSale}) => {
     const { theme, web3 } = useAppContext()
     const [hover, setHover] = useState<boolean>(false)
-    useEffect(() => {
-        console.log(hover)
-    }, [hover])
-
 
     return <div className="toggle" 
                 onMouseEnter={() => {

@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom"
 import { useAppContext } from "../../context/context"
-import { connectProvider } from "../../service/provider"
 import Lottie from "lottie-react"
 import metamask from '../../content/lottie/metamask.json'
 
@@ -10,15 +9,11 @@ import home from '../../content/home.md?raw'
 import './home.css'
 
 const Home = () => {
-    const { web3, setWeb3, loading, setStatus }: any = useAppContext()
+    const { web3, loading, connectWeb3 }: any = useAppContext()
     const navigate = useNavigate()
 
-    const handleConnect = async () => {
-        setStatus('Connecting')
-        const res = await connectProvider(true, setStatus)
-        if(typeof res !== 'string'){
-            setWeb3(res)
-        } else console.log(res)
+    const handleConnect = async (metamask: boolean) => {
+        await connectWeb3(metamask)
     }
 
     return <div className="home">
@@ -27,7 +22,7 @@ const Home = () => {
                     <Lottie animationData={metamask} style={{
                         width: '200px',
                         cursor: 'pointer'
-                    }} onClick={() => handleConnect()}/>
+                    }} onClick={() => handleConnect(true)}/>
                     <div className="home-right">
                         <p>{!window.ethereum ? 'You dont have Metamask installed...' 
                           : !web3?.address ? 'Sign in with metamask' : 'You are connected!'}</p>

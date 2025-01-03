@@ -20,7 +20,6 @@ const Gallery = () => {
     const [sale, setSale] = useState<boolean>(false)
     useEffect(() => {
         if(items){
-            console.log(own)
             let newColls: any = items
             if(own) newColls = items.filter(item => item.owner === web3?.address)
             setColls(newColls)

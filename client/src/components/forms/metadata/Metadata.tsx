@@ -14,20 +14,16 @@ const Metadata = ({ className, height, cids, setCids, mint }: { className: strin
         imageURI: ''
     })
     useEffect(() => {
-        console.log(className)
         const handleProcess = async () => {
             setStatus('Process IPFS')
             const { name, description, imageURI } = nftMeta;
             if (name !== '' && description !== '' && imageURI instanceof File) {
-                setStatus('Process image cid...')
                 const imgCid = await ipfs.pinFile(imageURI)
                 nftMeta.imageURI = 'ipfs://' + imgCid.IpfsHash
                 if (imgCid) {
-                    setStatus('Process json cid...')
                     const jsonCid = await ipfs.pinJSON(nftMeta)
                     const newCid = { imgCid: 'ipfs://' + await imgCid.IpfsHash, jsonCid: 'ipfs://' + await jsonCid.IpfsHash }
                     setStatus(`IPFS uploaded_`)
-                    console.log(jsonCid)
                     setCids(newCid)
                     setProcess(false)
                 }

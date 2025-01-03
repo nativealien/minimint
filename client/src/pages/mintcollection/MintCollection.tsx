@@ -16,17 +16,12 @@ const MintCollection = () => {
     const { web3, setStatus } = useAppContext()
     const [collMeta, setCollmeta] = useState<any>(null)
 
-    useEffect(() => {
-        console.log(collMeta)
-    }, [collMeta])
-
     const handleMint = async (e: any) => {
         e.preventDefault()
         setStatus('Minting collection, dont leave the page.')
         const coll = await ipfs.fetchIPFSJSON(collMeta.jsonCid)
         const collUri = collMeta.jsonCid
         const res = await factory.deployCollection(web3?.signer, coll.name, 'MM',collUri)
-        console.log(res)
         setStatus('Collection minted!_')
     }
 
@@ -38,7 +33,7 @@ const MintCollection = () => {
                 {/* <button onClick={(e) => handleMint(e)}>Mint Collection</button> */}
             </div>}
         </div> : <div className="nometamask">
-            <ConnectWeb3 mm={true} />
+            <ConnectWeb3 />
             <p>You need too connect with metamask</p>
         </div>}
         <GoBack />

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { addListener } from "../service/provider";
+import connectProvider from "../service/provider";
 import metafetcher from "../service/metafetcher";
 
 const AppContext = createContext<IAppContext | undefined>(undefined);
@@ -13,10 +13,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     })
 
     useEffect(() => {
-      if(status === 'acc-change'){
-        console.log('hej')
+      const initWeb3 = async () => {
+        await connectProvider(false, setStatus, setWeb3)
       }
-    }, [status])
+      if(!web3) initWeb3()
+    }, [])
 
     useEffect(() => {
       document.documentElement.setAttribute("data-theme", theme);
@@ -30,7 +31,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
           setStatus('Minimint is now connected!_')
         }
         if(web3 && !items) getCollections(web3)
-        addListener(setStatus, web3, setWeb3)
     }, [web3])
 
     const reloadItems: (contract: string, collName: string, tokenId: string) => Promise<INFTMeta | undefined> = async (contract, collName, tokenId) => {
@@ -43,6 +43,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         })
         const nft = newNfts.filter(item => item.tokenId === tokenId)[0]
         return nft
+      }
+    }
+
+    const connectWeb3 = async (metamask: boolean) => {
+      if(!status){
+        await connectProvider(metamask, setStatus, setWeb3)
       }
     }
 
@@ -59,7 +65,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         setStatus,
         reloadItems,
         theme,
-        toggleTheme
+        toggleTheme,
+        connectWeb3
     }
 
     return <AppContext.Provider value={contextValue}>

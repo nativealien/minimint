@@ -5,7 +5,6 @@ import factory from './blockchain/factory';
 import ipfs from './ipfs';
 
 const processNFT = async (web3: IWeb3, tokenId: any, contract: string, name: string, setStatus: (status: string | null) => void): Promise<INFTMeta> => {
-    setStatus('Process NFT')
     const nft = await ERC721.getTokenURI(tokenId, web3.provider, contract);
     const listing = await marketplace.getListing(web3.provider, contract, tokenId)
     const priceInEth = ethers.formatUnits(listing[1])
@@ -61,6 +60,7 @@ const initMinimint = async (web3: IWeb3, setStatus: (status: string | null) => v
           return result; 
         })
     );
+    setStatus('Initializing complete_')
     return results
 }
 
